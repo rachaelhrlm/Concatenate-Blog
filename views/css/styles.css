@@ -27,6 +27,9 @@ footer {
 section{
     padding: 50px;
 }
+.spacer{
+    padding:25px;
+}
 .newsletter {
     margin-top: 120px;
 }

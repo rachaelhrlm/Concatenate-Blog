@@ -1,4 +1,30 @@
-<!--Search Section-->
+
+<!--AJAX Search onMouseUp-->
+<script>
+    function searchPost(str) {
+
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                document.querySelector(".results").innerHTML = this.responseText;
+            }
+            if (document.querySelector(".results").innerHTML !== '') {
+                document.querySelector(".postAll").style.display = 'none';
+            }
+        };
+        xhr.open("GET", "views/scripts/searchAny.php?search=" + str, true);
+        xhr.send();
+    }
+</script>
+
+
+
+
+
+
+
+
+<!--Search Bar Section-->
 <div class="container-fluid animated">
     <div class="container">
         <div class="row ">
@@ -10,9 +36,9 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fas fa-search"></i></div>
                     </div>
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="search">
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="search" onkeyup="searchPost(this.value)">
                 </div>
-                 <p class="smalltext"><b>try:</b> motivational, career, lifestyle</p> 
+                <p class="smalltext"><b>try:</b> motivational, career, lifestyle</p> 
             </form>
             <div class="col-md-3"></div>
         </div>
@@ -20,12 +46,18 @@
 </div>
 
 
+<!--Padding-->
+<div class="spacer"></div>
 
 
+<!--Search Results Section-->
+<div class="container">
+    <div class="row justify-content-center results"></div>
+</div>
 
-<!--Results / ReadAll Section-->
-<section>
-    <div class="row justify-content-center">
+<!--All Posts Section-->
+<div class="container">
+    <div class="row justify-content-center postAll">
         <?php foreach ($posts as $post) { ?>
             <?php
             $img = "views/images/{$post->getPostID()}.jpeg";
@@ -41,4 +73,7 @@
             </div>
         <?php } ?>
     </div>
-</section>
+</div>
+
+<!--Padding-->
+<div class="spacer"></div>
