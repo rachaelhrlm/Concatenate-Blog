@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="views/css/styles.css">
 
 
-        <title>CONCATENATE</title>
+        <title>Concatenate</title>
     </head>
     
     
@@ -36,7 +36,8 @@
         if (isset($_COOKIE['user'])) {
             require_once 'views/sections/nav-member.php';
         } else{
-            require_once 'views/sections/nav-default.php';
+//            require_once 'views/sections/nav-default.php';
+            require_once 'views/sections/nav-test.php';
         }    
         ?>
 
