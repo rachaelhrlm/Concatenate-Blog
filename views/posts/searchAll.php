@@ -6,8 +6,10 @@
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
+//          put the results of the query inside .results div
                 document.querySelector(".results").innerHTML = this.responseText;
             }
+//          if there is something written inside .results div, hide the .postAll div
             if (document.querySelector(".results").innerHTML !== '') {
                 document.querySelector(".postAll").style.display = 'none';
             }

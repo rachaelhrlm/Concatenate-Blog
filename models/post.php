@@ -110,7 +110,7 @@ class Post {
         $this->content = $content;
     }
 
-//    methods
+//    method for selecting all posts
     public static function searchAll() {
         $list = [];
         $db = Db::getInstance();
@@ -121,12 +121,14 @@ class Post {
         return $list;
     }
 
+    
+//    method for selecting post via Ajax where keyword matches anything
     public static function searchAny($keyword) {
         $db = Db::getInstance();
         $req = $db->prepare('CALL searchPost(?)');
         $req->execute([$keyword]);
-        $posts = $req->fetchAll(PDO::FETCH_ASSOC);
-        if (!empty($posts)) {
+        $posts = $req->fetchAll(PDO::FETCH_ASSOC); //specifying that I want the results to be associative arrays
+        if (!empty($posts)) { //if there are results, echo out a container along with a loop of Post Cards
             echo '<div class="container"><div class="row justify-content-center">';
             foreach ($posts as $post) {
                 $img = "views/images/{$post['postID']}.jpeg";
@@ -140,7 +142,7 @@ class Post {
                 echo '</div></div>';
             }
             echo '</div></div>';
-        } else {
+        } else { //if there are no results, echo 'No results found.'
             echo 'No results found.';
         }
     }
