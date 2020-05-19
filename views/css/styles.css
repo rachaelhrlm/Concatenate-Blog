@@ -89,11 +89,27 @@ section{
 
 
 
-/*other styling*/
+/*search results: card styling*/
 .customcard {
     margin: 10px;
     cursor: pointer;
+    transition: transform .5s;
 }
+.customcard:hover {
+    transform: scale(1.1,1.1);
+}
+.customcard button {
+    font-size: 11px;
+    color: #999;
+    padding: 3px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background: none;
+}
+
+
+
+
 .smalltext{
     font-size: 11px;
 }
