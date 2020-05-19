@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2020 at 09:01 AM
+-- Generation Time: May 19, 2020 at 09:21 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -121,7 +121,10 @@ INSERT INTO `member` (`memberID`, `userName`, `passwords`, `email`, `accessLevel
 -- (See below for the actual view)
 --
 CREATE TABLE `memberinfo` (
-`username` varchar(100)
+`memberID` int(11)
+,`genderID` int(100)
+,`accessLevelID` int(100)
+,`username` varchar(100)
 ,`passwords` varchar(100)
 ,`email` varchar(100)
 ,`accessLevel` varchar(100)
@@ -165,7 +168,10 @@ INSERT INTO `post` (`postID`, `memberID`, `title`, `categoryID`, `datePosted`, `
 -- (See below for the actual view)
 --
 CREATE TABLE `postinfo` (
-`title` varchar(100)
+`postID` int(11)
+,`memberID` int(100)
+,`categoryID` int(11)
+,`title` varchar(100)
 ,`author` varchar(201)
 ,`category` varchar(100)
 ,`datePosted` date
@@ -210,7 +216,7 @@ CREATE TABLE `survey` (
 --
 DROP TABLE IF EXISTS `memberinfo`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `memberinfo`  AS  select `member`.`userName` AS `username`,`member`.`passwords` AS `passwords`,`member`.`email` AS `email`,`accesslevel`.`accessLevel` AS `accessLevel`,`member`.`firstName` AS `firstName`,`member`.`lastName` AS `lastName`,`gender`.`gender` AS `gender` from ((`member` join `accesslevel` on((`member`.`accessLevelID` = `accesslevel`.`accessLevelID`))) join `gender` on((`member`.`genderID` = `gender`.`genderID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `memberinfo`  AS  select `member`.`memberID` AS `memberID`,`member`.`genderID` AS `genderID`,`member`.`accessLevelID` AS `accessLevelID`,`member`.`userName` AS `username`,`member`.`passwords` AS `passwords`,`member`.`email` AS `email`,`accesslevel`.`accessLevel` AS `accessLevel`,`member`.`firstName` AS `firstName`,`member`.`lastName` AS `lastName`,`gender`.`gender` AS `gender` from ((`member` join `accesslevel` on((`member`.`accessLevelID` = `accesslevel`.`accessLevelID`))) join `gender` on((`member`.`genderID` = `gender`.`genderID`))) ;
 
 -- --------------------------------------------------------
 
@@ -219,7 +225,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `postinfo`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `postinfo`  AS  select `post`.`title` AS `title`,concat(`member`.`firstName`,' ',`member`.`lastName`) AS `author`,`category`.`category` AS `category`,`post`.`datePosted` AS `datePosted`,`post`.`dateUpdated` AS `dateUpdated`,`post`.`excerpt` AS `excerpt`,`post`.`content` AS `content` from ((`post` join `member` on((`post`.`memberID` = `member`.`memberID`))) join `category` on((`post`.`categoryID` = `category`.`categoryID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `postinfo`  AS  select `post`.`postID` AS `postID`,`post`.`memberID` AS `memberID`,`post`.`categoryID` AS `categoryID`,`post`.`title` AS `title`,concat(`member`.`firstName`,' ',`member`.`lastName`) AS `author`,`category`.`category` AS `category`,`post`.`datePosted` AS `datePosted`,`post`.`dateUpdated` AS `dateUpdated`,`post`.`excerpt` AS `excerpt`,`post`.`content` AS `content` from ((`post` join `member` on((`post`.`memberID` = `member`.`memberID`))) join `category` on((`post`.`categoryID` = `category`.`categoryID`))) ;
 
 --
 -- Indexes for dumped tables
