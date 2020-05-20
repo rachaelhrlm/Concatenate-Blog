@@ -153,7 +153,7 @@ class Post {
 //    method for getting all categories (for dropdown)
      public static function categories() {
         $db = Db::getInstance();
-        $req = $db->query('SELECT * FROM catergory');
+        $req = $db->query('SELECT * FROM category');
         return $req->fetchAll(PDO::FETCH_ASSOC);
      }
 }
