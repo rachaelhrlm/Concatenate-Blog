@@ -64,7 +64,7 @@
             <?php
             $img = "views/images/{$post->getPostID()}.jpeg";
             ?>
-            <div class="card customcard" onclick="location.href = '?controller=post&action=read&id=<?php echo $post->getPostID(); ?>';" style="width: 20rem;">
+            <div class="card customcard" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $post->getPostID(); ?>';" style="width: 20rem;">
                 <img src="<?php echo $img ?>"  class="card-img-top" alt="Image for <?php $post->getTitle() ?>">
                 <div class="card-body">
                     <p class="card-text"><small class="text-muted"><?php echo $post->getDatePosted() . '&emsp; &emsp;' . $post->getAuthor() ?></small></p>

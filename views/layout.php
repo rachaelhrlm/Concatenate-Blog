@@ -5,7 +5,7 @@
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <!--bootstrap stylesheet-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!--fontawesome stylesheet: for icons-->
@@ -16,8 +16,8 @@
 
         <title>Concatenate</title>
     </head>
-    
-    
+
+
     <body>
         <!--Logo Bar-->
         <div class="container-fluid logo">
@@ -25,30 +25,30 @@
                 <img src="views/images/standard/logo.png" height="80px">
             </div>
         </div>
-        
+
         <!--divider-->
         <hr>
-        
-        
+
+
         <!--Navbar Switch-->
         <?php
 //        $_COOKIE['user'] = 'uncomment to test log in switch';
         if (isset($_COOKIE['user'])) {
             require_once 'views/sections/nav-member.php';
-        } else{
+        } else {
 //            require_once 'views/sections/nav-default.php';
             require_once 'views/sections/nav-test.php';
-        }    
+        }
         ?>
 
         <!--Content-->
         <?php require_once('routes.php'); ?>
 
-        
+
         <!--divider-->
         <hr>
-        
-        
+
+
         <!--Footer-->
         <footer>
             <div class="row justify-content-around">
@@ -92,7 +92,7 @@
                 <div class="col-md-2">
                     <img src="views/images/standard/graphiclogo.png" width="30px">
                     <i class="far fa-copyright"></i> <?php echo date('Y') ?></div>
-               
+
             </div>
         </footer>
         <script src='https://cdn.tiny.cloud/1/tsm4jflxmwzdk9w9ws3pt5kefzwep82nt1bcq1rduh7w70lu/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
@@ -101,7 +101,12 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script>
             tinymce.init({
-                selector: '.textarea'
+                selector: '.textarea',
+                plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+                toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+                toolbar_mode: 'floating',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
             });
         </script>
     </body>

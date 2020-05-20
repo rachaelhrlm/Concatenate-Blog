@@ -132,7 +132,7 @@ class Post {
             echo '<div class="container"><div class="row justify-content-center">';
             foreach ($posts as $post) {
                 $img = "views/images/{$post['postID']}.jpeg";
-                echo '<div class="card customcard" onclick="location.href = ' . "'?controller=post&action=read&id=" . $post['postID'] . "'" . '"' . '; style="width: 20rem;">';
+                echo '<div class="card customcard" onclick="location.href = ' . "'?controller=post&action=searchID&id=" . $post['postID'] . "'" . '"' . '; style="width: 20rem;">';
                 echo '<img src="' . $img . '"  class="card-img-top" alt="Image for ' . $post['title'] . '">';
                 echo '<div class="card-body">';
                 echo '<p class="card-text"><small class="text-muted">' . $post['datePosted'] . '&emsp; &emsp;' . $post['author'] . '</small></p>';
@@ -144,6 +144,22 @@ class Post {
             echo '</div></div>';
         } else { //if there are no results, echo 'No results found.'
             echo 'No results found.';
+        }
+    }
+    
+    
+    public static function searchID($id) {
+        $db = Db::getInstance();
+        //use intval to make sure $id is an integer
+        $id = intval($id);
+        $req = $db->prepare('SELECT * FROM postinfo WHERE postID = :id');
+        //the query was prepared, now replace :id with the actual $id value
+        $req->execute(array('id' => $id));
+        $post = $req->fetch();
+        if (!empty($post)) {
+            return new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
+        } else {
+            return $post = NULL;
         }
     }
 }

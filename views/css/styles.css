@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap');
 
 /*default override*/
+html { 
+    scroll-behavior: smooth;
+}
 * {
     font-family: 'Roboto', sans-serif;
 }
@@ -36,6 +39,9 @@ section{
 .logo {
     padding-top: 10px;
 }
+.btn {
+    margin: 5px;
+}
 
 
 
@@ -60,6 +66,17 @@ section{
 .animated {
     overflow:hidden;
     height: 400px;
+    width: 100%;
+    color: #fff;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 600% 600%;
+    -webkit-animation: Gradient 60s ease infinite;
+    -moz-animation: Gradient 60s ease infinite;
+    animation: Gradient 60s ease infinite;
+}
+.animatedsmall {
+    overflow:hidden;
+    height: 80px;
     width: 100%;
     color: #fff;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -109,6 +126,26 @@ section{
     border-radius: 3px;
     background: none;
 }
+
+
+
+/*Blog Post Styling (read.php)*/
+.blogimg {
+    width: 80%;
+    padding: 10px 0;
+}
+
+.authorSnippet {
+    border: 2px dotted #efefef;
+    padding: 30px;
+    text-align: center;
+}
+.profilePic {
+    height: auto;
+    max-width: 100px;
+    border-radius: 100px;
+}
+
 
 
 
