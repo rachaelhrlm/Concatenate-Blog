@@ -31,7 +31,7 @@
     <div class="container">
         <div class="row ">
             <div class="col-md-3"></div>
-            <form class="col-md-6 animated-container">
+            <div class="col-md-6 animated-container">
                 <h1>Looking for something?</h1>
                 <label class="sr-only" for="inlineFormInputGroup">Search</label>
                 <div class="input-group">
@@ -41,7 +41,7 @@
                     <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="search" onkeyup="searchPost(this.value)">
                 </div>
                 <p class="smalltext"><b>try:</b> motivational, career, lifestyle</p> 
-            </form>
+            </div>
             <div class="col-md-3"></div>
         </div>
     </div>
