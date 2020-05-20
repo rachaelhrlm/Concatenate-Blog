@@ -146,4 +146,14 @@ class Post {
             echo 'No results found.';
         }
     }
+    
+    
+    
+    
+//    method for getting all categories (for dropdown)
+     public static function categories() {
+        $db = Db::getInstance();
+        $req = $db->query('SELECT * FROM catergory');
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+     }
 }

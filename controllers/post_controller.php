@@ -6,9 +6,6 @@ class PostController {
       require_once('views/posts/searchAll.php');
     }
     
-    
-    
-    
     public function test() {
       require_once('views/posts/test.php');
     }
