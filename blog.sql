@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2020 at 09:14 PM
+-- Generation Time: May 20, 2020 at 10:35 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -43,6 +43,30 @@ INSERT INTO `accesslevel` (`accessLevelID`, `accessLevel`) VALUES
 (1, 'Admin'),
 (2, 'Blogger'),
 (3, 'Member');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bio`
+--
+
+CREATE TABLE `bio` (
+  `bioID` int(11) NOT NULL,
+  `memberID` int(11) NOT NULL,
+  `name` varchar(100) COLLATE latin1_general_ci NOT NULL,
+  `about` varchar(200) COLLATE latin1_general_ci DEFAULT 'Proud writer for Concatenate. Loves coding, coffee, and cats. Meow.'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dumping data for table `bio`
+--
+
+INSERT INTO `bio` (`bioID`, `memberID`, `name`, `about`) VALUES
+(1, 1, 'Mary Sue', 'Proud writer for Concatenate. Loves coding, coffee, and cats. Meow.'),
+(2, 2, 'Jane Doe', 'Proud writer for Concatenate. Loves coding, coffee, and cats. Meow.'),
+(3, 3, 'Any Mouse', 'Proud writer for Concatenate. Loves coding, coffee, and cats. Meow.'),
+(4, 4, 'Miss Fortune', 'Proud writer for Concatenate. Loves coding, coffee, and cats. Meow.'),
+(5, 5, 'Admin', 'Proud writer for Concatenate. Loves coding, coffee, and cats. Meow.');
 
 -- --------------------------------------------------------
 
@@ -97,41 +121,19 @@ CREATE TABLE `member` (
   `userName` varchar(100) COLLATE latin1_general_ci NOT NULL,
   `passwords` varchar(100) COLLATE latin1_general_ci NOT NULL,
   `email` varchar(100) COLLATE latin1_general_ci NOT NULL,
-  `accessLevelID` int(100) NOT NULL DEFAULT '3',
-  `firstName` varchar(100) COLLATE latin1_general_ci NOT NULL,
-  `lastName` varchar(100) COLLATE latin1_general_ci NOT NULL,
-  `genderID` int(100) NOT NULL
+  `accessLevelID` int(100) NOT NULL DEFAULT '3'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`memberID`, `userName`, `passwords`, `email`, `accessLevelID`, `firstName`, `lastName`, `genderID`) VALUES
-(1, 'theoriginal', 'K!ttyCat123', 'theoriginal@wow.com', 2, 'Mary', 'Sue', 1),
-(2, 'ladyluck', 'M!55F0rtun3', 'samanthab@yahoo.com', 3, 'Samantha', 'Brookes', 1),
-(3, 'KittyKate', 'M30wPurr', 'kitty.meow@gmail.com', 3, 'Kate', 'Smith', 1),
-(4, 'DangerDan', 'Ar53n@l', 'dan.gerous@wow.com', 3, 'Dan', 'Vicious', 2),
-(5, 'test', 'Password', 'test@test.com', 1, 'Test', 'User', 1);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `memberinfo`
--- (See below for the actual view)
---
-CREATE TABLE `memberinfo` (
-`memberID` int(11)
-,`genderID` int(100)
-,`accessLevelID` int(100)
-,`username` varchar(100)
-,`passwords` varchar(100)
-,`email` varchar(100)
-,`accessLevel` varchar(100)
-,`firstName` varchar(100)
-,`lastName` varchar(100)
-,`gender` varchar(100)
-);
+INSERT INTO `member` (`memberID`, `userName`, `passwords`, `email`, `accessLevelID`) VALUES
+(1, 'theoriginal', 'K!ttyCat123', 'theoriginal@wow.com', 2),
+(2, 'ladyluck', 'M!55F0rtun3', 'samanthab@yahoo.com', 3),
+(3, 'KittyKate', 'M30wPurr', 'kitty.meow@gmail.com', 3),
+(4, 'DangerDan', 'Ar53n@l', 'dan.gerous@wow.com', 3),
+(5, 'test', 'Password', 'test@test.com', 1);
 
 -- --------------------------------------------------------
 
@@ -172,13 +174,58 @@ CREATE TABLE `postinfo` (
 ,`memberID` int(100)
 ,`categoryID` int(11)
 ,`title` varchar(100)
-,`author` varchar(201)
 ,`category` varchar(100)
 ,`datePosted` date
 ,`dateUpdated` date
 ,`excerpt` varchar(255)
 ,`content` longtext
+,`author` varchar(100)
+,`about` varchar(200)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social`
+--
+
+CREATE TABLE `social` (
+  `socialID` int(11) NOT NULL,
+  `social` varchar(100) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dumping data for table `social`
+--
+
+INSERT INTO `social` (`socialID`, `social`) VALUES
+(1, 'Twitter'),
+(2, 'Facebook'),
+(3, 'Github'),
+(4, 'Instagram'),
+(5, 'LinkedIn');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sociallink`
+--
+
+CREATE TABLE `sociallink` (
+  `socialLinkID` int(11) NOT NULL,
+  `socialID` int(11) NOT NULL,
+  `memberID` int(11) NOT NULL,
+  `url` varchar(255) COLLATE latin1_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dumping data for table `sociallink`
+--
+
+INSERT INTO `sociallink` (`socialLinkID`, `socialID`, `memberID`, `url`) VALUES
+(1, 1, 1, 'https://twitter.com/MarySue'),
+(2, 4, 1, 'https://www.instagram.com/mary_sue/'),
+(3, 5, 1, 'https://www.linkedin.com/in/marysue');
 
 -- --------------------------------------------------------
 
@@ -212,20 +259,11 @@ CREATE TABLE `survey` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `memberinfo`
---
-DROP TABLE IF EXISTS `memberinfo`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `memberinfo`  AS  select `member`.`memberID` AS `memberID`,`member`.`genderID` AS `genderID`,`member`.`accessLevelID` AS `accessLevelID`,`member`.`userName` AS `username`,`member`.`passwords` AS `passwords`,`member`.`email` AS `email`,`accesslevel`.`accessLevel` AS `accessLevel`,`member`.`firstName` AS `firstName`,`member`.`lastName` AS `lastName`,`gender`.`gender` AS `gender` from ((`member` join `accesslevel` on((`member`.`accessLevelID` = `accesslevel`.`accessLevelID`))) join `gender` on((`member`.`genderID` = `gender`.`genderID`))) ;
-
--- --------------------------------------------------------
-
---
 -- Structure for view `postinfo`
 --
 DROP TABLE IF EXISTS `postinfo`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `postinfo`  AS  select `post`.`postID` AS `postID`,`post`.`memberID` AS `memberID`,`post`.`categoryID` AS `categoryID`,`post`.`title` AS `title`,concat(`member`.`firstName`,' ',`member`.`lastName`) AS `author`,`category`.`category` AS `category`,`post`.`datePosted` AS `datePosted`,`post`.`dateUpdated` AS `dateUpdated`,`post`.`excerpt` AS `excerpt`,`post`.`content` AS `content` from ((`post` join `member` on((`post`.`memberID` = `member`.`memberID`))) join `category` on((`post`.`categoryID` = `category`.`categoryID`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `postinfo`  AS  select `post`.`postID` AS `postID`,`post`.`memberID` AS `memberID`,`post`.`categoryID` AS `categoryID`,`post`.`title` AS `title`,`category`.`category` AS `category`,`post`.`datePosted` AS `datePosted`,`post`.`dateUpdated` AS `dateUpdated`,`post`.`excerpt` AS `excerpt`,`post`.`content` AS `content`,`bio`.`name` AS `author`,`bio`.`about` AS `about` from (((`post` join `member` on((`post`.`memberID` = `member`.`memberID`))) join `category` on((`post`.`categoryID` = `category`.`categoryID`))) join `bio` on((`post`.`memberID` = `bio`.`memberID`))) ;
 
 --
 -- Indexes for dumped tables
@@ -236,6 +274,13 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 ALTER TABLE `accesslevel`
   ADD PRIMARY KEY (`accessLevelID`);
+
+--
+-- Indexes for table `bio`
+--
+ALTER TABLE `bio`
+  ADD PRIMARY KEY (`bioID`),
+  ADD KEY `memberID` (`memberID`);
 
 --
 -- Indexes for table `category`
@@ -256,8 +301,7 @@ ALTER TABLE `member`
   ADD PRIMARY KEY (`memberID`),
   ADD UNIQUE KEY `userName` (`userName`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `accessLevel` (`accessLevelID`),
-  ADD KEY `gender` (`genderID`);
+  ADD KEY `accessLevel` (`accessLevelID`);
 
 --
 -- Indexes for table `post`
@@ -266,6 +310,20 @@ ALTER TABLE `post`
   ADD PRIMARY KEY (`postID`),
   ADD KEY `memberID` (`memberID`),
   ADD KEY `category` (`categoryID`);
+
+--
+-- Indexes for table `social`
+--
+ALTER TABLE `social`
+  ADD PRIMARY KEY (`socialID`);
+
+--
+-- Indexes for table `sociallink`
+--
+ALTER TABLE `sociallink`
+  ADD PRIMARY KEY (`socialLinkID`),
+  ADD KEY `socialID` (`socialID`),
+  ADD KEY `memberID` (`memberID`);
 
 --
 -- Indexes for table `subscriber`
@@ -289,6 +347,11 @@ ALTER TABLE `survey`
 ALTER TABLE `accesslevel`
   MODIFY `accessLevelID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
+-- AUTO_INCREMENT for table `bio`
+--
+ALTER TABLE `bio`
+  MODIFY `bioID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
@@ -309,6 +372,16 @@ ALTER TABLE `member`
 ALTER TABLE `post`
   MODIFY `postID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `social`
+--
+ALTER TABLE `social`
+  MODIFY `socialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `sociallink`
+--
+ALTER TABLE `sociallink`
+  MODIFY `socialLinkID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `subscriber`
 --
 ALTER TABLE `subscriber`
@@ -318,11 +391,16 @@ ALTER TABLE `subscriber`
 --
 
 --
+-- Constraints for table `bio`
+--
+ALTER TABLE `bio`
+  ADD CONSTRAINT `bio_ibfk_1` FOREIGN KEY (`memberID`) REFERENCES `member` (`memberID`);
+
+--
 -- Constraints for table `member`
 --
 ALTER TABLE `member`
-  ADD CONSTRAINT `member_ibfk_1` FOREIGN KEY (`accessLevelID`) REFERENCES `accesslevel` (`accessLevelID`),
-  ADD CONSTRAINT `member_ibfk_2` FOREIGN KEY (`genderID`) REFERENCES `gender` (`genderID`);
+  ADD CONSTRAINT `member_ibfk_1` FOREIGN KEY (`accessLevelID`) REFERENCES `accesslevel` (`accessLevelID`);
 
 --
 -- Constraints for table `post`
@@ -330,6 +408,13 @@ ALTER TABLE `member`
 ALTER TABLE `post`
   ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`memberID`) REFERENCES `member` (`memberID`),
   ADD CONSTRAINT `post_ibfk_2` FOREIGN KEY (`categoryID`) REFERENCES `category` (`categoryID`);
+
+--
+-- Constraints for table `sociallink`
+--
+ALTER TABLE `sociallink`
+  ADD CONSTRAINT `sociallink_ibfk_1` FOREIGN KEY (`socialID`) REFERENCES `social` (`socialID`),
+  ADD CONSTRAINT `sociallink_ibfk_2` FOREIGN KEY (`memberID`) REFERENCES `member` (`memberID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
