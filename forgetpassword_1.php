@@ -38,22 +38,23 @@
                     <input type='password' name='password'>
                     <button type='submit' name='reset'>Change Password</button>
                 </form>
-        <?php
-        }}else {
-        ?>
+                <?php
+            }
+        } else {
+            ?>
 
-        
-        <form method = "POST" >
 
-            Username:
-            <input type='text' name='login_username' required>
+            <form method = "POST" >
 
-            Email address:
+                Username:
+                <input type='text' name='login_username' required>
 
-            <input type='email' name='email' required>
-            <input type="hidden" name="recover" value="true">
-            <button type='submit'>Submit</button>
-        <?php }?>
-        </form>
+                Email address:
+
+                <input type='email' name='email' required>
+                <input type="hidden" name="recover" value="true">
+                <button type='submit'>Submit</button>
+            </form>
+<?php } ?>
     </body>
 </html>
