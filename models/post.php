@@ -8,6 +8,7 @@ class Post {
     private $categoryID;
     private $title;
     private $author;
+    private $about;
     private $category;
     private $datePosted;
     private $dateUpdated;
@@ -15,12 +16,13 @@ class Post {
     private $content;
 
 //    constructor
-    public function __construct($postID, $memberID, $categoryID, $title, $author, $category, $datePosted, $dateUpdated, $excerpt, $content) {
+    public function __construct($postID, $memberID, $categoryID, $title, $author, $about, $category, $datePosted, $dateUpdated, $excerpt, $content) {
         $this->postID = $postID;
         $this->memberID = $memberID;
         $this->categoryID = $categoryID;
         $this->title = $title;
         $this->author = $author;
+        $this->about = $about;
         $this->category = $category;
         $this->datePosted = $datePosted;
         $this->dateUpdated = $dateUpdated;
@@ -47,6 +49,10 @@ class Post {
 
     public function getAuthor() {
         return $this->author;
+    }
+    
+    public function getAbout() {
+        return $this->about;
     }
 
     public function getCategory() {
@@ -89,6 +95,10 @@ class Post {
     public function setAuthor($author) {
         $this->author = $author;
     }
+    
+    public function setAbout($about) {
+        $this->author = $about;
+    }
 
     public function setCategory($category) {
         $this->category = $category;
@@ -110,27 +120,29 @@ class Post {
         $this->content = $content;
     }
 
-//    methods
+//    method for selecting all posts
     public static function searchAll() {
         $list = [];
         $db = Db::getInstance();
         $req = $db->query('SELECT * FROM postInfo ORDER BY postID DESC');
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
+            $list[] = new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'], $post['about'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
         }
         return $list;
     }
 
+    
+//    method for selecting post via Ajax where keyword matches anything
     public static function searchAny($keyword) {
         $db = Db::getInstance();
         $req = $db->prepare('CALL searchPost(?)');
         $req->execute([$keyword]);
-        $posts = $req->fetchAll(PDO::FETCH_ASSOC);
-        if (!empty($posts)) {
+        $posts = $req->fetchAll(PDO::FETCH_ASSOC); //specifying that I want the results to be associative arrays
+        if (!empty($posts)) { //if there are results, echo out a container along with a loop of Post Cards
             echo '<div class="container"><div class="row justify-content-center">';
             foreach ($posts as $post) {
                 $img = "views/images/{$post['postID']}.jpeg";
-                echo '<div class="card customcard" onclick="location.href = ' . "'?controller=post&action=read&id=" . $post['postID'] . "'" . '"' . '; style="width: 20rem;">';
+                echo '<div class="card customcard" onclick="location.href = ' . "'?controller=post&action=searchID&id=" . $post['postID'] . "'" . '"' . '; style="width: 20rem;">';
                 echo '<img src="' . $img . '"  class="card-img-top" alt="Image for ' . $post['title'] . '">';
                 echo '<div class="card-body">';
                 echo '<p class="card-text"><small class="text-muted">' . $post['datePosted'] . '&emsp; &emsp;' . $post['author'] . '</small></p>';
@@ -140,8 +152,31 @@ class Post {
                 echo '</div></div>';
             }
             echo '</div></div>';
-        } else {
+        } else { //if there are no results, echo 'No results found.'
             echo 'No results found.';
         }
+    }
+    
+    
+    public static function searchID($id) {
+        $db = Db::getInstance();
+        //use intval to make sure $id is an integer
+        $id = intval($id);
+        $req = $db->prepare('SELECT * FROM postinfo WHERE postID = :id');
+        //the query was prepared, now replace :id with the actual $id value
+        $req->execute(array('id' => $id));
+        $post = $req->fetch();
+        if (!empty($post)) {
+            return new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'],  $post['about'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
+        } else {
+            return $post = NULL;
+        }
+    }
+    
+    public static function searchSocial($id) {
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT * from socialLink WHERE memberID = ?');
+        $req->execute([$id]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 }
