@@ -19,23 +19,24 @@ class PostController {
         }
     }
 
-    public function update() {
+    public function edit() {
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             if (!isset($_GET['id']))
                 return call('pages', 'error');
 
-
-            $post = Post::find($_GET['id']);
-
-            require_once('views/posts/update.php');
+            
+            $post = Post::searchID($_GET['id']);
+            $categories = Post::categories();
+            require_once('views/posts/edit.php');
         }
         else {
             $id = $_GET['id'];
-            Post::update($id);
-
-            $posts = Post::all();
-            require_once('views/posts/readAll.php');
+            Post::edit($id);
+            
+            $post = Post::searchID($_GET['id']);
+            $socials = Post::searchSocial($post->getMemberID());
+            require_once('views/posts/read.php');
         }
     }
 

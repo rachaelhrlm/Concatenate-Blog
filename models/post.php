@@ -50,7 +50,7 @@ class Post {
     public function getAuthor() {
         return $this->author;
     }
-    
+
     public function getAbout() {
         return $this->about;
     }
@@ -95,7 +95,7 @@ class Post {
     public function setAuthor($author) {
         $this->author = $author;
     }
-    
+
     public function setAbout($about) {
         $this->author = $about;
     }
@@ -131,7 +131,6 @@ class Post {
         return $list;
     }
 
-    
 //    method for selecting post via Ajax where keyword matches anything
     public static function searchAny($keyword) {
         $db = Db::getInstance();
@@ -157,6 +156,7 @@ class Post {
         }
     }
 
+//    method for searching post by its postid
     public static function searchID($id) {
         $db = Db::getInstance();
         //use intval to make sure $id is an integer
@@ -166,24 +166,90 @@ class Post {
         $req->execute(array('id' => $id));
         $post = $req->fetch();
         if (!empty($post)) {
-            return new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'],  $post['about'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
+            return new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'], $post['about'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
         } else {
             return $post = NULL;
         }
     }
-    
+
+//    method for finding all socials for chosen member
     public static function searchSocial($id) {
         $db = Db::getInstance();
         $req = $db->prepare('SELECT * from socialLink WHERE memberID = ?');
         $req->execute([$id]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
-  
-    
+
 //    method for getting all categories (for dropdown)
-     public static function categories() {
+    public static function categories() {
         $db = Db::getInstance();
         $req = $db->query('SELECT * FROM category');
         return $req->fetchAll(PDO::FETCH_ASSOC);
-     }
+    }
+
+//     method for editing post
+    public static function edit($id) {
+        $db = Db::getInstance();
+        $req = $db->prepare("call editPost(?,?,?,?,?)");
+
+        if(!empty($_POST)) {
+            if (isset($_POST['title']) && $_POST['title'] != "") {
+                $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+            if (isset($_POST['excerpt']) && $_POST['excerpt'] != "") {
+                $filteredExcerpt = filter_input(INPUT_POST, 'excerpt', FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+            if (isset($_POST['content']) && $_POST['content'] != "") {
+                $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+
+            $title = $filteredTitle;
+            $categoryID = $_POST['categoryID'];
+            $excerpt = $filteredExcerpt;
+            $content = $filteredContent;
+            $req->execute([$id, $title, $categoryID, $excerpt, $content]);
+
+            if (!empty($_FILES[self::InputKey]['title'])) {
+                Post::uploadFile($id);
+            }
+        }
+        else {
+            trigger_error("Post Info Missing!");
+        }
+    }
+
+//    method and constants for uploadFile
+    const AllowedTypes = ['image/jpeg', 'image/jpg'];
+    const InputKey = 'myUploader';
+
+    public static function uploadFile(string $postID) {
+
+        if (empty($_FILES[self::InputKey])) {
+            //die("File Missing!");
+            trigger_error("File Missing!");
+        }
+
+        if ($_FILES[self::InputKey]['error'] > 0) {
+            trigger_error("Handle the error! " . $_FILES[self::InputKey]['error']);
+        }
+
+
+        if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
+            trigger_error("Handle File Type Not Allowed: " . $_FILES[self::InputKey]['type']);
+        }
+
+        $tempFile = $_FILES[self::InputKey]['tmp_name'];
+        $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/";
+        $destinationFile = $path . $postID . '.jpeg';
+
+        if (!move_uploaded_file($tempFile, $destinationFile)) {
+            trigger_error("Handle Error");
+        }
+
+        //Clean up the temp file
+        if (file_exists($tempFile)) {
+            unlink($tempFile);
+        }
+    }
+
 }

@@ -167,3 +167,10 @@ section{
 .smalltext{
     font-size: 11px;
 }
+
+
+
+/*form styling*/
+.textarea {
+    height: 500px !important;
+}
