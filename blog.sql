@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2020 at 10:35 PM
+-- Generation Time: May 21, 2020 at 11:36 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.0.21
 
@@ -88,6 +88,18 @@ INSERT INTO `category` (`categoryID`, `category`) VALUES
 (2, 'Resources'),
 (3, 'Career'),
 (4, 'Events');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favourite`
+--
+
+CREATE TABLE `favourite` (
+  `favID` int(11) NOT NULL,
+  `memberID` int(11) NOT NULL,
+  `postID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- --------------------------------------------------------
 
@@ -289,6 +301,14 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`categoryID`);
 
 --
+-- Indexes for table `favourite`
+--
+ALTER TABLE `favourite`
+  ADD PRIMARY KEY (`favID`),
+  ADD KEY `memberID` (`memberID`),
+  ADD KEY `postID` (`postID`);
+
+--
 -- Indexes for table `gender`
 --
 ALTER TABLE `gender`
@@ -357,6 +377,11 @@ ALTER TABLE `bio`
 ALTER TABLE `category`
   MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `favourite`
+--
+ALTER TABLE `favourite`
+  MODIFY `favID` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `gender`
 --
 ALTER TABLE `gender`
@@ -395,6 +420,13 @@ ALTER TABLE `subscriber`
 --
 ALTER TABLE `bio`
   ADD CONSTRAINT `bio_ibfk_1` FOREIGN KEY (`memberID`) REFERENCES `member` (`memberID`);
+
+--
+-- Constraints for table `favourite`
+--
+ALTER TABLE `favourite`
+  ADD CONSTRAINT `favourite_ibfk_1` FOREIGN KEY (`memberID`) REFERENCES `member` (`memberID`),
+  ADD CONSTRAINT `favourite_ibfk_2` FOREIGN KEY (`postID`) REFERENCES `post` (`postID`);
 
 --
 -- Constraints for table `member`
