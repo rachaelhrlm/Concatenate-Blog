@@ -47,7 +47,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
     </div>
     <div class="row justify-content-center">
         <div class="col-md-9 text-center">
-        <img src="<?php echo $img ?>" class="blogimg">
+        <img src="<?php echo $img ?>?<?=Date('U')?>" class="blogimg">
         </div>
     </div>
 </div>

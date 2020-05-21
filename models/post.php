@@ -75,7 +75,7 @@ class Post {
         return $this->content;
     }
 
-    //    setters
+//    setters
     public function setPostID($postID) {
         $this->postID = $postID;
     }
@@ -159,10 +159,10 @@ class Post {
 //    method for searching post by its postid
     public static function searchID($id) {
         $db = Db::getInstance();
-        //use intval to make sure $id is an integer
+//use intval to make sure $id is an integer
         $id = intval($id);
         $req = $db->prepare('SELECT * FROM postinfo WHERE postID = :id');
-        //the query was prepared, now replace :id with the actual $id value
+//the query was prepared, now replace :id with the actual $id value
         $req->execute(array('id' => $id));
         $post = $req->fetch();
         if (!empty($post)) {
@@ -192,7 +192,7 @@ class Post {
         $db = Db::getInstance();
         $req = $db->prepare("call editPost(?,?,?,?,?)");
 
-        if(!empty($_POST)) {
+        if (!empty($_POST)) {
             if (isset($_POST['title']) && $_POST['title'] != "") {
                 $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
             }
@@ -209,11 +209,12 @@ class Post {
             $content = $filteredContent;
             $req->execute([$id, $title, $categoryID, $excerpt, $content]);
 
-            if (!empty($_FILES[self::InputKey]['title'])) {
+            if (!empty($_FILES[self::InputKey]['name'])) {
                 Post::uploadFile($id);
+            } else {
+                trigger_error("File Info Missing!");
             }
-        }
-        else {
+        } else {
             trigger_error("Post Info Missing!");
         }
     }
@@ -225,7 +226,7 @@ class Post {
     public static function uploadFile(string $postID) {
 
         if (empty($_FILES[self::InputKey])) {
-            //die("File Missing!");
+//die("File Missing!");
             trigger_error("File Missing!");
         }
 
@@ -246,11 +247,10 @@ class Post {
             trigger_error("Handle Error");
         }
 
-        //Clean up the temp file
+//Clean up the temp file
         if (file_exists($tempFile)) {
             unlink($tempFile);
         }
     }
- 
-  
+
 }
