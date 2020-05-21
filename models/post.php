@@ -211,9 +211,7 @@ class Post {
 
             if (!empty($_FILES[self::InputKey]['name'])) {
                 Post::uploadFile($id);
-            } else {
-                trigger_error("File Info Missing!");
-            }
+            } 
         } else {
             trigger_error("Post Info Missing!");
         }

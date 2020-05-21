@@ -21,7 +21,6 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
     <div class="row justify-content-center">
         
         <div class="col-md-9 text-right">
-            <hr>
             <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
             <a href=""><i class="fas fa-plus-square fa-3x" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
             <a href=""><i class="fas fa-minus-square fa-3x" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
@@ -51,10 +50,10 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
         </div>
     </div>
 </div>
-<div class="spacer"></div>
 <div class="row justify-content-center">
-    <div class="col-md-9">
-        <h2>"<?php echo $post->getExcerpt() ?>"</h2>
+    <div class="col-md-9 post">
+        <h2 class="excerpt"><?php echo $post->getExcerpt() ?></h2>
+        <div class="spacer"></div>
         <?php echo htmlspecialchars_decode($post->getContent())?>
     </div>
 </div>
