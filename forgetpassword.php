@@ -1,4 +1,4 @@
-<?php session_start ();?>
+<?php session_start(); ?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -19,16 +19,8 @@
         }
 
         if (isset($_POST['recover'])) {
-            $login_username = $_POST['login_username'];
-            $email = $_POST['email'];
-            //The password is encrypted
-            $_SESSION ['username']=$login_username;
-            $_SESSION ['email']=$email;
-            
-
-            echo $login_username;
-            echo $email;
-
+            $_SESSION ['username'] = $_POST['login_username'];
+            $_SESSION ['email'] = $_POST['email'];
 
             $stmt = $pdo->prepare("SELECT userName, email FROM member WHERE userName =:username and email =:email");
             $stmt->bindParam(":username", $_SESSION['username']);
@@ -40,39 +32,18 @@
 
 
 
-            if ($count > 0 && (isset($_POST['recover']))) {
+            if ($count > 0) {
                 ?>
-
-                <form action = "" method = "POST">
-
+                <form action = "changepassword.php" method = "POST">
                     <input type='password' name='password'>
-
-
-
-                    <button type='submit' name='recover'>Change Password</button></form>
-
-                <?php
-                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                echo $_SESSION['username'];
-                $stmt1 = $pdo->prepare("UPDATE member SET passwords =:password WHERE userName =:username");
-                $stmt1->bindParam(":username", $_SESSION['username']);
-                $stmt1->bindParam(":password", $password);
-
-                $stmt1->execute();
-                $count1 = $stmt1->rowCount();
-
-                if ($count1 > 0) {
-                    
-                } else {
-                    echo "Try again";
-                }
-            } else {
-                echo "Username does not exist.";
-            }
-        }
+                    <button type='submit' name='reset'>Change Password</button>
+                </form>
+        <?php
+        }}
         ?>
 
-        <form action = "" method = "POST">
+        <form method = "POST" >
+
             Username:
             <input type='text' name='login_username' required>
 
@@ -82,11 +53,6 @@
 
             <button type='submit' name='recover'>Submit</button>
 
-
-
-
-
         </form>
-
     </body>
 </html>
