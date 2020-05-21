@@ -6,7 +6,6 @@ class PostController {
         $posts = Post::searchAll();
         require_once('views/posts/searchAll.php');
     }
-
     public function searchID() {
         if (!isset($_GET['id']))
             return call('pages', 'error');
@@ -18,7 +17,6 @@ class PostController {
             return call('pages', 'error');
         }
     }
-
         public function test() {
             require_once('views/posts/test.php');
         }

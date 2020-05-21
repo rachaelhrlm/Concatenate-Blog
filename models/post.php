@@ -156,8 +156,7 @@ class Post {
             echo 'No results found.';
         }
     }
-    
-    
+
     public static function searchID($id) {
         $db = Db::getInstance();
         //use intval to make sure $id is an integer
@@ -179,4 +178,12 @@ class Post {
         $req->execute([$id]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+  
+    
+//    method for getting all categories (for dropdown)
+     public static function categories() {
+        $db = Db::getInstance();
+        $req = $db->query('SELECT * FROM catergory');
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+     }
 }
