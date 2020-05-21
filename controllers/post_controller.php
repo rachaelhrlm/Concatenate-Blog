@@ -12,6 +12,7 @@ class PostController {
             return call('pages', 'error');
         try {
             $post = Post::searchID($_GET['id']);
+            $socials = Post::searchSocial($post->getMemberID());
             require_once('views/posts/read.php');
         } catch (Exception $ex) {
             return call('pages', 'error');

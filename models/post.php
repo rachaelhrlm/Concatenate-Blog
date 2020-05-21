@@ -8,6 +8,7 @@ class Post {
     private $categoryID;
     private $title;
     private $author;
+    private $about;
     private $category;
     private $datePosted;
     private $dateUpdated;
@@ -15,12 +16,13 @@ class Post {
     private $content;
 
 //    constructor
-    public function __construct($postID, $memberID, $categoryID, $title, $author, $category, $datePosted, $dateUpdated, $excerpt, $content) {
+    public function __construct($postID, $memberID, $categoryID, $title, $author, $about, $category, $datePosted, $dateUpdated, $excerpt, $content) {
         $this->postID = $postID;
         $this->memberID = $memberID;
         $this->categoryID = $categoryID;
         $this->title = $title;
         $this->author = $author;
+        $this->about = $about;
         $this->category = $category;
         $this->datePosted = $datePosted;
         $this->dateUpdated = $dateUpdated;
@@ -47,6 +49,10 @@ class Post {
 
     public function getAuthor() {
         return $this->author;
+    }
+    
+    public function getAbout() {
+        return $this->about;
     }
 
     public function getCategory() {
@@ -89,6 +95,10 @@ class Post {
     public function setAuthor($author) {
         $this->author = $author;
     }
+    
+    public function setAbout($about) {
+        $this->author = $about;
+    }
 
     public function setCategory($category) {
         $this->category = $category;
@@ -116,7 +126,7 @@ class Post {
         $db = Db::getInstance();
         $req = $db->query('SELECT * FROM postInfo ORDER BY postID DESC');
         foreach ($req->fetchAll() as $post) {
-            $list[] = new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
+            $list[] = new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'], $post['about'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
         }
         return $list;
     }
@@ -157,9 +167,16 @@ class Post {
         $req->execute(array('id' => $id));
         $post = $req->fetch();
         if (!empty($post)) {
-            return new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
+            return new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'],  $post['about'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
         } else {
             return $post = NULL;
         }
+    }
+    
+    public static function searchSocial($id) {
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT * from socialLink WHERE memberID = ?');
+        $req->execute([$id]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
     }
 }

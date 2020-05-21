@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap');
 
 /*default override*/
+a, a:hover {
+    text-decoration: inherit;
+    color: inherit;
+}
 html { 
     scroll-behavior: smooth;
 }
@@ -41,6 +45,16 @@ section{
 }
 .btn {
     margin: 5px;
+}
+.fab, .far, .fas {
+    margin: 5px;
+    color: #333;
+}
+
+.fab:hover, .far:hover, .fas:hover {
+    margin: 5px;
+    color: #23a6d5;
+    transition:color .5s;
 }
 
 
@@ -131,7 +145,7 @@ section{
 
 /*Blog Post Styling (read.php)*/
 .blogimg {
-    width: 80%;
+    width: 100%;
     padding: 10px 0;
 }
 

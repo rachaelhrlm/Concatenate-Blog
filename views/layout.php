@@ -95,6 +95,8 @@
 
             </div>
         </footer>
+
+        <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
         <script src='https://cdn.tiny.cloud/1/tsm4jflxmwzdk9w9ws3pt5kefzwep82nt1bcq1rduh7w70lu/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -108,6 +110,9 @@
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
             });
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
         </script>
     </body>
 </html>
