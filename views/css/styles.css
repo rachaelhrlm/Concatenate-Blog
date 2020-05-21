@@ -47,12 +47,12 @@ section{
 .btn {
     margin: 5px;
 }
-.fab, .far, .fas {
+.icon {
     margin: 5px;
     color: #333;
 }
 
-.fab:hover, .far:hover, .fas:hover {
+.icon:hover {
     margin: 5px;
     color: #23a6d5;
     transition:color .5s;
