@@ -32,6 +32,7 @@ $controllers = array('pages' => ['home', 'error'],
 );
 
 
+
 // check that the requested controller and action are both allowed
 // if someone tries to access something else they will be redirected 
 // to the error action of the pages controller
