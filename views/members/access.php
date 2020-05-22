@@ -1,7 +1,4 @@
-<?php
-
-
-?>
+<?php ?>
 
 
 <section class="container">

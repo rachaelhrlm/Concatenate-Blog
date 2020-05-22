@@ -15,7 +15,10 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 
 
 <!--if user is logged in and accessLevelID is admin or member logged in is the post author-->
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460f1f1ebbf7542638e5b97f0919dd2d3cb8d0b0
 <?php if (isset($_SESSION['user']) && 
         (($_SESSION['user']->getAccessLevelID() === '1') || ($post->getMemberID() === $_SESSION['user']->getMemberID()))){ ?>
 

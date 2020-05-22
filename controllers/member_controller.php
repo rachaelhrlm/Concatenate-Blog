@@ -3,6 +3,7 @@
 class MemberController {
 
     public function login() {
+
         if (!isset($_SESSION['user'])) {
         if (isset($_POST['login'])) {
             $result = Member::login();
