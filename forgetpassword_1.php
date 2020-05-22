@@ -34,13 +34,28 @@
 
             if ($count > 0) {
                 ?>
-                <form action = "changepassword.php" method = "POST">
+                <form action = "" method = "POST">
                     <input type='password' name='password'>
                     <button type='submit' name='reset'>Change Password</button>
                 </form>
                 <?php
             }
-        } else {
+        } else if (!empty($_POST['password'])) {
+                $password = $_POST['password'];
+//    I get rid of this first to help you validate your change
+//    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $stmt = $pdo->prepare("UPDATE member SET passwords =:password WHERE userName =:username");
+                $stmt->bindParam(":username", $_SESSION['username']);
+                $stmt->bindParam(":password", $password);
+
+                $stmt->execute();
+                $count = $stmt->rowCount();
+                if ($count > 0) {
+                    echo "Success!";
+                } else {
+                    echo "Try again";
+                }
+            } else{
             ?>
 
 
@@ -55,6 +70,8 @@
                 <input type="hidden" name="recover" value="true">
                 <button type='submit'>Submit</button>
             </form>
-<?php } ?>
+            <?php
+        }
+        ?>
     </body>
 </html>
