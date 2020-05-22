@@ -15,7 +15,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 
 
 <!--if user is logged in and accessLevelID is admin or member logged in is the post author-->
-<?php //if (!empty($_COOKIE['user']) && ($_COOKIE['user']->getAccessLevelID() === 1 || $post->getMemberID() === $_COOKIE['user']->getMemberID())){ ?>
+<?php if (!empty($_SESSION['user']) && (($_SESSION['user']->getAccessLevelID() === 1) || ($post->getMemberID() === $_SESSION['user']->getMemberID()))){ ?>
 <div class="spacer"></div>
 <div class="container">
     <div class="row justify-content-center">
@@ -29,7 +29,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
         </div>
     </div>
 </div>
-<?php // }  ?>
+<?php }  ?>
 
 
 
