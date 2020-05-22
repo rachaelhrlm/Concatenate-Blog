@@ -1,5 +1,7 @@
 <?php
 
+require_once 'models/exceptions.php';
+
 class Post {
 
 //    attributes
@@ -212,12 +214,8 @@ class Post {
 
 
             if (!empty($_FILES[self::InputKey]['name'])) {
-
                 try {
-
-
                     if (empty($_FILES[self::InputKey])) {
-//die("File Missing!");
                         throw new NoFileException();
                     } else if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
                         throw new WrongFileTypeException();
@@ -229,7 +227,13 @@ class Post {
                 } catch (NoFileException $ex) {
                     echo "File missing! Please try again.";
                 } catch (WrongFileTypeException $ex) {
-                    echo "You cannot upload this file type {$_FILES[self::InputKey]['type']}, please try again.";
+                    echo ("
+                    <div class='alert alert-primary' role='alert'>
+                    You cannot upload this file type {$_FILES[self::InputKey]['type']}, please try again.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>&times;</span>
+  </button>
+                    </div>");
                 } catch (Exception $ex) {
                     echo "oops something went wrong";
                 }
@@ -244,20 +248,13 @@ class Post {
     const InputKey = 'myUploader';
 
     public static function uploadFile(string $postID) {
-
-
-
-
-
-
         $tempFile = $_FILES[self::InputKey]['tmp_name'];
         $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/";
         $destinationFile = $path . $postID . '.jpeg';
 
-        if (!move_uploaded_file($tempFile, $destinationFile)) {
-            throw new NotMovedToDestinationException();
-        }
-
+//        if (!move_uploaded_file($tempFile, $destinationFile)) {
+//            throw new NotMovedToDestinationException();
+//        }
 //Clean up the temp file
         if (file_exists($tempFile)) {
             unlink($tempFile);
