@@ -209,11 +209,33 @@ class Post {
             $content = $filteredContent;
             $req->execute([$id, $title, $categoryID, $excerpt, $content]);
 
+
+
             if (!empty($_FILES[self::InputKey]['name'])) {
-                Post::uploadFile($id);
-            } 
-        } else {
-            trigger_error("Post Info Missing!");
+
+                try {
+
+
+                    if (empty($_FILES[self::InputKey])) {
+//die("File Missing!");
+                        throw new NoFileException();
+                    } else if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
+                        throw new WrongFileTypeException();
+                    } else if ($_FILES[self::InputKey]['error'] > 0) {
+                        throw new Exception();
+                    } else {
+                        Post::uploadFile($id);
+                    }
+                } catch (NoFileException $ex) {
+                    echo "File missing! Please try again.";
+                } catch (WrongFileTypeException $ex) {
+                    echo "You cannot upload this file type {$_FILES[self::InputKey]['type']}, please try again.";
+                } catch (Exception $ex) {
+                    echo "oops something went wrong";
+                }
+            } else {
+                trigger_error("Post Info Missing!");
+            }
         }
     }
 
@@ -223,26 +245,17 @@ class Post {
 
     public static function uploadFile(string $postID) {
 
-        if (empty($_FILES[self::InputKey])) {
-//die("File Missing!");
-            trigger_error("File Missing!");
-        }
-
-        if ($_FILES[self::InputKey]['error'] > 0) {
-            trigger_error("Handle the error! " . $_FILES[self::InputKey]['error']);
-        }
 
 
-        if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
-            trigger_error("Handle File Type Not Allowed: " . $_FILES[self::InputKey]['type']);
-        }
+
+
 
         $tempFile = $_FILES[self::InputKey]['tmp_name'];
         $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/";
         $destinationFile = $path . $postID . '.jpeg';
 
         if (!move_uploaded_file($tempFile, $destinationFile)) {
-            trigger_error("Handle Error");
+            throw new NotMovedToDestinationException();
         }
 
 //Clean up the temp file
