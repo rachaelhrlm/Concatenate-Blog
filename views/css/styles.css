@@ -5,6 +5,7 @@ a, a:hover {
     text-decoration: inherit;
     color: inherit;
 }
+
 html { 
     scroll-behavior: smooth;
 }
@@ -46,12 +47,12 @@ section{
 .btn {
     margin: 5px;
 }
-.fab, .far, .fas {
+.icon {
     margin: 5px;
     color: #333;
 }
 
-.fab:hover, .far:hover, .fas:hover {
+.icon:hover {
     margin: 5px;
     color: #23a6d5;
     transition:color .5s;
@@ -159,6 +160,18 @@ section{
     max-width: 100px;
     border-radius: 100px;
 }
+.post img {
+    width:100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+}
+.excerpt {
+    background-color: #333;
+    padding: 10px;
+    margin-top: -10px;
+    color: white;
+}
 
 
 
@@ -166,4 +179,11 @@ section{
 
 .smalltext{
     font-size: 11px;
+}
+
+
+
+/*form styling*/
+.textarea {
+    height: 500px !important;
 }

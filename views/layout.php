@@ -113,6 +113,15 @@
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             })
+
+
+
+            document.querySelector('.custom-file-input').addEventListener('change', function (e) {
+                var fileName = document.getElementById("image").files[0].name;
+                var nextSibling = e.target.nextElementSibling
+                nextSibling.innerText = fileName
+//                $('#image').on('change', function() { $(this).attr('name', 'image') });
+            })
         </script>
     </body>
 </html>

@@ -21,10 +21,9 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
     <div class="row justify-content-center">
         
         <div class="col-md-9 text-right">
-            <hr>
-            <a href=""><i class="fas fa-pen-square fa-3x" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
-            <a href=""><i class="fas fa-plus-square fa-3x" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
-            <a href=""><i class="fas fa-minus-square fa-3x" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
+            <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
+            <a href=""><i class="fas fa-plus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
+            <a href=""><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
             <hr>
         </div>
     </div>
@@ -47,15 +46,15 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
     </div>
     <div class="row justify-content-center">
         <div class="col-md-9 text-center">
-        <img src="<?php echo $img ?>" class="blogimg">
+        <img src="<?php echo $img ?>?<?=Date('U')?>" class="blogimg">
         </div>
     </div>
 </div>
-<div class="spacer"></div>
 <div class="row justify-content-center">
-    <div class="col-md-9">
-        <h2>"<?php echo $post->getExcerpt() ?>"</h2>
-        <?php echo $post->getContent() ?>
+    <div class="col-md-9 post">
+        <h2 class="excerpt"><?php echo $post->getExcerpt() ?></h2>
+        <div class="spacer"></div>
+        <?php echo htmlspecialchars_decode($post->getContent())?>
     </div>
 </div>
 </section>
@@ -82,23 +81,23 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                     foreach ($socials as $social) {
                         if ($social['socialID'] === '1') {
                             ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-twitter fa-2x"></i></a>
+                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-twitter fa-2x icon"></i></a>
                         <?php }
                         if ($social['socialID'] === '2') {
                             ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-facebook fa-2x"></i></a>
+                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-facebook fa-2x icon"></i></a>
                         <?php }
                         if ($social['socialID'] === '3') {
                             ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-github fa-2x"></i>  </a> 
+                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-github fa-2x icon"></i>  </a> 
                         <?php }
                         if ($social['socialID'] === '4') {
                             ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-instagram fa-2x"></i> </a>
+                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-instagram fa-2x icon"></i> </a>
                         <?php }
                         if ($social['socialID'] === '5') {
                             ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-linkedin fa-2x"></i></a>
+                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-linkedin fa-2x icon"></i></a>
     <?php }
 }
 ?>
