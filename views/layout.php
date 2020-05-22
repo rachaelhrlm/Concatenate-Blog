@@ -50,7 +50,7 @@
 
 
         <!--Footer-->
-        <footer>
+        <footer class="container">
             <div class="row justify-content-around">
                 <div class="col-md-3">
                     <ul>
