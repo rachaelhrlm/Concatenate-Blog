@@ -70,12 +70,16 @@ class Member {
         if (isset($data)) {
             if (password_verify($login_password, $data['passwords'])) {
                 $_SESSION['user'] = new Member($data['memberID'], $data['userName'], $data['passwords'], $data['email'], $data['accessLevelID']);
-                echo "Hello " . $_SESSION['user']->getUserName() . ". Login Successful";
+                echo "Hello " . $_SESSION['user']->getUserName() . ". Login Successful <br>".
+                        "Redirecting to home page in 3 seconds."
+                    . "<a href='?controller=pages&action=home'><div class='smalltext' href='?controller=pages&action=home'>(or click here to go now)</div></a>";
             } else {
-                echo "Password incorrect.";
+                echo "Password is incorrect. Redirecting to home page in 3 seconds."
+                    . "<a href='?controller=pages&action=home'><div class='smalltext' href='?controller=pages&action=home'>(or click here to go now)</div></a>";
             }
         } else {
-            echo "Username does not exist.";
+            echo "Username does not exist."
+            . "<a href='?controller=pages&action=home'><div class='smalltext'>(or click here to go now)</div></a>";
         }
     }
 

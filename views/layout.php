@@ -96,7 +96,7 @@ session_start(); ?>
 
 
         <!--Footer-->
-        <footer class="container">
+        <div class="container-fluid">
             <div class="row justify-content-around">
                 <div class="col-md-3">
                     <ul>
@@ -133,14 +133,21 @@ session_start(); ?>
                     </ul>
                 </div>
             </div>
-            <hr>
+        </div>
+        
+        
+        <hr>
+        
+        
+        
+        <div class="container-fluid">
             <div class="row justify-content-end align-content-middle">
                 <div class="col-md-2">
                     <img src="views/images/standard/graphiclogo.png" width="30px">
                     <i class="far fa-copyright"></i> <?php echo date('Y') ?></div>
 
             </div>
-        </footer>
+        </div>
 
         <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
         <script src='https://cdn.tiny.cloud/1/tsm4jflxmwzdk9w9ws3pt5kefzwep82nt1bcq1rduh7w70lu/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
