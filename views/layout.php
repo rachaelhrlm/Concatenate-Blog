@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<?php 
+<?php
 require_once 'models/member.php';
-session_start(); ?>
+session_start();
+?>
 <html>
     <head>
         <meta name="msapplication-TileColor" content="#da532c">
@@ -88,7 +89,7 @@ session_start(); ?>
 
 
         <!--Content-->
-        <?php require_once('routes.php'); ?>
+<?php require_once('routes.php'); ?>
 
 
         <!--divider-->
@@ -134,12 +135,12 @@ session_start(); ?>
                 </div>
             </div>
         </div>
-        
-        
+
+
         <hr>
-        
-        
-        
+
+
+
         <div class="container-fluid">
             <div class="row justify-content-end align-content-middle">
                 <div class="col-md-2">
@@ -148,7 +149,7 @@ session_start(); ?>
 
             </div>
         </div>
-
+        
         <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
         <script src='https://cdn.tiny.cloud/1/tsm4jflxmwzdk9w9ws3pt5kefzwep82nt1bcq1rduh7w70lu/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -176,5 +177,6 @@ session_start(); ?>
 //                $('#image').on('change', function() { $(this).attr('name', 'image') });
             })
         </script>
+        <script async src="https://static.addtoany.com/menu/page.js"></script>
     </body>
 </html>
