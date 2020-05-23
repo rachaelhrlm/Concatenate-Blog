@@ -1,4 +1,5 @@
 <?php
+require_once 'models/exceptions.php';
 
 class Post {
 
@@ -202,19 +203,105 @@ class Post {
             if (isset($_POST['content']) && $_POST['content'] != "") {
                 $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
             }
+            $curses = ['shit', 'fuck'];
+            $content = str_replace($curses, 'meow', $filteredContent);
+
+
+
 
             $title = $filteredTitle;
             $categoryID = $_POST['categoryID'];
             $excerpt = $filteredExcerpt;
-            $content = $filteredContent;
-            $req->execute([$id, $title, $categoryID, $excerpt, $content]);
 
-            if (!empty($_FILES[self::InputKey]['name'])) {
-                Post::uploadFile($id);
-            } 
-        } else {
-            trigger_error("Post Info Missing!");
+
+            try {
+                if (strlen($_POST['title']) > 40) {
+                    // throw exception if title > 100
+                    throw new WordingTooLongException('of 10 for your title');
+                } else if (strlen($_POST['excerpt']) > 50) {
+// throw exception if excerpt > 255
+                    throw new WordingTooLongException('of 10 for your excerpt');
+                } else {
+                    $req->execute([$id, $title, $categoryID, $excerpt, $content]);
+                }
+            } catch (WordingTooLongException $e) {
+                ?> <div class='alert alert-primary' role='alert'>
+                    You have exceeded the character limit <?php echo $e->getMessage() ?>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div> <?php
+            }
         }
+
+
+
+
+
+
+        if (!empty($_FILES[self::InputKey]['name'])) {
+            try {
+                list($width, $height, $type, $attr) = getimagesize($_FILES[self::InputKey]['tmp_name']);
+
+                if (empty($_FILES[self::InputKey])) {
+                    throw new NoFileException();
+                } else if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
+                    throw new WrongFileTypeException();
+                } else if ($height > $width) {
+                    throw new PortraitException();
+                } else if ($height < 534 || $width < 800) {
+                    throw new LowResolutionException();
+                } else if ($_FILES[self::InputKey]['error'] > 0) {
+                    throw new Exception();
+                } else {
+                    Post::uploadFile($id);
+                }
+            } catch (PortraitException $ex) {
+//                    
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Only landscape photos are allowed. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+            } catch (LowResolutionException $ex) {
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Resolution too low. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+            } catch (NoFileException $ex) {
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    File missing! Please try again.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+            } catch (WrongFileTypeException $ex) {
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    You cannot upload this file type {$_FILES[self::InputKey]['type']}, please try again.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+            <?php } catch (Exception $ex) {
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    oops something went wrong
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div><?php
+            }
+        } 
     }
 
 //    method and constants for uploadFile
@@ -222,29 +309,13 @@ class Post {
     const InputKey = 'myUploader';
 
     public static function uploadFile(string $postID) {
-
-        if (empty($_FILES[self::InputKey])) {
-//die("File Missing!");
-            trigger_error("File Missing!");
-        }
-
-        if ($_FILES[self::InputKey]['error'] > 0) {
-            trigger_error("Handle the error! " . $_FILES[self::InputKey]['error']);
-        }
-
-
-        if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
-            trigger_error("Handle File Type Not Allowed: " . $_FILES[self::InputKey]['type']);
-        }
-
         $tempFile = $_FILES[self::InputKey]['tmp_name'];
         $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/";
         $destinationFile = $path . $postID . '.jpeg';
 
-        if (!move_uploaded_file($tempFile, $destinationFile)) {
-            trigger_error("Handle Error");
-        }
-
+//        if (!move_uploaded_file($tempFile, $destinationFile)) {
+//            throw new NotMovedToDestinationException();
+//        }
 //Clean up the temp file
         if (file_exists($tempFile)) {
             unlink($tempFile);
