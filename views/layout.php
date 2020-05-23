@@ -97,9 +97,9 @@ session_start();
 
 
         <!--Footer-->
-        <div class="container-fluid">
+        <div class="container">
             <div class="row justify-content-around">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <ul>
                         <li><h5>Resources</h5></li>
                         <!--<li><hr></li>-->
@@ -108,7 +108,7 @@ session_start();
                         <li>Example</li>
                     </ul>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <ul>
                         <li><h5>Contact</h5></li>
                         <!--<li><hr></li>-->
@@ -117,14 +117,14 @@ session_start();
                         <li>Example</li>
                     </ul>
                 </div>
-                <div class="col-md-3"><ul>
+                <div class="col-md-2"><ul>
                         <li><h5>Events</h5></li>
                         <!--<li><hr></li>-->
                         <li>Example</li>
                         <li>Example</li>
                         <li>Example</li>
                     </ul></div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <ul>
                         <li><h5>Socials</h5></li>
                         <!--<li><hr></li>-->
