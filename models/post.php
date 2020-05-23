@@ -187,8 +187,7 @@ class Post {
         $req = $db->query('SELECT * FROM category');
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
-    defined('CURSES', ['shit', 'fuck']);
-    const Curses = ['shit', 'fuck'];
+    
     
 //     method for editing post
     public static function edit($id) {
@@ -196,6 +195,9 @@ class Post {
         $req = $db->prepare("call editPost(?,?,?,?,?)");
 
         if (!empty($_POST)) {
+            
+            
+            
             if (isset($_POST['title']) && $_POST['title'] != "") {
                 $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
             }
@@ -205,12 +207,7 @@ class Post {
             if (isset($_POST['content']) && $_POST['content'] != "") {
                 $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
             }
-            
-            $content = str_replace(Curses, 'meow', $filteredContent);
-
-
-
-
+            $content = str_replace(self::Curses, '%3Cspan%20style%3D%27color%3A%20%23e73c7e%27%3Emeow%3C%2Fspan%3E', $filteredContent);
             $title = $filteredTitle;
             $categoryID = $_POST['categoryID'];
             $excerpt = $filteredExcerpt;
@@ -330,6 +327,7 @@ class Post {
 //    method and constants for uploadFile
     const AllowedTypes = ['image/jpeg', 'image/jpg'];
     const InputKey = 'myUploader';
+    const Curses = ['shit', 'fuck'];
     
 
     public static function uploadFile(string $postID) {
