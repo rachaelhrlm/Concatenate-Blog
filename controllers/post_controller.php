@@ -1,5 +1,5 @@
 <?php
-
+include_once 'models/exceptions.php';
 //require_once 'models/member.php';
 
 

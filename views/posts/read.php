@@ -47,8 +47,8 @@ if (isset($_SESSION['user']) &&
 <!--Blog Content-->
 <section class="container">    
     <div class ="row justify-content-center">
-        <div class="col-md-9 text-center">
-            <h1><?php echo $post->getTitle() ?></h1>
+        <div class="col-md-9 text-center"> 
+            <h1><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($post->getTitle()))) ?></h1>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -79,9 +79,13 @@ if (isset($_SESSION['user']) &&
 
     <div class="row justify-content-center">
         <div class="col-md-9 post">
-            <h2 class="excerpt"><?php echo $post->getExcerpt() ?></h2>
+            <h2 class="excerpt"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>',$post->getExcerpt())) ?></h2>
             <div class="spacer"></div>
-            <?php echo htmlspecialchars_decode($post->getContent()) ?>
+            <?php 
+            
+            $content = str_replace(Post::Curses, '<i class="curses">meow</i>', htmlspecialchars_decode($post->getContent()));
+            
+            echo  $content?>
         </div>
     </div>
 </section>
@@ -159,11 +163,11 @@ if (isset($_SESSION['user']) &&
                     <h3>Previous Post</h3>
                 </div>
                 <div class="card customcard" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $prev->getPostID(); ?>';" style="width: 20rem;">
-                    <img src="<?php echo $previmg ?>"  class="card-img-top" alt="Image for <?php $prev->getTitle() ?>">
+                    <img src="<?php echo $previmg ?>"  class="card-img-top">
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted"><?php echo $prev->getDatePosted() . '&emsp; &emsp;' . $prev->getAuthor() ?></small></p>
-                        <h5 class="card-title"><?php echo $prev->getTitle() ?></h5>
-                        <p class="card-text"><?php echo $prev->getExcerpt() ?></p>
+                        <h5 class="card-title"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($prev->getTitle()))) ?></h5>
+                        <p class="card-text"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($prev->getExcerpt()))) ?></p>
                         <button><?php echo $prev->getCategory() ?></button>
                     </div>
                 </div>
@@ -182,11 +186,11 @@ if (isset($_SESSION['user']) &&
                     <h3>Next Post</h3>
                 </div>
                 <div class="card customcard" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $next->getPostID(); ?>';" style="width: 20rem;">
-                    <img src="<?php echo $nextimg ?>"  class="card-img-top" alt="Image for <?php $next->getTitle() ?>">
+                    <img src="<?php echo $nextimg ?>"  class="card-img-top" >
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted"><?php echo $next->getDatePosted() . '&emsp; &emsp;' . $next->getAuthor() ?></small></p>
-                        <h5 class="card-title"><?php echo $next->getTitle() ?></h5>
-                        <p class="card-text"><?php echo $next->getExcerpt() ?></p>
+                        <h5 class="card-title"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($next->getTitle()))) ?></h5>
+                        <p class="card-text"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($next->getExcerpt()))) ?></p>
                         <button><?php echo $next->getCategory() ?></button>
                     </div>
                 </div>

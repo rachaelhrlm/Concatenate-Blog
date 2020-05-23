@@ -1,5 +1,5 @@
 <?php
-require_once 'models/exceptions.php';
+
 
 class Post {
 
@@ -121,6 +121,11 @@ class Post {
         $this->content = $content;
     }
 
+    
+    
+    
+    
+    
 //    method for selecting all posts
     public static function searchAll() {
         $list = [];
@@ -131,6 +136,8 @@ class Post {
         }
         return $list;
     }
+    
+    
 
 //    method for selecting post via Ajax where keyword matches anything
     public static function searchAny($keyword) {
@@ -141,16 +148,16 @@ class Post {
         if (!empty($posts)) { //if there are results, echo out a container along with a loop of Post Cards
             echo '<div class="container"><div class="row justify-content-center">';
             foreach ($posts as $post) {
-                $img = "views/images/{$post['postID']}.jpeg";
-                echo '<div class="card customcard" onclick="location.href = ' . "'?controller=post&action=searchID&id=" . $post['postID'] . "'" . '"' . '; style="width: 20rem;">';
-                echo '<img src="' . $img . '"  class="card-img-top" alt="Image for ' . $post['title'] . '">';
-                echo '<div class="card-body">';
-                echo '<p class="card-text"><small class="text-muted">' . $post['datePosted'] . '&emsp; &emsp;' . $post['author'] . '</small></p>';
-                echo '<h5 class="card-title">' . $post['title'] . '</h5>';
-                echo '<p class="card-text">' . $post['excerpt'] . '</p>';
-                echo '<button>' . $post['category'] . '</button>';
-                echo '</div></div>';
-            }
+                $img = "views/images/{$post['postID']}.jpeg";?>
+                <div class="card customcard" onclick="location.href ='?controller=post&action=searchID&id=<?php echo $post['postID'] ?>'" style="width: 20rem;">
+                <img src="<?php echo $img ?>"  class="card-img-top">
+                <div class="card-body">
+                <p class="card-text"><small class="text-muted"><?php echo $post['datePosted'] . '&emsp; &emsp;' . $post['author'] ?></small></p>
+                <h5 class="card-title"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['title']))) ?></h5>
+                <p class="card-text"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['excerpt'])))?> </p>
+                <button><?php echo $post['category'] ?></button>
+                </div></div>
+            <?php }
             echo '</div></div>';
         } else { //if there are no results, echo 'No results found.'
             echo 'No results found.';
@@ -194,10 +201,7 @@ class Post {
         $db = Db::getInstance();
         $req = $db->prepare("call editPost(?,?,?,?,?)");
 
-        if (!empty($_POST)) {
-            
-            
-            
+        if (!empty($_POST)) {       
             if (isset($_POST['title']) && $_POST['title'] != "") {
                 $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
             }
@@ -207,7 +211,7 @@ class Post {
             if (isset($_POST['content']) && $_POST['content'] != "") {
                 $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
             }
-            $content = str_replace(self::Curses, '%3Cspan%20style%3D%27color%3A%20%23e73c7e%27%3Emeow%3C%2Fspan%3E', $filteredContent);
+            $content=$filteredContent;
             $title = $filteredTitle;
             $categoryID = $_POST['categoryID'];
             $excerpt = $filteredExcerpt;
@@ -328,6 +332,7 @@ class Post {
     const AllowedTypes = ['image/jpeg', 'image/jpg'];
     const InputKey = 'myUploader';
     const Curses = ['shit', 'fuck'];
+    
     
 
     public static function uploadFile(string $postID) {
