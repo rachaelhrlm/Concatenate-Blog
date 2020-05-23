@@ -225,23 +225,36 @@ class Post {
                         Post::uploadFile($id);
                     }
                 } catch (NoFileException $ex) {
-                    echo "File missing! Please try again.";
+                    echo ("
+                    <div class='alert alert-primary' role='alert'>
+                    File missing! Please try again.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                    </button>
+                    </div>");
                 } catch (WrongFileTypeException $ex) {
                     echo ("
                     <div class='alert alert-primary' role='alert'>
                     You cannot upload this file type {$_FILES[self::InputKey]['type']}, please try again.
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>
+                    <span aria-hidden='true'>&times;</span>
+                    </button>
                     </div>");
                 } catch (Exception $ex) {
-                    echo "oops something went wrong";
+                    echo ("
+                    <div class='alert alert-primary' role='alert'>
+                    oops something went wrong
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                    </button>
+                    </div>");
+                    }
                 }
             } else {
                 trigger_error("Post Info Missing!");
             }
         }
-    }
+    
 
 //    method and constants for uploadFile
     const AllowedTypes = ['image/jpeg', 'image/jpg'];
