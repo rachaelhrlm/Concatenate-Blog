@@ -82,6 +82,19 @@ section{
 }
 
 
+
+
+/*account page styling*/
+.tab-container{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    min-height: 300px;
+    padding:20px;
+}
+
+
+
+
 /*animated section styling*/
 .animated {
     overflow:hidden;
