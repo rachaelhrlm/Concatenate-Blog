@@ -19,3 +19,10 @@ class WordingTooLongException extends Exception {
             return $length;
         }
 }
+
+class PortraitException extends Exception {
+    
+}
+class LowResolutionException extends Exception {
+    
+}
