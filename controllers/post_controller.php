@@ -1,5 +1,8 @@
 <?php
 
+//require_once 'models/member.php';
+
+
 class PostController {
 
     public function searchAll() {
@@ -41,4 +44,24 @@ class PostController {
         }
     }
 
+    public function create() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if (isset($_SESSION['user'])) {
+                $user = Member::searchID();
+
+                $categories = Post::categories();
+                require_once('views/posts/create.php');
+            }
+        } else {
+
+            $memberID = $_SESSION['user']->getMemberID();
+            $_GET['id'] = Post::create($memberID);
+
+            if (!empty($_GET['id'])) {
+                $post = Post::searchID($_GET['id']);
+                $socials = Post::searchSocial($_SESSION['user']->getMemberID());
+                require_once('views/posts/read.php');
+            }
+        }
+    }
 }
