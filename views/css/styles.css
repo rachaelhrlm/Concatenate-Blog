@@ -38,6 +38,9 @@ section{
 .spacer{
     padding:25px;
 }
+.sharebtn{
+    padding: 20px 0;
+}
 .newsletter {
     margin-top: 120px;
 }
@@ -68,12 +71,14 @@ section{
 .nav-link {
     font-family: 'Varela Round', sans-serif;
     color: black;
-    transition:color .5s;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 10px;
+    transition:color .2s, background .5s;
 }
 .nav-link:hover {
-    color: #23a6d5;
-    border-bottom: 1px solid;
-    padding-bottom: 0px;
+    background-color: #23a6d5;
+    color: white;
 }
 
 

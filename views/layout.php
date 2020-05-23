@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<?php session_start(); ?>
+<?php
+require_once 'models/member.php';
+session_start();
+?>
 <html>
     <head>
         <meta name="msapplication-TileColor" content="#da532c">
@@ -33,16 +36,60 @@
         <!--Navbar Switch-->
         <?php
 //        $_COOKIE['user'] = 'uncomment to test log in switch';
-        if (isset($_COOKIE['user'])) {
+        if (isset($_SESSION['user'])) {
             require_once 'views/sections/nav-member.php';
         } else {
-//            require_once 'views/sections/nav-default.php';
-            require_once 'views/sections/nav-test.php';
+            require_once 'views/sections/nav-default.php';
+//            require_once 'views/sections/nav-test.php';
         }
         ?>
 
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginLabel">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action = "?controller=member&action=login" method = "POST">
+                            <div class="form-group row">
+                                <label for="username"  class="col-sm-2 col-form-label" required>Username:</label>
+                                <div class="col-md-10">
+                                    <input type="text" name="login_username" class="form-control" id="username">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password"  class="col-sm-2 col-form-label" required>Password:</label>
+                                <div class="col-md-10">
+                                    <input type="password" name="login_password"  class="form-control" id="password">
+                                </div>
+                            </div>
+                            <input type="hidden" name='login' value="true">
+                            <button type = 'submit' class="btn btn-primary" >Log In</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
         <!--Content-->
-        <?php require_once('routes.php'); ?>
+<?php require_once('routes.php'); ?>
 
 
         <!--divider-->
@@ -50,7 +97,7 @@
 
 
         <!--Footer-->
-        <footer class="container">
+        <div class="container-fluid">
             <div class="row justify-content-around">
                 <div class="col-md-3">
                     <ul>
@@ -87,15 +134,22 @@
                     </ul>
                 </div>
             </div>
-            <hr>
+        </div>
+
+
+        <hr>
+
+
+
+        <div class="container-fluid">
             <div class="row justify-content-end align-content-middle">
                 <div class="col-md-2">
                     <img src="views/images/standard/graphiclogo.png" width="30px">
                     <i class="far fa-copyright"></i> <?php echo date('Y') ?></div>
 
             </div>
-        </footer>
-
+        </div>
+        
         <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
         <script src='https://cdn.tiny.cloud/1/tsm4jflxmwzdk9w9ws3pt5kefzwep82nt1bcq1rduh7w70lu/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -123,5 +177,6 @@
 //                $('#image').on('change', function() { $(this).attr('name', 'image') });
             })
         </script>
+        <script async src="https://static.addtoany.com/menu/page.js"></script>
     </body>
 </html>

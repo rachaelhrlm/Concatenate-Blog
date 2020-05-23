@@ -15,48 +15,75 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 
 
 <!--if user is logged in and accessLevelID is admin or member logged in is the post author-->
-<?php //if (!empty($_COOKIE['user']) && ($_COOKIE['user']->getAccessLevelID() === 1 || $post->getMemberID() === $_COOKIE['user']->getMemberID())){ ?>
-<div class="spacer"></div>
-<div class="container">
-    <div class="row justify-content-center">
-        
-        <div class="col-md-9 text-right">
-            <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
-            <a href=""><i class="fas fa-plus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
-            <a href=""><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
-            <hr>
+<?php
+if (isset($_SESSION['user']) &&
+        (($_SESSION['user']->getAccessLevelID() === '1') || ($post->getMemberID() === $_SESSION['user']->getMemberID()))) {
+    ?>
+
+
+
+
+
+
+    <div class="spacer"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-md-9 text-right">
+                <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
+                <a href=""><i class="fas fa-plus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
+                <a href=""><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
+                <hr>
+            </div>
         </div>
     </div>
-</div>
-<?php // }  ?>
+<?php } ?>
+
 
 
 
 
 
 <!--Blog Content-->
-<section class="container">
+<section class="container">    
     <div class ="row justify-content-center">
         <div class="col-md-9 text-center">
-        <h1><?php echo $post->getTitle() ?></h1>
+            <h1><?php echo $post->getTitle() ?></h1>
         </div>
     </div>
     <div class="row justify-content-center">
         <small class="text-muted"><?php echo $post->getAuthor() . '&emsp; &emsp;' . $post->getDatePosted() . '&emsp; &emsp;' . $post->getCategory() ?></small>
     </div>
+
+
+    <!--Add to Any Share Buttons-->
     <div class="row justify-content-center">
-        <div class="col-md-9 text-center">
-        <img src="<?php echo $img ?>?<?=Date('U')?>" class="blogimg">
+        <div class="a2a_kit a2a_kit_size_32 a2a_default_style sharebtn">
+            <a class="a2a_button_email"></a>
+            <a class="a2a_button_print"></a>
+            <a class="a2a_button_twitter"></a>
+            <a class="a2a_button_linkedin"></a>
+            <a class="a2a_button_facebook"></a>
+            <a class="a2a_button_tumblr"></a>
         </div>
     </div>
-</div>
-<div class="row justify-content-center">
-    <div class="col-md-9 post">
-        <h2 class="excerpt"><?php echo $post->getExcerpt() ?></h2>
-        <div class="spacer"></div>
-        <?php echo htmlspecialchars_decode($post->getContent())?>
+
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-9 text-center">
+            <img src="<?php echo $img ?>?<?= Date('U') ?>" class="blogimg">
+        </div>
     </div>
-</div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-9 post">
+            <h2 class="excerpt"><?php echo $post->getExcerpt() ?></h2>
+            <div class="spacer"></div>
+            <?php echo htmlspecialchars_decode($post->getContent()) ?>
+        </div>
+    </div>
 </section>
 
 
@@ -82,25 +109,30 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                         if ($social['socialID'] === '1') {
                             ?>
                             <a href="<?php echo $social['url'] ?>"> <i class="fab fa-twitter fa-2x icon"></i></a>
-                        <?php }
+                            <?php
+                        }
                         if ($social['socialID'] === '2') {
                             ?>
                             <a href="<?php echo $social['url'] ?>"> <i class="fab fa-facebook fa-2x icon"></i></a>
-                        <?php }
+                            <?php
+                        }
                         if ($social['socialID'] === '3') {
                             ?>
                             <a href="<?php echo $social['url'] ?>"> <i class="fab fa-github fa-2x icon"></i>  </a> 
-                        <?php }
+                            <?php
+                        }
                         if ($social['socialID'] === '4') {
                             ?>
                             <a href="<?php echo $social['url'] ?>"> <i class="fab fa-instagram fa-2x icon"></i> </a>
-                        <?php }
+                            <?php
+                        }
                         if ($social['socialID'] === '5') {
                             ?>
                             <a href="<?php echo $social['url'] ?>"> <i class="fab fa-linkedin fa-2x icon"></i></a>
-    <?php }
-}
-?>
+                            <?php
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -117,12 +149,12 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 <section class="container">
     <div class="row justify-content-around">
         <div class="col-md-4">
-<?php
-$prevID = $_GET['id'] - 1;
-$prev = Post::searchID($prevID);
-if (!empty($prev)) {
-    $previmg = "views/images/{$prevID}.jpeg";
-    ?>
+            <?php
+            $prevID = $_GET['id'] - 1;
+            $prev = Post::searchID($prevID);
+            if (!empty($prev)) {
+                $previmg = "views/images/{$prevID}.jpeg";
+                ?>
                 <div class="row justify-content-center">
                     <h3>Previous Post</h3>
                 </div>
@@ -140,12 +172,12 @@ if (!empty($prev)) {
             ?>
         </div>
         <div class="col-md-4">
-<?php
-$nextID = $_GET['id'] + 1;
-$next = Post::searchID($nextID);
-if (!empty($next)) {
-    $nextimg = "views/images/{$nextID}.jpeg";
-    ?>
+            <?php
+            $nextID = $_GET['id'] + 1;
+            $next = Post::searchID($nextID);
+            if (!empty($next)) {
+                $nextimg = "views/images/{$nextID}.jpeg";
+                ?>
                 <div class="row justify-content-center">
                     <h3>Next Post</h3>
                 </div>
@@ -158,9 +190,9 @@ if (!empty($next)) {
                         <button><?php echo $next->getCategory() ?></button>
                     </div>
                 </div>
-    <?php
-}
-?>
+                <?php
+            }
+            ?>
         </div>
     </div>
 </section>
