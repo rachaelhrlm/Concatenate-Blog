@@ -1,4 +1,5 @@
 <?php session_start();
+require_once 'connection.php';
 ?>
 <html>
     <head>
@@ -8,24 +9,12 @@
     </head>
     <body>
         <?php
-        $dsn = "mysql:host=127.0.0.1;dbname=blog";
-        $user = "root";
-        $password = NULL;
-        $options = NULL;
-        $message = "";
-        try {
-            $pdo = new PDO($dsn, $user, $password, $options);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (Exception $e) {
-            $message = $e->getMessage();
-        }
-
-
+        $db = Db::getInstance();
         if (isset($_POST['login'])) {
             $login_username = $_POST['login_username'];
             //The password is encrypted
             $login_password = $_POST['login_password'];
-            $stmt = $pdo->prepare("SELECT userName, passwords FROM member WHERE userName =:username");
+            $stmt = $db->prepare("SELECT userName, passwords FROM member WHERE userName =:username");
             $stmt->bindParam(":username", $login_username);
             $stmt->execute();
             $count = $stmt->rowCount();
@@ -36,7 +25,7 @@
             if ($count > 0) {
                 if (password_verify($login_password, $hashed_password)) {
                     $_SESSION["login_username"] = $login_username;
-                    echo "Hello " . $_SESSION["login_username"] . ". Login Successful";
+                    header("location: dashboard.php");
                 } else {
                     echo "Password incorrect.";
                 }
