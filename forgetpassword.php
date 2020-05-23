@@ -24,7 +24,8 @@ require_once 'connection.php';
 
 
 
-            if ($count > 0) {
+            if ($count > 0) 
+            {
                 ?>
                 <form action = "" method = "POST">
                     <input type='password' name='password'>
