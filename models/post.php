@@ -211,9 +211,34 @@ class Post {
 
             if (!empty($_FILES[self::InputKey]['name'])) {
                 Post::uploadFile($id);
-            } 
-        } else {
-            trigger_error("Post Info Missing!");
+            }
+        }
+    }
+
+    public static function create($id) {
+        $db = Db::getInstance();
+        $req = $db->prepare("call createPost(?,?,?,?,?)");
+
+        if (!empty($_POST)) {
+            if (isset($_POST['title']) && $_POST['title'] != "") {
+                $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+            if (isset($_POST['excerpt']) && $_POST['excerpt'] != "") {
+                $filteredExcerpt = filter_input(INPUT_POST, 'excerpt', FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+            if (isset($_POST['content']) && $_POST['content'] != "") {
+                $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+            $title = $filteredTitle;
+            $categoryID = intval($_POST['categoryID']);
+            $excerpt = $filteredExcerpt;
+            $content = $filteredContent;
+            $req->execute([$id, $title, $categoryID, $excerpt, $content]);
+            $postID = $req->fetch();
+
+            Post::uploadFile($postID['postID']);
+            
+            return $postID['postID'];
         }
     }
 

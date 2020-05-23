@@ -1,5 +1,8 @@
 <?php
 
+//require_once 'models/member.php';
+
+
 class PostController {
 
     public function searchAll() {
@@ -25,7 +28,7 @@ class PostController {
             if (!isset($_GET['id']))
                 return call('pages', 'error');
 
-            
+
             $post = Post::searchID($_GET['id']);
             $categories = Post::categories();
             require_once('views/posts/edit.php');
@@ -33,40 +36,37 @@ class PostController {
         else {
             $id = $_GET['id'];
             Post::edit($id);
-            
+
             $post = Post::searchID($_GET['id']);
             $socials = Post::searchSocial($post->getMemberID());
             require_once('views/posts/read.php');
         }
     }
 
-     public function update() {
-        
-      if($_SERVER['REQUEST_METHOD'] == 'GET'){
-          if (!isset($_GET['id']))
-        return call('pages', 'error');
+    public function create() {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if (isset($_SESSION['user'])) {
+                $user = Member::searchID();
 
+                $categories = Post::categories();
+                require_once('views/posts/create.php');
+            }
+        } else {
 
-        $post = Post::find($_GET['id']);
-      
-        require_once('views/posts/update.php');
+            $memberID = $_SESSION['user']->getMemberID();
+            $_GET['id'] = Post::create($memberID);
+
+            if (!empty($_GET['id'])) {
+                $post = Post::searchID($_GET['id']);
+                $socials = Post::searchSocial($_SESSION['user']->getMemberID());
+                require_once('views/posts/read.php');
+            }
         }
-      else
-          { 
-            $id = $_GET['id'];
-            Post::update($id);
-                        
-            $posts = Post::all();
-            require_once('views/posts/readAll.php');
-      }
-      
     }
-    
-    
-    public function test() {
-      $categories = Post::categories();  
-      require_once('views/posts/test.php');
 
+    public function test() {
+        $categories = Post::categories();
+        require_once('views/posts/test.php');
     }
 
 }

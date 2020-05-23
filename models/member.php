@@ -82,5 +82,18 @@ class Member {
             . "<a href='?controller=pages&action=home'><div class='smalltext'>(or click here to go now)</div></a>";
         }
     }
+    
+    public function searchID() {
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT * FROM bio WHERE memberID = ?');
+        $req->execute([$_SESSION['user']->getMemberID()]);
+        $post = $req->fetch(PDO::FETCH_ASSOC);
+        if (!empty($post)) {
+            return $post;
+        } else {
+            return $post = NULL;
+        }
+    
+    }
 
 }
