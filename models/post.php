@@ -204,11 +204,15 @@ class Post {
             if (isset($_POST['content']) && $_POST['content'] != "") {
                 $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
             }
+            $curses = ['shit', 'fuck'];
+            $content = str_replace($curses, 'meow', $filteredContent);
+            
+
+            
 
             $title = $filteredTitle;
             $categoryID = $_POST['categoryID'];
             $excerpt = $filteredExcerpt;
-            $content = $filteredContent;
             $req->execute([$id, $title, $categoryID, $excerpt, $content]);
 
 
@@ -248,13 +252,12 @@ class Post {
                     <span aria-hidden='true'>&times;</span>
                     </button>
                     </div>");
-                    }
                 }
-            } else {
-                trigger_error("Post Info Missing!");
             }
+        } else {
+            trigger_error("Post Info Missing!");
         }
-    
+    }
 
 //    method and constants for uploadFile
     const AllowedTypes = ['image/jpeg', 'image/jpg'];

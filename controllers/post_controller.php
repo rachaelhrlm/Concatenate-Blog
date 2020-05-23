@@ -32,7 +32,10 @@ class PostController {
         }
         else {
             try {
-                [shit]
+
+
+
+                
                 // check if length over 255
                 If (strlen($_POST['title']) > 40) {
 // throw exception if title > 100
@@ -50,12 +53,11 @@ class PostController {
                 }
             } catch (WordingTooLongException $e) {
                 ?> <div class='alert alert-primary' role='alert'>
-                    You have exceeded the character limit <?php echo $e->getMessage()?>
+                    You have exceeded the character limit <?php echo $e->getMessage() ?>
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
                 </div> <?php
-                
             }
         }
     }
