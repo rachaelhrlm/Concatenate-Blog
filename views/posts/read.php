@@ -19,12 +19,6 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 if (isset($_SESSION['user']) &&
         (($_SESSION['user']->getAccessLevelID() === '1') || ($post->getMemberID() === $_SESSION['user']->getMemberID()))) {
     ?>
-
-
-
-
-
-
     <div class="spacer"></div>
     <div class="container">
         <div class="row justify-content-center">
@@ -32,7 +26,7 @@ if (isset($_SESSION['user']) &&
             <div class="col-md-9 text-right">
                 <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
                 <a href="?controller=post&action=create"><i class="fas fa-plus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
-                <a href=""><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
+                <a href="?controller=post&action=delete&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
                 <hr>
             </div>
         </div>

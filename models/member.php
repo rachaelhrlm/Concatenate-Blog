@@ -95,5 +95,18 @@ class Member {
         }
     
     }
-
+    
+    public function searchAuthor() {
+        $db = Db::getInstance();
+        $id = intval($this->getMemberID());
+        $req = $db->prepare('SELECT * FROM postinfo WHERE memberID = ? ORDER BY postID ASC');
+        $req->execute([$id]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function searchAll() {
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT * FROM postinfo ORDER BY postID ASC');
+        $req->execute();
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

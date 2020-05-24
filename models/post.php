@@ -167,10 +167,8 @@ class Post {
 //    method for searching post by its postid
     public static function searchID($id) {
         $db = Db::getInstance();
-//use intval to make sure $id is an integer
         $id = intval($id);
         $req = $db->prepare('SELECT * FROM postinfo WHERE postID = :id AND visibility = 1');
-//the query was prepared, now replace :id with the actual $id value
         $req->execute(array('id' => $id));
         $post = $req->fetch();
         if (!empty($post)) {
@@ -179,6 +177,8 @@ class Post {
             return $post = NULL;
         }
     }
+    
+    
 
 //    method for finding all socials for chosen member
     public static function searchSocial($id) {
@@ -326,6 +326,20 @@ class Post {
 
             return $postID['postID'];
         }
+    }
+    
+    public static function delete($id) {
+        $db = Db::getInstance();
+        $id = intval($id);
+        $req = $db->prepare('UPDATE post SET visibility = 0 WHERE postID = ?');
+        $req->execute([$id]);
+    }
+    
+    public static function restore($id) {
+        $db = Db::getInstance();
+        $id = intval($id);
+        $req = $db->prepare('UPDATE post SET visibility = 1 WHERE postID = ?');
+        $req->execute([$id]);
     }
 
 //    method and constants for uploadFile
