@@ -6,11 +6,11 @@ class MemberController {
 
         if (!isset($_SESSION['user'])) {
         if (isset($_POST['login'])) {
-            $result = Member::login();
             ob_start();
+            $result = Member::login();
             header('Refresh:3, ?controller=pages&action=home');
-            ob_end_flush();
             require_once('views/members/access.php');
+            ob_end_flush();
         } elseif (isset($_POST['register'])) {
             Member::register();
             require_once('views/members/access.php');
