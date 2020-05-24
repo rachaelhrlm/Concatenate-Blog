@@ -1,6 +1,5 @@
 <?php
 
-
 class Post {
 
 //    attributes
@@ -121,11 +120,6 @@ class Post {
         $this->content = $content;
     }
 
-    
-    
-    
-    
-    
 //    method for selecting all posts
     public static function searchAll() {
         $list = [];
@@ -136,8 +130,6 @@ class Post {
         }
         return $list;
     }
-    
-    
 
 //    method for selecting post via Ajax where keyword matches anything
     public static function searchAny($keyword) {
@@ -148,16 +140,18 @@ class Post {
         if (!empty($posts)) { //if there are results, echo out a container along with a loop of Post Cards
             echo '<div class="container"><div class="row justify-content-center">';
             foreach ($posts as $post) {
-                $img = "views/images/{$post['postID']}.jpeg";?>
-                <div class="card customcard" onclick="location.href ='?controller=post&action=searchID&id=<?php echo $post['postID'] ?>'" style="width: 20rem;">
-                <img src="<?php echo $img ?>"  class="card-img-top">
-                <div class="card-body">
-                <p class="card-text"><small class="text-muted"><?php echo $post['datePosted'] . '&emsp; &emsp;' . $post['author'] ?></small></p>
-                <h5 class="card-title"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['title']))) ?></h5>
-                <p class="card-text"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['excerpt'])))?> </p>
-                <button><?php echo $post['category'] ?></button>
-                </div></div>
-            <?php }
+                $img = "views/images/{$post['postID']}.jpeg";
+                ?>
+                <div class="card customcard" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $post['postID'] ?>'" style="width: 20rem;">
+                    <img src="<?php echo $img ?>"  class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text"><small class="text-muted"><?php echo $post['datePosted'] . '&emsp; &emsp;' . $post['author'] ?></small></p>
+                        <h5 class="card-title"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['title']))) ?></h5>
+                        <p class="card-text"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['excerpt']))) ?> </p>
+                        <button><?php echo $post['category'] ?></button>
+                    </div></div>
+                <?php
+            }
             echo '</div></div>';
         } else { //if there are no results, echo 'No results found.'
             echo 'No results found.';
@@ -194,14 +188,13 @@ class Post {
         $req = $db->query('SELECT * FROM category');
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    
+
 //     method for editing post
     public static function edit($id) {
         $db = Db::getInstance();
         $req = $db->prepare("call editPost(?,?,?,?,?)");
 
-        if (!empty($_POST)) {       
+        if (!empty($_POST)) {
             if (isset($_POST['title']) && $_POST['title'] != "") {
                 $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
             }
@@ -211,7 +204,7 @@ class Post {
             if (isset($_POST['content']) && $_POST['content'] != "") {
                 $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
             }
-            $content=$filteredContent;
+            $content = $filteredContent;
             $title = $filteredTitle;
             $categoryID = $_POST['categoryID'];
             $excerpt = $filteredExcerpt;
@@ -283,7 +276,7 @@ class Post {
                 } catch (WrongFileTypeException $ex) {
                     ?>
                     <div class='alert alert-primary' role='alert'>
-                        You cannot upload this file type {$_FILES[self::InputKey]['type']}, please try again.
+                        You cannot upload this file type <?php $_FILES[self::InputKey]['type'] ?>, please try again.
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
                         </button>
@@ -319,12 +312,92 @@ class Post {
             $categoryID = intval($_POST['categoryID']);
             $excerpt = $filteredExcerpt;
             $content = $filteredContent;
-            $req->execute([$id, $title, $categoryID, $excerpt, $content]);
-            $postID = $req->fetch();
 
-            Post::uploadFile($postID['postID']);
+            try {
+                if (strlen($_POST['title']) > 40) {
+                    // throw exception if title > 100
+                    throw new WordingTooLongException('of 40 for your title');
+                } else if (strlen($_POST['excerpt']) > 50) {
+// throw exception if excerpt > 255
+                    throw new WordingTooLongException('of 50 for your excerpt');
+                } else if (!empty($_FILES[self::InputKey]['name'])) {
+                    list($width, $height, $type, $attr) = getimagesize($_FILES[self::InputKey]['tmp_name']);
 
-            return $postID['postID'];
+                    if (empty($_FILES[self::InputKey])) {
+                        throw new NoFileException();
+                    } else if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
+                        throw new WrongFileTypeException();
+                    } else if ($height > $width) {
+                        throw new PortraitException();
+                    } else if ($height < 534 || $width < 800) {
+                        throw new LowResolutionException();
+                    } else if ($_FILES[self::InputKey]['error'] > 0) {
+                        throw new Exception();
+                    }
+                } else {
+
+                    $req->execute([$id, $title, $categoryID, $excerpt, $content]);
+                    $postID = $req->fetch();
+                    Post::uploadFile($postID['postID']);
+                }
+            } catch (WordingTooLongException $e) {
+                                ?> <div class='alert alert-primary' role='alert'>
+                    You have exceeded the character limit <?php echo $e->getMessage() ?>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div> <?php
+            } catch (PortraitException $ex) {
+//                    
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Only landscape photos are allowed. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+            } catch (LowResolutionException $ex) {
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Resolution too low. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+            } catch (NoFileException $ex) {
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    File missing! Please try again.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+            } catch (WrongFileTypeException $ex) {
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    You cannot upload this file type <?php $_FILES[self::InputKey]['type'] ?>, please try again.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+            <?php } catch (Exception $ex) {
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    oops something went wrong
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div><?php
+            }
+
+
+
+            if (isset($postID['postID'])) {
+                return $postID['postID'];
+            }
         }
     }
 
@@ -332,8 +405,6 @@ class Post {
     const AllowedTypes = ['image/jpeg', 'image/jpg'];
     const InputKey = 'myUploader';
     const Curses = ['shit', 'Shit', 'fuck', 'Fuck'];
-    
-    
 
     public static function uploadFile(string $postID) {
         $tempFile = $_FILES[self::InputKey]['tmp_name'];
