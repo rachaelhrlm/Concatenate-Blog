@@ -1,6 +1,8 @@
 <?php
 if (empty($_SESSION['user'])) {
+    ob_start();
     header("Location:?controller=pages&action=home");
+    ob_end_flush();
     exit();
 }
 ?>

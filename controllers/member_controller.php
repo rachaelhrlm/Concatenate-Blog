@@ -7,7 +7,9 @@ class MemberController {
         if (!isset($_SESSION['user'])) {
         if (isset($_POST['login'])) {
             $result = Member::login();
+            ob_start();
             header('Refresh:3, ?controller=pages&action=home');
+            ob_end_flush();
             require_once('views/members/access.php');
         } elseif (isset($_POST['register'])) {
             Member::register();
@@ -22,11 +24,13 @@ class MemberController {
 
     public function logout() {
         if (isset($_SESSION['user'])) {
+            ob_start();
             session_unset();
             session_destroy();
             $result="Logout successful. Redirecting to home page in 3 seconds.<br>"
                     . "<a  href='?controller=pages&action=home'><div class='smalltext'>(or click here to go now)</a></div>";
             header('Refresh:3, ?controller=pages&action=home');
+            ob_end_flush();
             require_once('views/members/access.php');
         }else {
             header("Location: ?controller=pages&action=home");

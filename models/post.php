@@ -130,7 +130,7 @@ class Post {
     public static function searchAll() {
         $list = [];
         $db = Db::getInstance();
-        $req = $db->query('SELECT * FROM postInfo ORDER BY postID DESC');
+        $req = $db->query('SELECT * FROM postInfo WHERE visibility = 1 ORDER BY postID DESC');
         foreach ($req->fetchAll() as $post) {
             $list[] = new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'], $post['about'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
         }
@@ -169,7 +169,7 @@ class Post {
         $db = Db::getInstance();
 //use intval to make sure $id is an integer
         $id = intval($id);
-        $req = $db->prepare('SELECT * FROM postinfo WHERE postID = :id');
+        $req = $db->prepare('SELECT * FROM postinfo WHERE postID = :id AND visibility = 1');
 //the query was prepared, now replace :id with the actual $id value
         $req->execute(array('id' => $id));
         $post = $req->fetch();

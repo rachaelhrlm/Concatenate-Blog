@@ -6,7 +6,7 @@
             <h1>New Post</h1>
         </div>
         <div class="col-md-2 text-right">
-            <a onclick="goBack()"><i class="far fa-times-circle fa-3x icon" data-toggle="tooltip" data-placement="top" title="Cancel Edit"></i></a>
+            <a href="?controller=post&action=searchAll"><i class="far fa-times-circle fa-3x icon" data-toggle="tooltip" data-placement="top" title="Cancel Create"></i></a>
         </div>
     </div>    
     <div class=" row justify-content-center">

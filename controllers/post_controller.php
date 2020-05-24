@@ -1,5 +1,7 @@
 <?php
+
 include_once 'models/exceptions.php';
+
 //require_once 'models/member.php';
 
 
@@ -11,32 +13,35 @@ class PostController {
     }
 
     public function searchID() {
-        if (!isset($_GET['id']))
+        if (!isset($_GET['id'])) {
             return call('pages', 'error');
-        try {
+        } else {
             $post = Post::searchID($_GET['id']);
-            $socials = Post::searchSocial($post->getMemberID());
-            require_once('views/posts/read.php');
-        } catch (Exception $ex) {
-            return call('pages', 'error');
+            if (isset($post)) {
+                $socials = Post::searchSocial($post->getMemberID());
+                require_once('views/posts/read.php');
+            } else {
+                return call('pages', 'error');
+            }
         }
     }
 
     public function edit() {
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            if (!isset($_GET['id']))
+            if (!isset($_GET['id'])) {
                 return call('pages', 'error');
-
+            }
 
             $post = Post::searchID($_GET['id']);
-            $categories = Post::categories();
-            require_once('views/posts/edit.php');
-        }
-        else {
-
-            $id = $_GET['id'];
-            Post::edit($id);
+            if (isset($post)) {
+                $categories = Post::categories();
+                require_once('views/posts/edit.php');
+            } else {
+                return call('pages', 'error');
+            }
+        } else {
+            Post::edit($_GET['id']);
 
             $post = Post::searchID($_GET['id']);
             $socials = Post::searchSocial($post->getMemberID());
@@ -64,4 +69,5 @@ class PostController {
             }
         }
     }
+
 }
