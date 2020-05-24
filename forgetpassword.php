@@ -43,7 +43,7 @@
         } else if (!empty($_POST['password'])) {
                 $password = $_POST['password'];
 //    I get rid of this first to help you validate your change
-//    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+//    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); (thanks!!! very useful)
                 $stmt = $pdo->prepare("UPDATE member SET passwords =:password WHERE userName =:username");
                 $stmt->bindParam(":username", $_SESSION['username']);
                 $stmt->bindParam(":password", $password);
@@ -73,5 +73,7 @@
             <?php
         }
         ?>
+        
+        
     </body>
 </html>

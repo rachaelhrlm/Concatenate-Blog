@@ -102,7 +102,7 @@
             Last Name:
             <input type = "text" name = "lastname" required>
             Email:
-            <input requiredtype = "email" name = "email"required>
+            <input required type = "email" name = "email"required>
             Gender:
             <input type = "radio" name = "gender" value = "1">Female
             <input type = "radio" name = "gender" value = "2">Male
