@@ -91,6 +91,8 @@ require_once 'connection.php';
                 echo "whaaaaaaaaaaaaaaaaaaaaaaaaaaaat?";
             }
         }
+
+        
         ?>
 
         <h3>Log In Here</h3>
@@ -108,7 +110,7 @@ require_once 'connection.php';
             Username:
             <input type = "text" name = "username"required>
             Password:
-            <input type = "password" name = "password"required>
+            <input type = "password" name = "password" required>
             Confirm Password:
             <input type = "password" name = "confirm_password" required>
 
