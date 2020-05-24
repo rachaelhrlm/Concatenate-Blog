@@ -11,6 +11,15 @@ require_once 'connection.php';
     <body>
         <?php
         $db = Db::getInstance();
+
+        $req = $db->prepare("SELECT * FROM securityquestions");
+
+        $req->execute();
+        $count = $req->rowCount();
+        $security = $req->fetchall();
+
+
+
         if (isset($_POST['login'])) {
             $login_username = $_POST['login_username'];
             //The password is encrypted
@@ -46,23 +55,28 @@ require_once 'connection.php';
                 } else {
                     $username = $_POST['username'];
                     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                    $firstname = $_POST ['firstname'];
-                    $lastname = $_POST ['lastname'];
+
                     $email = $_POST ['email'];
-                    $gender = $_POST ['gender'];
-                    $accesslevel = 3;
-                    $stmt = $pdo->prepare("INSERT INTO member (firstName, lastName, email, userName,accessLevel,passwords, gender) VALUES (:firstname, :lastname, :email ,:username,:accesslevel, :password, :gender)");
-                    $stmt->bindParam(":firstname", $firstname);
-                    $stmt->bindParam(":lastname", $lastname);
+
+                    $stmt = $db->prepare("INSERT INTO member (email, userName,passwords) VALUES (:email ,:username,:password)");
+
                     $stmt->bindParam(':username', $username);
-                    $stmt->bindParam(':accesslevel', $accesslevel);
+
                     $stmt->bindParam(":email", $email);
                     $stmt->bindParam(':password', $password);
-                    $stmt->bindparam(":gender", $gender);
+
                     $stmt->execute();
+                    $id = $db->lastInsertId();
                     $count = $stmt->rowCount();
+
                     if ($count > 0) {
-                        $_SESSION["username"] = $login_username;
+                        $securityid = intval($_POST['securityID']);
+                        $securityanswer = $_POST['securityanswer'];
+                        $req2 = $db->prepare("INSERT INTO security (memberID, securityID, securityanswer) VALUES (?, ?, ?)");
+
+
+                        $req2->execute([intval($id), $securityid, $securityanswer]);
+                        $_SESSION["username"] = $username;
                         $_SESSION["accessid"] = 3;
                         $_SESSION['start'] = time(); // Taking now logged in time.
                         // Ending a session in 15 minutes from the starting time.
@@ -97,17 +111,25 @@ require_once 'connection.php';
             <input type = "password" name = "password"required>
             Confirm Password:
             <input type = "password" name = "confirm_password" required>
-            First Name:
-            <input type = "text" name = "firstname" required>
-            Last Name:
-            <input type = "text" name = "lastname" required>
+
+            Security Questions:
+            <select class="custom-select" name="securityID"> 
+
+
+                <?php foreach ($security as $securityquestion) { ?> 
+
+                    <option value="
+                            <?php echo $securityquestion['securityID'] ?>">
+
+                        <?php echo $securityquestion['securityquestion'] ?></option>                             
+                <?php } ?>                     
+            </select>
+            <input required type='text' name=' securityanswer' required>
+
+
             Email:
-            <input required type = "email" name = "email"required>
-            Gender:
-            <input type = "radio" name = "gender" value = "1">Female
-            <input type = "radio" name = "gender" value = "2">Male
-            <input type = "radio" name = "gender" value = "3">Non-Binary
-            <input type = "radio" name = "gender" value = "4">Other
+            <input required type = "email" name = "email" required>
+
 
             <button type = 'submit' name = 'register'>Register</button>
 
