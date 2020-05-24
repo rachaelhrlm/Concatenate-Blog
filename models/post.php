@@ -331,7 +331,7 @@ class Post {
 //    method and constants for uploadFile
     const AllowedTypes = ['image/jpeg', 'image/jpg'];
     const InputKey = 'myUploader';
-    const Curses = ['shit', 'fuck'];
+    const Curses = ['shit', 'Shit', 'fuck', 'Fuck'];
     
     
 
