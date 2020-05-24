@@ -1,4 +1,6 @@
-<?php session_start();
+<?php
+session_start();
+require_once 'connection.php';
 ?>
 <html>
     <head>
@@ -8,35 +10,28 @@
     </head>
     <body>
         <?php
-        $dsn = "mysql:host=127.0.0.1;dbname=blog";
-        $user = "root";
-        $password = NULL;
-        $options = NULL;
-        $message = "";
-        try {
-            $pdo = new PDO($dsn, $user, $password, $options);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (Exception $e) {
-            $message = $e->getMessage();
-        }
-
-
+        $db = Db::getInstance();
         if (isset($_POST['login'])) {
             $login_username = $_POST['login_username'];
             //The password is encrypted
             $login_password = $_POST['login_password'];
-            $stmt = $pdo->prepare("SELECT userName, passwords FROM member WHERE userName =:username");
+            $stmt = $db->prepare("SELECT userName, passwords,accessLevelID FROM member WHERE userName =:username");
             $stmt->bindParam(":username", $login_username);
             $stmt->execute();
             $count = $stmt->rowCount();
             $data = $stmt->fetchall();
             foreach ($data as $row) {
                 $hashed_password = $row['passwords'];
+                $access = $row['accessLevelID'];
             }
             if ($count > 0) {
                 if (password_verify($login_password, $hashed_password)) {
-                    $_SESSION["login_username"] = $login_username;
-                    echo "Hello " . $_SESSION["login_username"] . ". Login Successful";
+                    $_SESSION["username"] = $login_username;
+                    $_SESSION["accessid"] = $access;
+                    $_SESSION['start'] = time(); // Taking now logged in time.
+                    // Ending a session in 15 minutes from the starting time.
+                    $_SESSION['expire'] = $_SESSION['start'] + (15 * 60);
+                    header("location: dashboard.php");
                 } else {
                     echo "Password incorrect.";
                 }
@@ -67,7 +62,12 @@
                     $stmt->execute();
                     $count = $stmt->rowCount();
                     if ($count > 0) {
-                        $_SESSION["username"] = $username;
+                        $_SESSION["username"] = $login_username;
+                        $_SESSION["accessid"] = 3;
+                        $_SESSION['start'] = time(); // Taking now logged in time.
+                        // Ending a session in 15 minutes from the starting time.
+                        $_SESSION['expire'] = $_SESSION['start'] + (15 * 60);
+                        header("location: dashboard.php");
                         echo "Hello " . $_SESSION["username"] . ". Registration Successful";
                     } else {
                         echo "Registration Unsuccessful";
