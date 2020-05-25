@@ -34,10 +34,12 @@ require_once 'connection.php';
                 <?php
             }
         } else if (!empty($_POST['password'])) {
+
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $stmt = $db->prepare("UPDATE member SET passwords =:password WHERE userName =:username");
             $stmt->bindParam(":username", $_SESSION['username']);
             $stmt->bindParam(":password", $password);
+
 
             $stmt->execute();
             $count = $stmt->rowCount();
@@ -64,5 +66,7 @@ require_once 'connection.php';
             <?php
         }
         ?>
+        
+        
     </body>
 </html>
