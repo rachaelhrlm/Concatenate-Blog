@@ -66,11 +66,11 @@
             $img = "views/images/{$post->getPostID()}.jpeg";
             ?>
             <div class="card customcard" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $post->getPostID(); ?>';" style="width: 20rem;">
-                <img src="<?php echo $img ?>"  class="card-img-top" alt="Image for <?php ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($post->getTitle()))) ?>">
+                <img src="<?php echo $img ?>"  class="card-img-top" alt="Image for <?php ucwords(Post::censor($post->getTitle())) ?>">
                 <div class="card-body">
                     <p class="card-text"><small class="text-muted"><?php echo $post->getDatePosted() . '&emsp; &emsp;' . $post->getAuthor() ?></small></p>
-                    <h5 class="card-title"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($post->getTitle()))) ?></h5>
-                    <p class="card-text"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($post->getExcerpt()))) ?></p>
+                    <h5 class="card-title"><?php echo ucwords(Post::censor($post->getTitle())) ?></h5>
+                    <p class="card-text"><?php echo ucfirst(Post::censor($post->getExcerpt())) ?></p>
                     <button><?php echo $post->getCategory() ?></button>
                 </div>
             </div>

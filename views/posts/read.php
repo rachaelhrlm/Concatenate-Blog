@@ -42,7 +42,7 @@ if (isset($_SESSION['user']) &&
 <section class="container">    
     <div class ="row justify-content-center">
         <div class="col-md-9 text-center"> 
-            <h1><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($post->getTitle()))) ?></h1>
+            <h1><?php echo ucwords(Post::censor($post->getTitle())) ?></h1>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -73,10 +73,10 @@ if (isset($_SESSION['user']) &&
 
     <div class="row justify-content-center">
         <div class="col-md-9 post">
-            <h2 class="excerpt"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', $post->getExcerpt())) ?></h2>
+            <h2 class="excerpt"><?php echo ucfirst(Post::censor($post->getExcerpt())) ?></h2>
             <div class="spacer"></div>
             <?php
-            $content = str_replace(Post::Curses, '<i class="curses">meow</i>', htmlspecialchars_decode($post->getContent()));
+            $content = Post::censor(htmlspecialchars_decode($post->getContent()));
 
             echo $content
             ?>
@@ -168,7 +168,7 @@ if (isset($_SESSION['user']) &&
                         </div>
                         <div class="col-md-4 commentMessage">
                             <div class="smalltext"><?php echo $name . "&emsp;" . $comment['dateCommented'] ?></div>
-                            <p><?php echo $comment['message'] ?></p>
+                            <p><?php echo Post::censor($comment['message']) ?></p>
                         </div></div><?php
                 }
             } else {
@@ -254,8 +254,8 @@ if (isset($_SESSION['user'])) {
                     <img src="<?php echo $previmg ?>"  class="card-img-top">
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted"><?php echo $prev->getDatePosted() . '&emsp; &emsp;' . $prev->getAuthor() ?></small></p>
-                        <h5 class="card-title"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($prev->getTitle()))) ?></h5>
-                        <p class="card-text"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($prev->getExcerpt()))) ?></p>
+                        <h5 class="card-title"><?php echo ucwords(Post::censor($prev->getTitle())) ?></h5>
+                        <p class="card-text"><?php echo ucfirst(Post::censor($prev->getExcerpt())) ?></p>
                         <button><?php echo $prev->getCategory() ?></button>
                     </div>
                 </div>
@@ -282,8 +282,8 @@ if (isset($_SESSION['user'])) {
                     <img src="<?php echo $nextimg ?>"  class="card-img-top" >
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted"><?php echo $next->getDatePosted() . '&emsp; &emsp;' . $next->getAuthor() ?></small></p>
-                        <h5 class="card-title"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($next->getTitle()))) ?></h5>
-                        <p class="card-text"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($next->getExcerpt()))) ?></p>
+                        <h5 class="card-title"><?php echo ucwords(Post::censor($next->getTitle())) ?></h5>
+                        <p class="card-text"><?php echo ucfirst(Post::censor($next->getExcerpt())) ?></p>
                         <button><?php echo $next->getCategory() ?></button>
                     </div>
                 </div>

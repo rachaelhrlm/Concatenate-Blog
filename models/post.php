@@ -146,8 +146,8 @@ class Post {
                     <img src="<?php echo $img ?>"  class="card-img-top">
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted"><?php echo $post['datePosted'] . '&emsp; &emsp;' . $post['author'] ?></small></p>
-                        <h5 class="card-title"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['title']))) ?></h5>
-                        <p class="card-text"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['excerpt']))) ?> </p>
+                        <h5 class="card-title"><?php echo ucwords(Post::censor($post['title'])) ?></h5>
+                        <p class="card-text"><?php echo ucfirst(Post::censor($post['excerpt'])) ?> </p>
                         <button><?php echo $post['category'] ?></button>
                     </div></div>
                 <?php
@@ -347,6 +347,10 @@ class Post {
         $id = intval($id);
         $req = $db->prepare('UPDATE featuredPost SET postID = ? WHERE featuredPostID = ?');
         $req->execute([$id, $feature]);
+    }
+    
+    public static function censor($message) {
+        return str_replace(Post::Curses, '<i class="curses"> meow</i>', strtolower($message));
     }
 
     public static function createComment($id, $member) {
