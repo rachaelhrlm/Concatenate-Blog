@@ -215,6 +215,15 @@ section{
 .commentPic{
     margin-right: 20px;
 }
+.newComment {
+    margin-bottom: 15px;
+    padding: 20px;
+    border: 1px solid #efefef;
+    border-radius: 15px;
+}
+.commentArea {
+    max-height: 300px;
+}
 
 
 

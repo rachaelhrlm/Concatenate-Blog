@@ -16,6 +16,9 @@ class PostController {
             return call('pages', 'error');
         } else {
             $post = Post::searchID($_GET['id']);
+            if (isset($_SESSION['user'])) {
+                $user = $_SESSION['user']->searchID();
+            }
             if (isset($post)) {
                 $comments = Post::searchComments($_GET['id']);
                 $socials = Post::searchSocial($post->getMemberID());
@@ -139,6 +142,26 @@ class PostController {
             }
         } else {
             return call('pages', 'home');
+        }
+    }
+    
+    public function createComment() {
+        if(isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
+            if (!isset($_GET['id'])) {
+                return call('pages', 'error');
+            } else {
+                $success=Post::createComment($_GET['id'], $_SESSION['user']->getMemberID());
+                if(isset($success)){
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Comment successfully added.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php }
+                return call('post', 'searchID');
+            }
         }
     }
 

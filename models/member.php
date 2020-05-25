@@ -87,13 +87,12 @@ class Member {
         $db = Db::getInstance();
         $req = $db->prepare('SELECT * FROM bio WHERE memberID = ?');
         $req->execute([$_SESSION['user']->getMemberID()]);
-        $post = $req->fetch(PDO::FETCH_ASSOC);
-        if (!empty($post)) {
-            return $post;
+        $user = $req->fetch(PDO::FETCH_ASSOC);
+        if (!empty($user)) {
+            return $user;
         } else {
-            return $post = NULL;
+            return $user = NULL;
         }
-    
     }
     
     public function searchAuthor() {

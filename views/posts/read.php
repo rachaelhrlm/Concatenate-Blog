@@ -149,7 +149,7 @@ if (isset($_SESSION['user']) &&
             </div>
 
             <?php
-            if (isset($comments)) {
+            if (!empty($comments)) {
                 foreach ($comments as $comment) {
                     if (file_exists("views/images/members/{$comment['memberID']}.jpeg")) {
                         $propic = "views/images/{$comment['memberID']}.jpeg";
@@ -171,7 +171,12 @@ if (isset($_SESSION['user']) &&
                             <p><?php echo $comment['message'] ?></p>
                         </div></div><?php
                 }
-            }
+            } else {
+                ?>
+                <div class="row comment">
+                    <p>No comments yet.</p>
+                </div>
+            <?php }
             ?>
         </div>
     </div>
@@ -179,19 +184,36 @@ if (isset($_SESSION['user']) &&
 
 
 <!--Write a Comment Section-->
-<?php if (isset($_SESSION['user'])) { ?>
+<?php
+if (isset($_SESSION['user'])) {
+    if (!empty($user['name'])) {
+        $name = $user['name'];
+    } else {
+        $name = $_SESSION['user']->getUserName();
+    }
+    ?>
     <section class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <form action="" method="GET">
-                    <label>New Comment:</label>
+                <form action="" method="GET" class='newComment' id="form-comment">
+                    <h2>New Comment:</h2>
                     <input type="hidden" name="controller" value="post">
                     <input type="hidden" name="action" value="createComment">
-                    <input type="author" name="author" class="form-control" id="author" value="<?php echo $name ?>" disabled contenteditable="true">
-                    <textarea name='comment' class='form-control'>Comment</textarea>
-                </form>
+                    <input type='hidden' name='id' value='<?php echo $post->getPostID() ?>'>
+                    <input type='hidden' name='member' value='<?php echo $_SESSION['user']->getMemberID() ?>'>
+                    <div class='form-row'>
+                        <input type="author" name="author" class="form-control" id="author" value="<?php echo $name ?>" disabled>
+                    </div>
+                    <div class='form-row'>
+                        <textarea name='message' class='form-control commentAreas' form="form-comment">Comment</textarea>
+                    </div>
+                    <div class='form-row justify-content-end'>
+                        <input type="submit" value='Submit Comment' class='btn btn-primary'>
+                    </div>
             </div>
+            </form>
         </div>
+    </div>
     </section>
 <?php } ?>
 
@@ -204,8 +226,13 @@ if (isset($_SESSION['user']) &&
     <div class="row justify-content-around">
         <div class="col-md-4">
             <?php
-            $prevID = $_GET['id'] - 1;
-            $prev = Post::searchID($prevID);
+            for ($i = 1; $i <= 3; $i++) {
+                $prevID = $_GET['id'] - $i;
+                $prev = Post::searchID($prevID);
+                if (!empty($prev)) {
+                    break;
+                }
+            }
             if (!empty($prev)) {
                 $previmg = "views/images/{$prevID}.jpeg";
                 ?>
@@ -227,8 +254,13 @@ if (isset($_SESSION['user']) &&
         </div>
         <div class="col-md-4">
             <?php
-            $nextID = $_GET['id'] + 1;
-            $next = Post::searchID($nextID);
+            for ($i = 1; $i <= 3; $i++) {
+                $nextID = $_GET['id'] + $i;
+                $next = Post::searchID($nextID);
+                if (!empty($next)) {
+                    break;
+                }
+            }
             if (!empty($next)) {
                 $nextimg = "views/images/{$nextID}.jpeg";
                 ?>

@@ -1,6 +1,5 @@
 <?php
 
-
 class Post {
 
 //    attributes
@@ -121,11 +120,6 @@ class Post {
         $this->content = $content;
     }
 
-    
-    
-    
-    
-    
 //    method for selecting all posts
     public static function searchAll() {
         $list = [];
@@ -136,8 +130,6 @@ class Post {
         }
         return $list;
     }
-    
-    
 
 //    method for selecting post via Ajax where keyword matches anything
     public static function searchAny($keyword) {
@@ -148,16 +140,18 @@ class Post {
         if (!empty($posts)) { //if there are results, echo out a container along with a loop of Post Cards
             echo '<div class="container"><div class="row justify-content-center">';
             foreach ($posts as $post) {
-                $img = "views/images/{$post['postID']}.jpeg";?>
-                <div class="card customcard" onclick="location.href ='?controller=post&action=searchID&id=<?php echo $post['postID'] ?>'" style="width: 20rem;">
-                <img src="<?php echo $img ?>"  class="card-img-top">
-                <div class="card-body">
-                <p class="card-text"><small class="text-muted"><?php echo $post['datePosted'] . '&emsp; &emsp;' . $post['author'] ?></small></p>
-                <h5 class="card-title"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['title']))) ?></h5>
-                <p class="card-text"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['excerpt'])))?> </p>
-                <button><?php echo $post['category'] ?></button>
-                </div></div>
-            <?php }
+                $img = "views/images/{$post['postID']}.jpeg";
+                ?>
+                <div class="card customcard" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $post['postID'] ?>'" style="width: 20rem;">
+                    <img src="<?php echo $img ?>"  class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text"><small class="text-muted"><?php echo $post['datePosted'] . '&emsp; &emsp;' . $post['author'] ?></small></p>
+                        <h5 class="card-title"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['title']))) ?></h5>
+                        <p class="card-text"><?php echo ucwords(str_replace(self::Curses, '<i class="curses"> meow</i>', strtolower($post['excerpt']))) ?> </p>
+                        <button><?php echo $post['category'] ?></button>
+                    </div></div>
+                <?php
+            }
             echo '</div></div>';
         } else { //if there are no results, echo 'No results found.'
             echo 'No results found.';
@@ -177,8 +171,7 @@ class Post {
             return $post = NULL;
         }
     }
-    
-    
+
 //    method for searching for all comments of a post
     public static function searchComments($id) {
         $db = Db::getInstance();
@@ -187,8 +180,6 @@ class Post {
         $req->execute([$id]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    
 
 //    method for finding all socials for chosen member
     public static function searchSocial($id) {
@@ -204,14 +195,13 @@ class Post {
         $req = $db->query('SELECT * FROM category');
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    
+
 //     method for editing post
     public static function edit($id) {
         $db = Db::getInstance();
         $req = $db->prepare("call editPost(?,?,?,?,?)");
 
-        if (!empty($_POST)) {       
+        if (!empty($_POST)) {
             if (isset($_POST['title']) && $_POST['title'] != "") {
                 $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
             }
@@ -221,7 +211,7 @@ class Post {
             if (isset($_POST['content']) && $_POST['content'] != "") {
                 $filteredContent = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
             }
-            $content=$filteredContent;
+            $content = $filteredContent;
             $title = $filteredTitle;
             $categoryID = $_POST['categoryID'];
             $excerpt = $filteredExcerpt;
@@ -229,10 +219,10 @@ class Post {
             try {
                 if (strlen($_POST['title']) > 40) {
                     // throw exception if title > 100
-                    throw new WordingTooLongException('of 10 for your title');
+                    throw new WordingTooLongException('of 40 for your title');
                 } else if (strlen($_POST['excerpt']) > 50) {
 // throw exception if excerpt > 255
-                    throw new WordingTooLongException('of 10 for your excerpt');
+                    throw new WordingTooLongException('of 50 for your excerpt');
                 } else {
                     $req->execute([$id, $title, $categoryID, $excerpt, $content]);
                 }
@@ -337,35 +327,60 @@ class Post {
             return $postID['postID'];
         }
     }
-    
+
     public static function delete($id) {
         $db = Db::getInstance();
         $id = intval($id);
         $req = $db->prepare('UPDATE post SET visibility = 0 WHERE postID = ?');
         $req->execute([$id]);
     }
-    
+
     public static function restore($id) {
         $db = Db::getInstance();
         $id = intval($id);
         $req = $db->prepare('UPDATE post SET visibility = 1 WHERE postID = ?');
         $req->execute([$id]);
     }
-    
-    public static function feature($id,$feature) {
+
+    public static function feature($id, $feature) {
         $db = Db::getInstance();
         $id = intval($id);
         $req = $db->prepare('UPDATE featuredPost SET postID = ? WHERE featuredPostID = ?');
-        $req->execute([$id,$feature]);
+        $req->execute([$id, $feature]);
     }
 
+    public static function createComment($id, $member) {
+        $db = Db::getInstance();
+        $id = intval($id);
+        $member = intval($member);
+        $req = $db->prepare('INSERT INTO postComment (postID, memberID, message, dateCommented) VALUES(?,?,?,CURDATE())');
+        if (isset($_GET['message']) && $_GET['message'] != "") {
+            $filteredMessage = filter_input(INPUT_GET, 'message', FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+
+        try {
+            if (strlen($_GET['message']) > 200) {
+                throw new WordingTooLongException('of 200 for your comment.');
+            } else {
+                $message = $filteredMessage;
+                $req->execute([$id, $member, $message]);
+                return true;
+            }
+        } catch (WordingTooLongException $e) {
+            ?> <div class='alert alert-primary' role='alert'>
+                You have exceeded the character limit <?php echo $e->getMessage() ?>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div> <?php
+            return null;
+        }
+    }
 
 //    method and constants for uploadFile
     const AllowedTypes = ['image/jpeg', 'image/jpg'];
     const InputKey = 'myUploader';
     const Curses = ['shit', 'Shit', 'fuck', 'Fuck'];
-    
-    
 
     public static function uploadFile(string $postID) {
         $tempFile = $_FILES[self::InputKey]['tmp_name'];
