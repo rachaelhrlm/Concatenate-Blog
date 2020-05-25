@@ -179,6 +179,16 @@ class Post {
     }
     
     
+//    method for searching for all comments of a post
+    public static function searchComments($id) {
+        $db = Db::getInstance();
+        $id = intval($id);
+        $req = $db->prepare('call searchComment(?)');
+        $req->execute([$id]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    
 
 //    method for finding all socials for chosen member
     public static function searchSocial($id) {
@@ -348,6 +358,7 @@ class Post {
         $req = $db->prepare('UPDATE featuredPost SET postID = ? WHERE featuredPostID = ?');
         $req->execute([$id,$feature]);
     }
+
 
 //    method and constants for uploadFile
     const AllowedTypes = ['image/jpeg', 'image/jpg'];

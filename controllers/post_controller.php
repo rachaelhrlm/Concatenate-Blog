@@ -17,6 +17,7 @@ class PostController {
         } else {
             $post = Post::searchID($_GET['id']);
             if (isset($post)) {
+                $comments = Post::searchComments($_GET['id']);
                 $socials = Post::searchSocial($post->getMemberID());
                 require_once('views/posts/read.php');
             } else {

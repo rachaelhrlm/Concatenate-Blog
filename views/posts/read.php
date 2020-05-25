@@ -73,13 +73,13 @@ if (isset($_SESSION['user']) &&
 
     <div class="row justify-content-center">
         <div class="col-md-9 post">
-            <h2 class="excerpt"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>',$post->getExcerpt())) ?></h2>
+            <h2 class="excerpt"><?php echo ucwords(str_replace(Post::Curses, '<i class="curses"> meow</i>', $post->getExcerpt())) ?></h2>
             <div class="spacer"></div>
-            <?php 
-            
+            <?php
             $content = str_replace(Post::Curses, '<i class="curses">meow</i>', htmlspecialchars_decode($post->getContent()));
-            
-            echo  $content?>
+
+            echo $content
+            ?>
         </div>
     </div>
 </section>
@@ -138,6 +138,62 @@ if (isset($_SESSION['user']) &&
 
 
 
+
+
+<!--Comment Section-->
+<section class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="row">
+                <h2>Comments:</h2>
+            </div>
+
+            <?php
+            if (isset($comments)) {
+                foreach ($comments as $comment) {
+                    if (file_exists("views/images/members/{$comment['memberID']}.jpeg")) {
+                        $propic = "views/images/{$comment['memberID']}.jpeg";
+                    } else {
+                        $propic = "views/images/standard/noprofileimage.png";
+                    }
+                    if (isset($comment['name'])) {
+                        $name = $comment['name'];
+                    } else {
+                        $name = $comment['username'];
+                    }
+                    ?>
+                    <div class="row comment">
+                        <div class="col-md-1 commentPic">
+                            <img src='<?php echo $propic ?>' class='propic'> 
+                        </div>
+                        <div class="col-md-4 commentMessage">
+                            <div class="smalltext"><?php echo $name . "&emsp;" . $comment['dateCommented'] ?></div>
+                            <p><?php echo $comment['message'] ?></p>
+                        </div></div><?php
+                }
+            }
+            ?>
+        </div>
+    </div>
+</section>
+
+
+<!--Write a Comment Section-->
+<?php if (isset($_SESSION['user'])) { ?>
+    <section class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <form action="" method="GET">
+                    <label>New Comment:</label>
+                    <input type="hidden" name="controller" value="post">
+                    <input type="hidden" name="action" value="createComment">
+                    <input type="author" name="author" class="form-control" id="author" value="<?php echo $name ?>" disabled contenteditable="true">
+                    <textarea name='comment' class='form-control'>Comment</textarea>
+                </form>
+            </div>
+        </div>
+    </section>
+<?php } ?>
 
 
 

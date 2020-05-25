@@ -201,8 +201,20 @@ section{
 .curses {
     color: #e73c7e;
 }
-
-
+.propic {
+    height: auto;
+    max-width: 50px;
+    border-radius: 100px;
+}
+.comment {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #efefef;
+    border-radius: 15px;
+}
+.commentPic{
+    margin-right: 20px;
+}
 
 
 
