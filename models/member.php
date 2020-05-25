@@ -70,19 +70,39 @@ class Member {
         if (isset($data)) {
             if (password_verify($login_password, $data['passwords'])) {
                 $_SESSION['user'] = new Member($data['memberID'], $data['userName'], $data['passwords'], $data['email'], $data['accessLevelID']);
-                echo "Hello " . $_SESSION['user']->getUserName() . ". Login Successful <br>".
-                        "Redirecting to home page in 3 seconds."
-                    . "<a href='?controller=pages&action=home'><div class='smalltext' href='?controller=pages&action=home'>(or click here to go now)</div></a>";
+                ob_start();
+                header("Refresh: 3; url=?controller=member&action=account");
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Login successful. Page will reload in 3 seconds, or close the alert to reload now.
+                    <button type='button' class='close' data-dismiss='alert' onclick="location.href = '?controller=member&action=account'" aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+                ob_end_flush();
             } else {
-                echo "Password is incorrect. Redirecting to home page in 3 seconds."
-                    . "<a href='?controller=pages&action=home'><div class='smalltext' href='?controller=pages&action=home'>(or click here to go now)</div></a>";
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Password is incorrect.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
             }
         } else {
-            echo "Username does not exist."
-            . "<a href='?controller=pages&action=home'><div class='smalltext'>(or click here to go now)</div></a>";
+            ?>
+            <div class='alert alert-primary' role='alert'>
+                Username does not exist.
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            <?php
         }
     }
-    
+
     public function searchID() {
         $db = Db::getInstance();
         $req = $db->prepare('SELECT * FROM bio WHERE memberID = ?');
@@ -94,7 +114,7 @@ class Member {
             return $user = NULL;
         }
     }
-    
+
     public function searchAuthor() {
         $db = Db::getInstance();
         $id = intval($this->getMemberID());
@@ -102,16 +122,19 @@ class Member {
         $req->execute([$id]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function searchAll() {
         $db = Db::getInstance();
         $req = $db->prepare('SELECT * FROM postinfo ORDER BY postID ASC');
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
-    public static function searchFeaturedPosts($id){
+
+    public static function searchFeaturedPosts($id) {
         $db = Db::getInstance();
         $req = $db->prepare('SELECT postID FROM featuredPost WHERE featuredPostID=?');
         $req->execute([intval($id)]);
         return $req->fetch(PDO::FETCH_ASSOC);
     }
+
 }

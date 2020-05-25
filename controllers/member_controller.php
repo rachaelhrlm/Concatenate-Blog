@@ -1,23 +1,24 @@
 <?php
+
 class MemberController {
 
     public function login() {
 
         if (!isset($_SESSION['user'])) {
             if (isset($_POST['login'])) {
-                ob_start();
                 $result = Member::login();
-                header('Refresh:3, ?controller=pages&action=home');
-                require_once('views/members/access.php');
-                ob_end_flush();
+                ?>
+
+                <?php
+
+                return call('member', 'account');
             } elseif (isset($_POST['register'])) {
                 Member::register();
-                require_once('views/members/access.php');
-            } else {
-                require_once('views/members/access.php');
+                ;
             }
         } else {
-            header("Location: ?controller=member&action=account");
+            return call('pages', 'home');
+            ;
         }
     }
 
@@ -26,13 +27,20 @@ class MemberController {
             ob_start();
             session_unset();
             session_destroy();
-            $result = "Logout successful. Redirecting to home page in 3 seconds.<br>"
-                    . "<a  href='?controller=pages&action=home'><div class='smalltext'>(or click here to go now)</a></div>";
-            header('Refresh:3, ?controller=pages&action=home');
+            header('Refresh: 3');
             ob_end_flush();
-            require_once('views/members/access.php');
+            ?>
+            <div class='alert alert-primary' role='alert'>
+                Logout successful. Page will reload in 3 seconds, or close the alert to reload now.
+                <button type='button' class='close' data-dismiss='alert' onclick="location.reload()" aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div> <?php
+
+            return call('pages', 'home');
         } else {
-            header("Location: ?controller=pages&action=home");
+            return call('pages', 'home');
+            ;
         }
     }
 
@@ -48,7 +56,6 @@ class MemberController {
                 $posts = $_SESSION['user']->searchAuthor();
                 require_once('views/members/account.php');
             }
-            
         } else {
             header("Location: ?controller=pages&action=home");
         }

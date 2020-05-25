@@ -215,8 +215,19 @@ if (isset($_SESSION['user'])) {
         </div>
     </div>
     </section>
+<?php } else { ?>
+    <section class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 newComment">
+                <h2>New Comment:</h2>
+                Please log in to comment.
+                <div class='form-row justify-content-end'>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#login">Login </button>
+                </div>
+            </div>
+        </div>
+    </section>
 <?php } ?>
-
 
 
 
