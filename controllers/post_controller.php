@@ -117,5 +117,28 @@ class PostController {
             return call('pages', 'home');
         }
     }
+    
+    
+    
+    public function feature() {
+        if(isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() == 1) {
+            if (!isset($_GET['id'])) {
+                return call('pages', 'error');
+            } else {
+                Post::feature($_GET['id'],$_GET['post']);
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Post successfully featured.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+                return call('member', 'account');
+            }
+        } else {
+            return call('pages', 'home');
+        }
+    }
 
 }

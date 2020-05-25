@@ -341,6 +341,13 @@ class Post {
         $req = $db->prepare('UPDATE post SET visibility = 1 WHERE postID = ?');
         $req->execute([$id]);
     }
+    
+    public static function feature($id,$feature) {
+        $db = Db::getInstance();
+        $id = intval($id);
+        $req = $db->prepare('UPDATE featuredPost SET postID = ? WHERE featuredPostID = ?');
+        $req->execute([$id,$feature]);
+    }
 
 //    method and constants for uploadFile
     const AllowedTypes = ['image/jpeg', 'image/jpg'];

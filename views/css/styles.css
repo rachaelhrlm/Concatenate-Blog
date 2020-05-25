@@ -92,7 +92,7 @@ section{
     min-height: 300px;
     padding:20px;
 }
-#edit, #delete, #recover {
+#edit, #delete, #restore {
     display: none;
 }
 
