@@ -96,7 +96,16 @@ section{
 #edit, #delete, #restore {
     display: none;
 }
-
+.aboutArea {
+    max-height: 300px;
+    min-height: 100px;
+}
+.custom-file-label {
+    margin: 0 17px;
+}
+.accountimg {
+    margin-bottom: 10px;
+}
 
 
 

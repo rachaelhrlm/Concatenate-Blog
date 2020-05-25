@@ -137,4 +137,15 @@ class Member {
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function updateName() {
+        $db = Db::getInstance();
+        if (isset($_GET['name']) && $_GET['name'] != "") {
+            $filteredName = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        $name = $filteredName;
+        $id = intval($_SESSION['user']->getMemberID());
+        $req = $db->prepare('INSERT INTO bio (bioID, memberID, name) VALUE (?,?,?) ON DUPLICATE KEY UPDATE name = ?');
+        $req->execute([$id, $id, $name, $name]);
+    }
+
 }

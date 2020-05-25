@@ -12,7 +12,7 @@ if (empty($_SESSION['user'])) {
         <div class="col-md-2">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="false">Login Details</a>
-                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+                <a class="nav-link" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
                 <a class="nav-link active" id="actions-tab" data-toggle="pill" href="#actions" role="tab" aria-controls="actions" aria-selected="false">Actions</a>
                 <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Favourite Posts</a>
             </div>
@@ -38,8 +38,85 @@ if (empty($_SESSION['user'])) {
 
 
 
-                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                    Profile
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div class="tab-container">
+
+
+                        <!--Update Name Form-->
+                        <div class="row justify-content-center">
+                            <h2>Update Name: </h2>
+                        </div>
+                        <div class="row justify-content-center">
+                            <form action="" method="GET" class="col-md-7">
+                                <input type="hidden" name="controller" value="member">
+                                <input type="hidden" name="action" value="updateName">
+                                <input class="form-control" type="text" name="name" value="<?php echo (isset($user['name'])) ? $user['name'] : $_SESSION['user']->getUserName(); ?> ">
+                                <div class="form-row justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="spacer"></div>
+                        <hr>
+                        <div class="spacer"></div>
+
+
+                        <!--Update About Me Form-->
+                        <div class="row justify-content-center">
+                            <h2>Update About Me: </h2>
+                        </div>
+                        <div class="row justify-content-center">
+                            <form action="" method="GET" id="about" class="col-md-7">
+                                <input type="hidden" name="controller" value="member">
+                                <input type="hidden" name="action" value="updateAbout">
+                                <textarea form="#about" class="form-control aboutArea" type="text" name="about"><?php echo (isset($user['about'])) ? $user['about'] : "About me"; ?> </textarea>
+                                <div class="form-row justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                        <div class="spacer"></div>
+                        <hr>
+                        <div class="spacer"></div>
+
+
+                        <!--Update Profile Picture Form-->
+                        <div class="row justify-content-center">
+                            <h2>Update Profile Picture: </h2>
+                        </div>
+                        <div class="row justify-content-center">
+                            <?php
+                            if (file_exists("views/images/members/{$_SESSION['user']->getMemberID()}.jpeg")) {
+                                $propic = "views/images/{$_SESSION['user']->getMemberID()}.jpeg";
+                            } else {
+                                $propic = "views/images/standard/noprofileimage.png";
+                            }
+                            ?>
+
+                            <img src="<?php echo $propic ?>" class="accountimg">
+                        </div>
+
+
+                        <div class="row justify-content-center">
+                            <form action="" method="GET" id="about" class=" col-md-7">
+                                        <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+                                        <input type="hidden" name="controller" value="member">
+                                        <input type="hidden" name="action" value="updateProfilePic">
+                                        <input type="file" name="myUploader" class="custom-file-input" id="image">
+                                        <label class="custom-file-label" for="image">Choose file</label>
+                                    <div class="form-row justify-content-end">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                            </form>
+                        </div>
+
+
+
+                    </div>
                 </div>
 
 

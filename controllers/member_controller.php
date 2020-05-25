@@ -10,7 +10,6 @@ class MemberController {
                 ?>
 
                 <?php
-
                 return call('member', 'account');
             } elseif (isset($_POST['register'])) {
                 Member::register();
@@ -36,7 +35,6 @@ class MemberController {
                     <span aria-hidden='true'>&times;</span>
                 </button>
             </div> <?php
-
             return call('pages', 'home');
         } else {
             return call('pages', 'home');
@@ -46,6 +44,7 @@ class MemberController {
 
     public function account() {
         if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
+            $user = $_SESSION['user']->searchID();
             if ($_SESSION['user']->getAccessLevelID() == 1) {
                 $posts = $_SESSION['user']->searchAll();
                 $featuredPost1 = Member::searchFeaturedPosts(1);
@@ -58,6 +57,28 @@ class MemberController {
             }
         } else {
             header("Location: ?controller=pages&action=home");
+        }
+    }
+
+    public function updateName() {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 3) {
+            if (isset($_GET['name'])) {
+                $_SESSION['user']->updateName();
+            
+            ?>
+            <div class='alert alert-primary' role='alert'>
+                Name successfully updated.
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            <?php
+            return call('member', 'account');
+            } else {
+                return call('pages', 'error');
+            }
+        } else {
+            return call('pages', 'home');
         }
     }
 
