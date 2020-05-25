@@ -50,9 +50,10 @@ section{
 .btn {
     margin: 5px;
 }
-.icon {
+
+.icon  {
     margin: 5px;
-    color: #333;
+    color: #333 !important;
     cursor: pointer;
 }
 
@@ -67,7 +68,7 @@ section{
 /*navigation styling*/
 .customnav {
     padding-bottom: 10px;
-    
+
 }
 .nav-link {
     font-family: 'Varela Round', sans-serif;
@@ -163,6 +164,9 @@ section{
     border-radius: 3px;
     background: none;
 }
+.smalltext{
+    font-size: 11px;
+}
 
 
 
@@ -202,13 +206,56 @@ section{
 
 
 
-.smalltext{
-    font-size: 11px;
-}
+
 
 
 
 /*form styling*/
 .textarea {
     height: 500px !important;
+}
+
+
+
+/*featured post styling*/
+.carousel-control-next, .carousel-control-prev{
+    color: #333 !important;
+}
+.carousel-control-next:hover, .carousel-control-prev:hover{
+    color: #23a6d5 !important;
+}
+.featured {
+    overflow: hidden;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+@media only screen and (max-width: 768px) {
+    .featured-text{
+        height: 400px;
+        position: static;
+    }
+    .featured-btn{
+        right: 0;
+    }
+    .carousel-control-next, .carousel-control-prev, .carousel-control-next:hover, .carousel-control-prev:hover{
+    margin-top: -25rem;
+}
+}
+@media only screen and (min-width: 768px){
+    .featured-text{
+        height: 400px;
+        position: relative;
+    } 
+    .featured-btn{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.featured-img {
+    height: 100%;
+    margin: 0 auto;
 }

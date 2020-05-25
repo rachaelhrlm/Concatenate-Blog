@@ -109,7 +109,7 @@ class Member {
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function searchFeaturedPosts($id){
+    public static function searchFeaturedPosts($id){
         $db = Db::getInstance();
         $req = $db->prepare('SELECT postID FROM featuredPost WHERE featuredPostID=?');
         $req->execute([intval($id)]);

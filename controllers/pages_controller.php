@@ -1,16 +1,19 @@
 <?php
+include_once 'models/post.php';
 
 class PagesController {
-   
+
     public function home() {
-      //example data to use in the home page
-      $first_name = 'Lisa';
-      $last_name  = 'Simpson';
-      require_once('views/pages/home.php');
+        $featuredPosts = 
+        [$fpost1 = Post::searchID(intval(Member::searchFeaturedPosts(1)['postID'])),
+        $fpost2 = Post::searchID(intval(Member::searchFeaturedPosts(2)['postID'])),
+        $fpost3 = Post::searchID(intval(Member::searchFeaturedPosts(3)['postID']))];
+
+        require_once('views/pages/home.php');
     }
 
     public function error() {
-      require_once('views/pages/error.php');
+        require_once('views/pages/error.php');
     }
-    
+
 }

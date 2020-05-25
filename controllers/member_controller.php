@@ -40,9 +40,9 @@ class MemberController {
         if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
             if ($_SESSION['user']->getAccessLevelID() == 1) {
                 $posts = $_SESSION['user']->searchAll();
-                $featuredPost1 = $_SESSION['user']->searchFeaturedPosts(1);
-                $featuredPost2 = $_SESSION['user']->searchFeaturedPosts(2);
-                $featuredPost3 = $_SESSION['user']->searchFeaturedPosts(3);
+                $featuredPost1 = Member::searchFeaturedPosts(1);
+                $featuredPost2 = Member::searchFeaturedPosts(2);
+                $featuredPost3 = Member::searchFeaturedPosts(3);
                 require_once('views/members/account.php');
             } else {
                 $posts = $_SESSION['user']->searchAuthor();
