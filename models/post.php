@@ -390,11 +390,7 @@ class Post {
         $tempFile = $_FILES[self::InputKey]['tmp_name'];
         $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/";
         $destinationFile = $path . $postID . '.jpeg';
-
-//        if (!move_uploaded_file($tempFile, $destinationFile)) {
-//            throw new NotMovedToDestinationException();
-//        }
-//Clean up the temp file
+        move_uploaded_file($tempFile, $destinationFile);
         if (file_exists($tempFile)) {
             unlink($tempFile);
         }

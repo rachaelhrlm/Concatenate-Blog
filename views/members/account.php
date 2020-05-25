@@ -67,10 +67,10 @@ if (empty($_SESSION['user'])) {
                             <h2>Update About Me: </h2>
                         </div>
                         <div class="row justify-content-center">
-                            <form action="" method="GET" id="about" class="col-md-7">
+                            <form action="" method="GET" id="aboutMe" class="col-md-7">
                                 <input type="hidden" name="controller" value="member">
                                 <input type="hidden" name="action" value="updateAbout">
-                                <textarea form="#about" class="form-control aboutArea" type="text" name="about"><?php echo (isset($user['about'])) ? $user['about'] : "About me"; ?> </textarea>
+                                <textarea form="aboutMe" class="form-control aboutArea" type="text" name="about"><?php echo (isset($user['about'])) ? $user['about'] : "About me"; ?> </textarea>
                                 <div class="form-row justify-content-end">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
@@ -91,7 +91,7 @@ if (empty($_SESSION['user'])) {
                         <div class="row justify-content-center">
                             <?php
                             if (file_exists("views/images/members/{$_SESSION['user']->getMemberID()}.jpeg")) {
-                                $propic = "views/images/{$_SESSION['user']->getMemberID()}.jpeg";
+                                $propic = "views/images/members/{$_SESSION['user']->getMemberID()}.jpeg";
                             } else {
                                 $propic = "views/images/standard/noprofileimage.png";
                             }
@@ -102,7 +102,7 @@ if (empty($_SESSION['user'])) {
 
 
                         <div class="row justify-content-center">
-                            <form action="" method="GET" id="about" class=" col-md-7">
+                            <form action="?controller=member&action=updateProfilePic" method="POST" id="about" class=" col-md-7" enctype="multipart/form-data">
                                         <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
                                         <input type="hidden" name="controller" value="member">
                                         <input type="hidden" name="action" value="updateProfilePic">

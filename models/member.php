@@ -148,4 +148,28 @@ class Member {
         $req->execute([$id, $id, $name, $name]);
     }
 
+    public function updateAbout() {
+        $db = Db::getInstance();
+        if (isset($_GET['about']) && $_GET['about'] != "") {
+            $filteredAbout = filter_input(INPUT_GET, 'about', FILTER_SANITIZE_SPECIAL_CHARS);
+        }
+        $about = $filteredAbout;
+        $id = intval($_SESSION['user']->getMemberID());
+        $req = $db->prepare('INSERT INTO bio (bioID, memberID, about) VALUE (?,?,?) ON DUPLICATE KEY UPDATE about = ?');
+        $req->execute([$id, $id, $about, $about]);
+    }
+
+    
+    const AllowedTypes = ['image/jpeg', 'image/jpg'];
+    const InputKey = 'myUploader';
+    public static function updateProfilePic() {
+        $tempFile = $_FILES[self::InputKey]['tmp_name'];
+        $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/members/";
+        $destinationFile = $path . $_SESSION['user']->getMemberID() . '.jpeg';
+        move_uploaded_file($tempFile, $destinationFile);
+        if (file_exists($tempFile)) {
+            unlink($tempFile);
+        }
+    }
+
 }

@@ -28,7 +28,7 @@ function call($controller, $action) {
 $controllers = array('pages' => ['home', 'error'],
     'product' => ['readAll', 'read', 'create', 'update', 'delete'],
     'post' => ['searchAll', 'searchID', 'edit', 'create','delete', 'restore','feature','createComment'],
-    'member' => ['login', 'logout', 'account', 'updateName'],
+    'member' => ['login', 'logout', 'account', 'updateName', 'updateAbout', 'updateProfilePic'],
 );
 
 

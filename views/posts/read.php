@@ -7,7 +7,7 @@ if (file_exists("views/images/{$_GET['id']}.jpeg")) {
 }
 
 if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
-    $pic = "views/images/{$post->getMemberID()}.jpeg";
+    $pic = "views/images/members/{$post->getMemberID()}.jpeg";
 } else {
     $pic = "views/images/standard/noprofileimage.png";
 }
@@ -152,7 +152,7 @@ if (isset($_SESSION['user']) &&
             if (!empty($comments)) {
                 foreach ($comments as $comment) {
                     if (file_exists("views/images/members/{$comment['memberID']}.jpeg")) {
-                        $propic = "views/images/{$comment['memberID']}.jpeg";
+                        $propic = "views/images/members/{$comment['memberID']}.jpeg";
                     } else {
                         $propic = "views/images/standard/noprofileimage.png";
                     }
@@ -195,7 +195,7 @@ if (isset($_SESSION['user'])) {
     <section class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <form action="" method="GET" class='newComment' id="form-comment">
+                <form action="" method="GET"  id="form-comment">
                     <h2>New Comment:</h2>
                     <input type="hidden" name="controller" value="post">
                     <input type="hidden" name="action" value="createComment">
@@ -210,8 +210,9 @@ if (isset($_SESSION['user'])) {
                     <div class='form-row justify-content-end'>
                         <input type="submit" value='Submit Comment' class='btn btn-primary'>
                     </div>
-            </div>
+            
             </form>
+                </div>
         </div>
     </div>
     </section>
