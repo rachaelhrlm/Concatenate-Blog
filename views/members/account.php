@@ -103,14 +103,14 @@ if (empty($_SESSION['user'])) {
 
                         <div class="row justify-content-center">
                             <form action="?controller=member&action=updateProfilePic" method="POST" id="about" class=" col-md-7" enctype="multipart/form-data">
-                                        <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-                                        <input type="hidden" name="controller" value="member">
-                                        <input type="hidden" name="action" value="updateProfilePic">
-                                        <input type="file" name="myUploader" class="custom-file-input" id="image">
-                                        <label class="custom-file-label" for="image">Choose file</label>
-                                    <div class="form-row justify-content-end">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </div>
+                                <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+                                <input type="hidden" name="controller" value="member">
+                                <input type="hidden" name="action" value="updateProfilePic">
+                                <input type="file" name="myUploader" class="custom-file-input" id="image">
+                                <label class="custom-file-label" for="image">Choose file</label>
+                                <div class="form-row justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
                             </form>
                         </div>
 
@@ -280,15 +280,21 @@ if (empty($_SESSION['user'])) {
                         </div>
                     <?php } ?>
                 </div>
-            </div>
 
 
 
 
 
 
-            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                Settings
+
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                    <div class="tab-container">
+
+
+
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
