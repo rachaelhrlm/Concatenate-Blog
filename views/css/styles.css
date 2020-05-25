@@ -1,10 +1,191 @@
-html, body, h1, h2, h3, h4, h5, h6 {
- font-family: 'Pangolin', cursive;
-}
-.w3-tangerine {
-  font-family: 'Tangerine', serif;
-}
-.w3-pacifico {
-    font-family: 'Pacifico', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap');
+
+/*default override*/
+a, a:hover {
+    text-decoration: inherit;
+    color: inherit;
 }
 
+html { 
+    scroll-behavior: smooth;
+}
+* {
+    font-family: 'Roboto', sans-serif;
+}
+ul {
+    text-decoration: none;
+    list-style: none;
+}
+
+hr {
+    position: relative;
+    border: none;
+    height: 1px;
+    background: #ddd;
+}
+h1, h2, h3, h4, h5 {
+    font-family: 'Varela Round', sans-serif;
+}
+
+
+/*margin and padding*/
+footer {
+    padding-top: 20px;
+}
+section{
+    padding: 50px;
+}
+.spacer{
+    padding:25px;
+}
+.newsletter {
+    margin-top: 120px;
+}
+.logo {
+    padding-top: 10px;
+}
+.btn {
+    margin: 5px;
+}
+.icon {
+    margin: 5px;
+    color: #333;
+}
+
+.icon:hover {
+    margin: 5px;
+    color: #23a6d5;
+    transition:color .5s;
+}
+
+
+
+/*navigation styling*/
+.customnav {
+    padding-bottom: 10px;
+    
+}
+.nav-link {
+    font-family: 'Varela Round', sans-serif;
+    color: black;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 10px;
+    transition:color .2s, background .5s;
+}
+.nav-link:hover {
+    background-color: #23a6d5;
+    color: white;
+}
+
+
+/*animated section styling*/
+.animated {
+    overflow:hidden;
+    height: 400px;
+    width: 100%;
+    color: #fff;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 600% 600%;
+    -webkit-animation: Gradient 60s ease infinite;
+    -moz-animation: Gradient 60s ease infinite;
+    animation: Gradient 60s ease infinite;
+}
+.animatedsmall {
+    overflow:hidden;
+    height: 80px;
+    width: 100%;
+    color: #fff;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 600% 600%;
+    -webkit-animation: Gradient 60s ease infinite;
+    -moz-animation: Gradient 60s ease infinite;
+    animation: Gradient 60s ease infinite;
+}
+@-webkit-keyframes Gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes Gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes Gradient { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.animated-container{
+    /*border: 3px solid #fff;*/
+    padding: 50px;
+    margin: 80px 0;
+}
+
+
+
+/*search results: card styling*/
+.customcard {
+    margin: 10px;
+    cursor: pointer;
+    transition: transform .5s;
+}
+.customcard:hover {
+    transform: scale(1.1,1.1);
+}
+.customcard button {
+    font-size: 11px;
+    color: #999;
+    padding: 3px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background: none;
+}
+
+
+
+/*Blog Post Styling (read.php)*/
+.blogimg {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.authorSnippet {
+    border: 2px dotted #efefef;
+    padding: 30px;
+    text-align: center;
+}
+.profilePic {
+    height: auto;
+    max-width: 100px;
+    border-radius: 100px;
+}
+.post img {
+    width:100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+}
+.excerpt {
+    background-color: #333;
+    padding: 10px;
+    margin-top: -10px;
+    color: white;
+}
+
+
+
+
+
+.smalltext{
+    font-size: 11px;
+}
+
+
+
+/*form styling*/
+.textarea {
+    height: 500px !important;
+}
