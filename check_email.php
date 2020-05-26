@@ -10,9 +10,8 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        
-         $dsn = "mysql:host=127.0.0.1;dbname=blog";
+    <?php
+        $dsn = "mysql:host=127.0.0.1;dbname=blog";
         $user = "root";
         $password = NULL;
         $options = NULL;
@@ -23,14 +22,34 @@ and open the template in the editor.
         } catch (Exception $e) {
             $message = $e->getMessage();
         }
-        
-        
-        $stmt = $pdo->prepare("INSERT INTO subscriber (email) VALUES (:email)");
-        $stmt->bindParam(":email", $_POST['email']);
 
-        $stmt->execute();
-        
-        
+
+        if (isset($_POST['subscribe'])) {
+            
+            $_POST['email'] = $_POST['confirm_email'];
+
+
+
+
+
+            $email = $_POST ['email'];
+            
+
+
+            $stmt = $pdo->prepare("INSERT INTO subscriber (email) VALUES (:email)");
+
+            $stmt->bindParam(":email", $email);
+            
+
+            $stmt->execute();
+            $count = $stmt->rowCount();
+            if ($count > 0) {
+
+                echo "Subscription Successful";
+            } else {
+                echo "Unsuccesful. Sad cat :(";
+            }
+        }
         ?>
     </body>
 </html>
