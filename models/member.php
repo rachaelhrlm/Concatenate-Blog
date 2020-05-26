@@ -129,6 +129,12 @@ class Member {
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function searchAllMembers() {
+        $db = Db::getInstance();
+        $req = $db->prepare('SELECT * FROM member ORDER BY memberID ASC');
+        $req->execute();
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public static function searchFeaturedPosts($id) {
         $db = Db::getInstance();
@@ -157,6 +163,18 @@ class Member {
         $id = intval($_SESSION['user']->getMemberID());
         $req = $db->prepare('INSERT INTO bio (bioID, memberID, about) VALUE (?,?,?) ON DUPLICATE KEY UPDATE about = ?');
         $req->execute([$id, $id, $about, $about]);
+    }
+    public function promoteMember($id) {
+        $db = Db::getInstance();
+        $id = intval($id);
+        $req = $db->prepare('UPDATE member SET accessLevelID = 2 WHERE memberID = ?');
+        $req->execute([$id]);
+    }
+    public function demoteMember($id) {
+        $db = Db::getInstance();
+        $id = intval($id);
+        $req = $db->prepare('UPDATE member SET accessLevelID = 3 WHERE memberID = ?');
+        $req->execute([$id]);
     }
 
     

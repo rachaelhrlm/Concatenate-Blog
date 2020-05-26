@@ -46,6 +46,7 @@ class MemberController {
         if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
             $user = $_SESSION['user']->searchID();
             if ($_SESSION['user']->getAccessLevelID() == 1) {
+                $members = $_SESSION['user']->searchAllMembers();
                 $posts = $_SESSION['user']->searchAll();
                 $featuredPost1 = Member::searchFeaturedPosts(1);
                 $featuredPost2 = Member::searchFeaturedPosts(2);
@@ -110,6 +111,48 @@ class MemberController {
             ?>
             <div class='alert alert-primary' role='alert'>
                 Profile Picture successfully updated.
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            <?php
+            return call('member', 'account');
+            } else {
+                return call('pages', 'error');
+            }
+        } else {
+            return call('pages', 'home');
+        }
+    }
+    public function promoteMember() {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
+            if (isset($_POST['id'])) {
+                $_SESSION['user']->promoteMember($_POST['id']);
+            
+            ?>
+            <div class='alert alert-primary' role='alert'>
+                Member successfully promoted to blogger.
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+            <?php
+            return call('member', 'account');
+            } else {
+                return call('pages', 'error');
+            }
+        } else {
+            return call('pages', 'home');
+        }
+    }
+    public function demoteMember() {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
+            if (isset($_POST['id'])) {
+                $_SESSION['user']->demoteMember($_POST['id']);
+            
+            ?>
+            <div class='alert alert-primary' role='alert'>
+                Blogger successfully demoted to member.
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                     <span aria-hidden='true'>&times;</span>
                 </button>
