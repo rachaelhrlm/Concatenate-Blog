@@ -1,4 +1,5 @@
 <?php
+require_once 'models/post.php';
 
 class MemberController {
 
@@ -42,9 +43,11 @@ class MemberController {
     public function account() {
         if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
             $user = $_SESSION['user']->searchID();
+            $favs = $_SESSION['user']->searchFavourites();
+            $favposts = $_SESSION['user']->searchAll();
             if ($_SESSION['user']->getAccessLevelID() == 1) {
-                $members = $_SESSION['user']->searchAllMembers();
                 $posts = $_SESSION['user']->searchAll();
+                $members = $_SESSION['user']->searchAllMembers();
                 $featuredPost1 = Member::searchFeaturedPosts(1);
                 $featuredPost2 = Member::searchFeaturedPosts(2);
                 $featuredPost3 = Member::searchFeaturedPosts(3);
@@ -183,6 +186,7 @@ class MemberController {
             return call('pages', 'home');
         }
     }
+
     public function banMember() {
         if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() == 1) {
             if (isset($_POST['id'])) {
@@ -203,6 +207,7 @@ class MemberController {
             return call('pages', 'home');
         }
     }
+
     public function unbanMember() {
         if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() == 1) {
             if (isset($_POST['id'])) {
@@ -229,7 +234,8 @@ class MemberController {
             if (isset($_POST['confirmLogin'])) {
                 $result = $_SESSION['user']->confirmLogin();
                 if (!empty($result)) {
-                    $_SESSION['verification'] = true; ?>
+                    $_SESSION['verification'] = true;
+                    ?>
                     <div class='alert alert-primary' role='alert'>
                         Login successfully verified.
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
@@ -245,8 +251,8 @@ class MemberController {
                             <span aria-hidden='true'>&times;</span>
                         </button>
                     </div>  
-                <?php
-                return call('member', 'account');
+                    <?php
+                    return call('member', 'account');
                 }
             } else if (isset($_SESSION['verification']) && isset($_POST['changeEmail'])) {
                 $_SESSION['user']->updateEmail();
@@ -266,12 +272,14 @@ class MemberController {
             return call('pages', 'home');
         }
     }
+
     public function changePassword() {
         if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
             if (isset($_POST['confirmLogin'])) {
                 $result = $_SESSION['user']->confirmLogin();
                 if (!empty($result)) {
-                    $_SESSION['verification'] = true; ?>
+                    $_SESSION['verification'] = true;
+                    ?>
                     <div class='alert alert-primary' role='alert'>
                         Login successfully verified.
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
@@ -287,8 +295,8 @@ class MemberController {
                             <span aria-hidden='true'>&times;</span>
                         </button>
                     </div>  
-                <?php
-                return call('member', 'account');
+                    <?php
+                    return call('member', 'account');
                 }
             } else if (isset($_SESSION['verification']) && isset($_POST['changePassword'])) {
                 $_SESSION['user']->updatePassword();
@@ -305,6 +313,44 @@ class MemberController {
             }
         } else {
             return call('pages', 'home');
+        }
+    }
+
+    public function fav() {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
+            if (!isset($_GET['id'])) {
+                return call('pages', 'error');
+            } else {
+                $_SESSION['user']->fav($_GET['id']);
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Post successfully added to favourites.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+                return call('post', 'searchID');
+            }
+        }
+    }
+
+    public function unfav() {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
+            if (!isset($_GET['id'])) {
+                return call('pages', 'error');
+            } else {
+                $_SESSION['user']->unfav($_GET['id']);
+                ?>
+                <div class='alert alert-primary' role='alert'>
+                    Post successfully removed from favourites.
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div>
+                <?php
+                return call('post', 'searchID');
+            }
         }
     }
 

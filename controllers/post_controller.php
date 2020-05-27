@@ -18,6 +18,7 @@ class PostController {
             $post = Post::searchID($_GET['id']);
             if (isset($_SESSION['user'])) {
                 $user = $_SESSION['user']->searchID();
+                $favs = $_SESSION['user']->searchFavourites();
             }
             if (isset($post)) {
                 $comments = Post::searchComments($_GET['id']);
@@ -144,6 +145,7 @@ class PostController {
             return call('pages', 'home');
         }
     }
+    
     
     public function createComment() {
         if(isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {

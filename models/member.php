@@ -138,6 +138,13 @@ class Member {
         $req->execute([$id]);
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function searchFavourites() {
+        $db = Db::getInstance();
+        $id = intval($this->getMemberID());
+        $req = $db->prepare('SELECT * FROM favourite WHERE memberID = ? ');
+        $req->execute([$id]);
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function searchAll() {
         $db = Db::getInstance();
@@ -220,6 +227,21 @@ class Member {
         $req = $db->prepare('UPDATE member SET accessLevelID = 4 WHERE memberID = ?');
         $req->execute([$id]);
     }
+    public function fav($id) {
+        $db = Db::getInstance();
+        $user=$this->getMemberID();
+        $id = intval($id);
+        $req = $db->prepare('INSERT INTO favourite (memberID, postID) VALUES (?,?);');
+        $req->execute([$user,$id]);
+    }
+    public function unfav($id) {
+        $db = Db::getInstance();
+        $user=$this->getMemberID();
+        $id = intval($id);
+        $req = $db->prepare('DELETE FROM favourite WHERE memberID = ? AND postID = ?;');
+        $req->execute([$user,$id]);
+    }
+    
 
     const AllowedTypes = ['image/jpeg', 'image/jpg'];
     const InputKey = 'myUploader';

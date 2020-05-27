@@ -94,7 +94,7 @@ section{
 .tab-container{
     border: 1px solid #ccc;
     border-radius: 10px;
-    min-height: 300px;
+    min-height: 200px;
     padding:20px;
 }
 #edit, #delete, #restore, #email, #passwords {
@@ -113,7 +113,17 @@ section{
 .custom-select {
     min-width: 20rem;
 }
-
+.accountFav {
+    padding: 0 15px 15px 15px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+.accountFav img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
 
 
 /*animated section styling*/

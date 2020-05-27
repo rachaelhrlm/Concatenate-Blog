@@ -16,20 +16,43 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 
 <!--if user is logged in and accessLevelID is admin or member logged in is the post author-->
 <?php
-if (isset($_SESSION['user']) &&
-        (($_SESSION['user']->getAccessLevelID() === '1') || ($post->getMemberID() === $_SESSION['user']->getMemberID()))) {
+if (isset($_SESSION['user'])) {
     ?>
     <div class="spacer"></div>
     <div class="container">
         <div class="row justify-content-center">
+            <div class='col-md-1 text-left'>
+                <?php 
+                $faved= null;
+                foreach($favs as $fav) {
+                    if($_GET['id'] === $fav['postID']) {
+                        $faved= true;
+                        break;
+                    }
+                } 
+                if (isset($faved)) { ?>
+                <a href="?controller=member&action=unfav&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-heart fa-3x icon"></i></a>
+                
+                <?php } else { ?>
+                <a href="?controller=member&action=fav&id=<?php echo $post->getPostID(); ?>"><i class="far fa-heart fa-3x icon"></i></a>
+                <?php } ?>
+            </div>
+            <div class="col-md-8 text-right">
+            <?php 
+        if(($_SESSION['user']->getAccessLevelID() === '1' ) || ($post->getMemberID() === $_SESSION['user']->getMemberID())) {?>
 
-            <div class="col-md-9 text-right">
+            
                 <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
                 <a href="?controller=post&action=create"><i class="fas fa-plus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
                 <a href="?controller=post&action=delete&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
-                <hr>
+                
+            
+        <?php } ?>
             </div>
         </div>
+        <div class="row justify-content-center">
+            <div class='col-md-9'><hr></div>
+            </div>
     </div>
 <?php } ?>
 

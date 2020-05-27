@@ -18,7 +18,7 @@ if (empty($_SESSION['user'])) {
                     <a class="nav-link <?php echo!isset($_GET['target']) ? "active" : ""; ?>" id="actions-tab" data-toggle="pill" href="#actions" role="tab" aria-controls="actions" aria-selected="false">Actions</a>
                 <?php } ?>
 
-                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Favourite Posts</a>
+                <a class="nav-link" id="favourites-tab" data-toggle="pill" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false">Favourite Posts</a>
             </div>
         </div>
 
@@ -42,15 +42,11 @@ if (empty($_SESSION['user'])) {
                 <?php require_once 'actions.php'; ?>
 
 
-
-                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                    <div class="tab-container">
-
+                <!--Favourite Posts Container-->
+                <?php require_once 'favouritePosts.php'; ?>
 
 
 
-                    </div>
-                </div>
             </div>
         </div>
     </div>
