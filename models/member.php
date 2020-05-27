@@ -60,6 +60,22 @@ class Member {
         $this->accessLevelID = $accessLevelID;
     }
 
+    public function confirmLogin() {
+        $username = $this->getUserName();
+        $password = $_POST['password'];
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT * FROM member WHERE userName =?");
+        $req->execute([$username]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+        if (isset($data)) {
+            if (password_verify($password, $data['passwords'])) {
+                return $data;
+            }
+        } else {
+            return null;
+        }
+    }
+
     public function login() {
         $login_username = $_POST['login_username'];
         $login_password = $_POST['login_password'];
@@ -129,6 +145,7 @@ class Member {
         $req->execute();
         return $req->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function searchAllMembers() {
         $db = Db::getInstance();
         $req = $db->prepare('SELECT * FROM member ORDER BY memberID ASC');
@@ -141,6 +158,25 @@ class Member {
         $req = $db->prepare('SELECT postID FROM featuredPost WHERE featuredPostID=?');
         $req->execute([intval($id)]);
         return $req->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateEmail() {
+        $db = Db::getInstance();
+        if (isset($_POST['newemail']) && $_POST['newemail'] != "") {
+            $filteredEmail = filter_input(INPUT_POST, 'newemail', FILTER_SANITIZE_EMAIL);
+        }
+        $this->setEmail($filteredEmail);
+        $req = $db->prepare("UPDATE member SET email =? WHERE userName =?");
+        $req->execute([$this->getEmail(), $this->getUserName()]);
+    }
+    public function updatePassword() {
+        $db = Db::getInstance();
+        if (isset($_POST['newpassword']) && $_POST['newpassword'] != "" && $_POST['newpassword'] === $_POST['confirmpassword']) {
+            $newpassword = password_hash($_POST['newpassword'], PASSWORD_DEFAULT);
+        }
+        $this->setPasswords($newpassword);
+        $req = $db->prepare("UPDATE member SET passwords =? WHERE userName =?");
+        $req->execute([$newpassword, $this->getUserName()]);
     }
 
     public function updateName() {
@@ -164,22 +200,30 @@ class Member {
         $req = $db->prepare('INSERT INTO bio (bioID, memberID, about) VALUE (?,?,?) ON DUPLICATE KEY UPDATE about = ?');
         $req->execute([$id, $id, $about, $about]);
     }
+
     public function promoteMember($id) {
         $db = Db::getInstance();
         $id = intval($id);
         $req = $db->prepare('UPDATE member SET accessLevelID = 2 WHERE memberID = ?');
         $req->execute([$id]);
     }
+
     public function demoteMember($id) {
         $db = Db::getInstance();
         $id = intval($id);
         $req = $db->prepare('UPDATE member SET accessLevelID = 3 WHERE memberID = ?');
         $req->execute([$id]);
     }
+    public function banMember($id) {
+        $db = Db::getInstance();
+        $id = intval($id);
+        $req = $db->prepare('UPDATE member SET accessLevelID = 4 WHERE memberID = ?');
+        $req->execute([$id]);
+    }
 
-    
     const AllowedTypes = ['image/jpeg', 'image/jpg'];
     const InputKey = 'myUploader';
+
     public static function updateProfilePic() {
         $tempFile = $_FILES[self::InputKey]['tmp_name'];
         $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/members/";

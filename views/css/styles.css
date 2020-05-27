@@ -21,7 +21,7 @@ hr {
     position: relative;
     border: none;
     height: 1px;
-    background: #ddd;
+    background: #ccc;
 }
 h1, h2, h3, h4, h5 {
     font-family: 'Varela Round', sans-serif;
@@ -62,6 +62,10 @@ section{
     color: #23a6d5;
     transition:color .5s;
 }
+.vpad {
+    padding: 10px;
+    margin: 0 5px;
+}
 
 
 
@@ -88,19 +92,19 @@ section{
 
 /*account page styling*/
 .tab-container{
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 10px;
     min-height: 300px;
     padding:20px;
 }
-#edit, #delete, #restore {
+#edit, #delete, #restore, #email, #passwords {
     display: none;
 }
 .aboutArea {
     max-height: 300px;
     min-height: 100px;
 }
-.custom-file-label {
+.cfl {
     margin: 0 17px;
 }
 .accountimg {
@@ -179,7 +183,9 @@ section{
 .smalltext{
     font-size: 11px;
 }
-
+.card {
+    border-color: #ccc;
+}
 
 
 /*Blog Post Styling (read.php)*/
@@ -189,7 +195,7 @@ section{
 }
 
 .authorSnippet {
-    border: 2px dotted #efefef;
+    border: 2px dotted #ccc;
     padding: 30px;
     text-align: center;
 }
@@ -221,7 +227,7 @@ section{
 .comment {
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #efefef;
+    border: 1px solid #ccc;
     border-radius: 15px;
 }
 .commentPic{
@@ -230,7 +236,7 @@ section{
 .newComment {
     margin-bottom: 15px;
     padding: 20px;
-    border: 1px solid #efefef;
+    border: 1px solid #ccc;
     border-radius: 15px;
 }
 .commentArea {
