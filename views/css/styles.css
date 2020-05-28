@@ -59,7 +59,7 @@ section{
 
 .icon:hover {
     margin: 5px;
-    color: #23a6d5;
+    color: #23a6d5 !important;
     transition:color .5s;
 }
 .vpad {

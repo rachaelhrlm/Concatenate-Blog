@@ -14,8 +14,9 @@ session_start();
         <!--fontawesome stylesheet: for icons-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <!--custom style sheet-->
-        <link rel="stylesheet" href="views/css/styles.css">
 
+        <link href="views/css/loginform.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="views/css/styles.css">
 
         <title>Concatenate</title>
     </head>
@@ -85,7 +86,7 @@ session_start();
 
 
 
-
+        <?php require_once 'views/members/loginForm.php'; ?>
 
 
         <!--Content-->
@@ -156,8 +157,15 @@ session_start();
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script>
-            
-            
+
+            function showHide(div) {
+                x = document.getElementById(div).style;
+                if (x.display === 'none' || x.display === '') {
+                    x.display = 'flex';
+                } else {
+                    x.display = 'none';
+                }
+            }
 //            Enable tinymce Text Formatting 
             tinymce.init({
                 selector: '.textarea',
@@ -167,7 +175,7 @@ session_start();
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
             });
-            
+
 //            Enable Bootstrap ToolTip
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
@@ -183,10 +191,7 @@ session_start();
                 nextSibling.innerText = fileName
             })
 
-//            Simple got back button
-            function goBack() {
-                window.history.back();
-            }
+
         </script>
         <script async src="https://static.addtoany.com/menu/page.js"></script>
     </body>

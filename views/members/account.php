@@ -18,7 +18,7 @@ if (empty($_SESSION['user'])) {
                     <a class="nav-link <?php echo!isset($_GET['target']) ? "active" : ""; ?>" id="actions-tab" data-toggle="pill" href="#actions" role="tab" aria-controls="actions" aria-selected="false">Actions</a>
                 <?php } ?>
 
-                <a class="nav-link" id="favourites-tab" data-toggle="pill" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false">Favourite Posts</a>
+                <a class="nav-link <?php echo (!isset($_GET['target']) && $_SESSION['user']->getAccessLevelID() == 3) ? "active" : ""; ?>" id="favourites-tab" data-toggle="pill" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false">Favourite Posts</a>
             </div>
         </div>
 
@@ -27,13 +27,13 @@ if (empty($_SESSION['user'])) {
             <div class="tab-content" id="v-pills-tabContent">
 
 
-                <!--Login Details Section--> 
+                <!--Login Details Section-->
                 <?php require_once 'loginDetails.php'; ?>
 
 
 
                 <!--Profile Section-->
-                <?php require 'profile.php'; ?>
+                    <?php require 'profile.php'; ?>
 
 
 
@@ -43,7 +43,8 @@ if (empty($_SESSION['user'])) {
 
 
                 <!--Favourite Posts Container-->
-                <?php require_once 'favouritePosts.php'; ?>
+  <?php require_once 'favouritePosts.php'; ?>
+                </div>
 
 
 
@@ -81,14 +82,6 @@ if (empty($_SESSION['user'])) {
             document.querySelector("#edit").style.display = 'none';
         } else {
             document.querySelector("#restore").style.display = 'none';
-        }
-    }
-    function showHide(div) {
-        x = document.getElementById(div).style;
-        if (x.display === 'none' || x.display === '') {
-            x.display = 'inline';
-        } else {
-            x.display = 'none';
         }
     }
 </script>

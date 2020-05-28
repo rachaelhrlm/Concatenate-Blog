@@ -8,11 +8,21 @@
                 <a class="nav-link" href='?controller=post&action=searchAll'>Blogs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target="#login">Login </a>
+                <a class="nav-link" href="#" id="loginButton" onclick="loginForm('overall')">Login </a>
             </li>
         </ul>
     </div>
 </div>
+
+<script>
+    function loginForm(div) {
+        x = document.getElementById(div).style;
+        if (x.display === 'none' || x.display === '') {
+            x.display = 'flex';
+        } else {
+            x.display = 'none';
+        }
+    }
+    
+
+</script>

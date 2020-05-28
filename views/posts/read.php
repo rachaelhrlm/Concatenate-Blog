@@ -246,7 +246,7 @@ if (isset($_SESSION['user'])) {
                 <h2>New Comment:</h2>
                 Please log in to comment.
                 <div class='form-row justify-content-end'>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#login">Login </button>
+                    <button class="btn btn-primary" onclick="loginForm('overall')">Login </button>
                 </div>
             </div>
         </div>
