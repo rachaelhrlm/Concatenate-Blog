@@ -5,28 +5,21 @@ class MemberController {
 
     public function login() {
         if (!isset($_SESSION['user'])) {
-            if (isset($_POST['login'])) {
-                Member::login();
-                return call('member', 'account');
-            } elseif (isset($_POST['register'])) {
-                Member::register();
-                
-                return call('member', 'account');
-            }
+            Member::login();
+            return call('pages', 'home');
         } else {
             return call('pages', 'home');
-            ;
         }
     }
+
     public function register() {
         if (!isset($_SESSION['user'])) {
             Member::register();
-            } else {
+            return call('member', 'account');
+        } else {
             return call('pages', 'home');
-            ;
         }
-        }
- 
+    }
 
     public function logout() {
         if (isset($_SESSION['user'])) {

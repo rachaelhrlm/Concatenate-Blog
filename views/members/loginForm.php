@@ -5,10 +5,10 @@
             <form method='POST' action='?controller=member&action=register'>
                 <h1>Sign up</h1>
                 <input type='hidden' name='register' value="true">
-                <input type="text" name='userName' placeholder="Username" />
-                <input  type="email" name='email' placeholder="Email" />
-                <input type="password" name='password' placeholder="Password" />
-                <input type="password" name='confirmPassword' placeholder="Confirm Password" />     
+                <input type="text" name='userName' placeholder="Username" required />
+                <input  type="email" name='email' placeholder="Email" required />
+                <input type="password" name='password' placeholder="Password" required  />
+                <input type="password" name='confirmPassword' placeholder="Confirm Password" required />     
                 <select class="custom-select" name="securityID"> 
                     <?php foreach ($security as $securityquestion) { ?> 
                         <option value="
@@ -17,17 +17,17 @@
                             <?php echo $securityquestion['securityquestion'] ?></option>                             
                     <?php } ?>                     
                 </select>
-                <input type="text" name='securityAnswer' placeholder="Answer" />
+                <input type="text" name='securityAnswer' placeholder="Answer" required/>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-group form-container sign-in-container ">
-            <form action="#">
+            <form action="?controller=member&action=login" method="POST">
                 <h1>Sign in</h1>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="text" name="userName" placeholder="Username" required/>
+                <input type="password" name="password" placeholder="Password" required />
                 <a href="#">Forgot your password?</a>
-                <button class="botton">Sign In</button>
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div class="overlay-container">
