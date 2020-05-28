@@ -24,7 +24,7 @@
                                         <div class="smalltext"><?php echo $featuredPost->getDatePosted() . '&emsp; &emsp;' . $featuredPost->getAuthor() ?></div>
                                        
                                         <p><?php echo $featuredPost->getExcerpt() ?></p>
-                                        <button onclick='location.href ="?controller=post&action=searchID&id=<?php echo $featuredPost->getPostID();?>"' class="btn btn-primary align-self-end featured-btn">Read More</button>
+                                        <button onclick='location.href ="?controller=post&action=searchID&id=<?php echo $featuredPost->getPostID();?>"' class="btn btn-success align-self-end featured-btn">Read More</button>
                                     </div>
                                 </div>
                             </div>

@@ -59,7 +59,7 @@ section{
 
 .icon:hover {
     margin: 5px;
-    color: #23a6d5 !important;
+    color: #28a745 !important;
     transition:color .5s;
 }
 .vpad {
@@ -83,10 +83,12 @@ section{
     transition:color .2s, background .5s;
 }
 .nav-link:hover {
-    background-color: #23a6d5;
+    background-color: #28a745;
     color: white;
 }
-
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+     background-color: #28a745;
+}
 
 
 

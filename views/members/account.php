@@ -33,7 +33,7 @@ if (empty($_SESSION['user'])) {
 
 
                 <!--Profile Section-->
-                    <?php require 'profile.php'; ?>
+                <?php require 'profile.php'; ?>
 
 
 
@@ -43,14 +43,14 @@ if (empty($_SESSION['user'])) {
 
 
                 <!--Favourite Posts Container-->
-  <?php require_once 'favouritePosts.php'; ?>
-                </div>
-
-
-
+                <?php require_once 'favouritePosts.php'; ?>
             </div>
+
+
+
         </div>
     </div>
+</div>
 </div>   
 
 

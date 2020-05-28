@@ -6,7 +6,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-4 vpad text-center"><?php echo $_SESSION['user']->getEmail() ?></div>
-            <div class="col-md-4 text-center"><button class="btn btn-primary" onclick="showHide('email')">Change Email</button></div>
+            <div class="col-md-4 text-center"><button class="btn btn-success" onclick="showHide('email')">Change Email</button></div>
         </div>
 
         <div class="spacer"></div>
@@ -18,14 +18,14 @@
                     Password: <input type='password' name='password' class="form-control" required>                 
                     <input type="hidden" name="confirmLogin" value="true">        
                     <div class="smalltext">Please validate your session</div>        
-                    <button class="btn btn-primary" type='submit'>Submit</button>
+                    <button class="btn btn-success" type='submit'>Submit</button>
                 </form>
             <?php } else if (isset($_SESSION['verification'])) { ?>
                 <form action="?controller=member&action=changeEmail&target=login" method="POST" class="col-md-7">
                     <input type="hidden" name="changeEmail" value="true">
                     <input class="form-control" type="email" name="newemail" value="<?php echo $_SESSION['user']->getEmail(); ?> ">
                     <div class="form-row justify-content-end">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-success">Update</button>
                     </div>
                 </form>
             <?php } ?>
@@ -41,7 +41,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-4 vpad text-center"> ( -- It's a secret! -- ) </div>
-            <div class="col-md-4 text-center"><button class="btn btn-primary" onclick="showHide('passwords')">Change Password</button></div>
+            <div class="col-md-4 text-center"><button class="btn btn-success" onclick="showHide('passwords')">Change Password</button></div>
         </div>
 
         <div class="spacer"></div>
@@ -55,7 +55,7 @@
                     <input type="hidden" name="confirmLogin" value="true">        
                     <input type="hidden" name="changePassword" value="true">
                     <div class="smalltext">Please validate your session</div>        
-                    <button class="btn btn-primary" type='submit'>Submit</button>
+                    <button class="btn btn-success" type='submit'>Submit</button>
                 </form>
             <?php } else if (isset($_SESSION['verification']) && isset($_POST['changePassword'])) { ?>
                 <form action="?controller=member&action=changePassword&target=login" method="POST" class="col-md-7">
@@ -63,7 +63,7 @@
                     New Password:  <input class="form-control" type="password" name="newpassword">
                     Confirm Password:  <input class="form-control" type="password" name="confirmpassword">
                     <div class="form-row justify-content-end">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-success">Update</button>
                     </div>
                 </form>
             <?php } ?>

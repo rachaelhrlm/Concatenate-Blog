@@ -231,7 +231,7 @@ if (isset($_SESSION['user'])) {
                         <textarea name='message' class='form-control commentAreas' form="form-comment" placeholder="Comment"></textarea>
                     </div>
                     <div class='form-row justify-content-end'>
-                        <input type="submit" value='Submit Comment' class='btn btn-primary'>
+                        <input type="submit" value='Submit Comment' class='btn btn-success'>
                     </div>
             
             </form>
@@ -246,7 +246,7 @@ if (isset($_SESSION['user'])) {
                 <h2>New Comment:</h2>
                 Please log in to comment.
                 <div class='form-row justify-content-end'>
-                    <button class="btn btn-primary" onclick="loginForm('overall')">Login </button>
+                    <button class="btn btn-success" onclick="loginForm('overall')">Login </button>
                 </div>
             </div>
         </div>
