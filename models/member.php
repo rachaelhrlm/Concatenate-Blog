@@ -167,6 +167,8 @@ class Member {
                             $securityanswer = $_POST['securityAnswer'];
                             $req2 = $db->prepare("INSERT INTO security (memberID, securityID, securityanswer) VALUES (?, ?, ?)");
                             $req2->execute([intval($id), $securityid, $securityanswer]);
+                            $req2 = $db->prepare("INSERT INTO bio (bioID, memberID, name) VALUES (?, ?, ?)");
+                            $req2->execute([intval($id), intval($id), $username]);
                             self::login();
                         }
                     }

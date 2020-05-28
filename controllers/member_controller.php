@@ -15,7 +15,7 @@ class MemberController {
     public function register() {
         if (!isset($_SESSION['user'])) {
             Member::register();
-            return call('member', 'account');
+            return call('pages', 'home');
         } else {
             return call('pages', 'home');
         }

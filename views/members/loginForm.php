@@ -1,4 +1,9 @@
-<?php $security= Member::security(); ?>
+<?php 
+
+
+
+
+$security= Member::security(); ?>
 <div class='overall' id='overall'>
     <div class="loginFormContainer" id="container">
         <div class="form-container sign-up-container">
@@ -24,6 +29,7 @@
         <div class="form-group form-container sign-in-container ">
             <form action="?controller=member&action=login" method="POST">
                 <h1>Sign in</h1>
+                <input type='hidden' name='login' value="true">
                 <input type="text" name="userName" placeholder="Username" required/>
                 <input type="password" name="password" placeholder="Password" required />
                 <a href="#">Forgot your password?</a>

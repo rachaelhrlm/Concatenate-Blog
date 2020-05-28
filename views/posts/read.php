@@ -228,7 +228,7 @@ if (isset($_SESSION['user'])) {
                         <input type="author" name="author" class="form-control" id="author" value="<?php echo $name ?>" disabled>
                     </div>
                     <div class='form-row'>
-                        <textarea name='message' class='form-control commentAreas' form="form-comment">Comment</textarea>
+                        <textarea name='message' class='form-control commentAreas' form="form-comment" placeholder="Comment"></textarea>
                     </div>
                     <div class='form-row justify-content-end'>
                         <input type="submit" value='Submit Comment' class='btn btn-primary'>
