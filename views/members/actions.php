@@ -26,7 +26,7 @@
                             }
                         }
                         ?>
-                    </select><button type="submit" class="btn btn-primary">Edit</button>
+                    </select><button type="submit" class="btn btn-outline-secondary">Edit</button>
                 </form>
 
 
@@ -45,7 +45,7 @@
                             }
                         }
                         ?>
-                    </select><button type="submit" class="btn btn-primary">Delete</button>
+                    </select><button type="submit" class="btn btn-outline-secondary">Delete</button>
                 </form>
 
 
@@ -63,7 +63,7 @@
                             }
                         }
                         ?>
-                    </select><button type="submit" class="btn btn-primary">Restore</button>
+                    </select><button type="submit" class="btn btn-outline-secondary">Restore</button>
                 </form>
             </div>
 
@@ -108,7 +108,7 @@
                                 }
                             }
                             ?>
-                        </select><button type="submit" class="btn btn-primary">Set</button>
+                        </select><button type="submit" class="btn btn-outline-secondary">Set</button>
                     </form>
                 </div>
                 <!--Second Featured Post-->
@@ -133,7 +133,7 @@
                                 }
                             }
                             ?>
-                        </select><button type="submit" class="btn btn-primary">Set</button>
+                        </select><button type="submit" class="btn btn-outline-secondary">Set</button>
                     </form>
                 </div>
                 <!--Third Featured Post-->
@@ -158,7 +158,7 @@
                                 }
                             }
                             ?>
-                        </select><button type="submit" class="btn btn-primary">Set</button>
+                        </select><button type="submit" class="btn btn-outline-secondary">Set</button>
                     </form>
                 </div>
 
@@ -184,7 +184,7 @@
                                     <?php
                                 }
                             }
-                            ?></select><button type="submit" class="btn btn-primary">Set</button>
+                            ?></select><button type="submit" class="btn btn-outline-secondary">Set</button>
 
                     </form>
                 </div>
@@ -208,7 +208,7 @@
                                     <?php
                                 }
                             }
-                            ?></select><button type="submit" class="btn btn-primary">Set</button>
+                            ?></select><button type="submit" class="btn btn-outline-secondary">Set</button>
 
                     </form>
                 </div>
@@ -234,7 +234,7 @@
                                     <?php
                                 }
                             }
-                            ?></select><button type="submit" class="btn btn-primary">Set</button>
+                            ?></select><button type="submit" class="btn btn-outline-secondary">Set</button>
 
                     </form>
                 </div>
@@ -261,7 +261,7 @@
                                     <?php
                                 }
                             }
-                            ?></select><button type="submit" class="btn btn-primary">Set</button>
+                            ?></select><button type="submit" class="btn btn-outline-secondary">Set</button>
 
                     </form>
                 </div>

@@ -31,7 +31,7 @@ session_start();
         </div>
 
         <!--divider-->
-        <hr>
+<!--        <hr>-->
 
 
         <!--Navbar Switch-->
@@ -74,7 +74,7 @@ session_start();
                                 </div>
                             </div>
                             <input type="hidden" name='login' value="true">
-                            <button type = 'submit' class="btn btn-primary" >Log In</button>
+                            <button type = 'submit' class="btn btn-outline-secondary" >Log In</button>
                         </form>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ session_start();
 
 
         <?php require_once 'views/members/loginForm.php'; ?>
-
+        <div class="spacer"></div>
 
         <!--Content-->
         <?php require_once('routes.php'); ?>

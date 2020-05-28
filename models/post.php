@@ -130,6 +130,16 @@ class Post {
         }
         return $list;
     }
+//    method for selecting all posts
+    public static function searchLatest() {
+        $list = [];
+        $db = Db::getInstance();
+        $req = $db->query('SELECT * FROM postInfo WHERE visibility = 1 ORDER BY postID DESC LIMIT 3');
+        foreach ($req->fetchAll() as $post) {
+            $list[] = new Post($post['postID'], $post['memberID'], $post['categoryID'], $post['title'], $post['author'], $post['about'], $post['category'], $post['datePosted'], $post['dateUpdated'], $post['excerpt'], $post['content']);
+        }
+        return $list;
+    }
 
 //    method for selecting post via Ajax where keyword matches anything
     public static function searchAny($keyword) {

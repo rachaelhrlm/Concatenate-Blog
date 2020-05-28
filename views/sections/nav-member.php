@@ -1,5 +1,5 @@
 <div class="container-fluid customnav">
-    <div class="row justify-content-end align-content-middle">
+    <div class="row justify-content-center">
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link active" href='?controller=pages&action=home'> Home</a>

@@ -14,47 +14,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 ?>
 
 
-<!--if user is logged in and accessLevelID is admin or member logged in is the post author-->
-<?php
-if (isset($_SESSION['user'])) {
-    ?>
-    <div class="spacer"></div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class='col-md-1 text-left'>
-                <?php 
-                $faved= null;
-                foreach($favs as $fav) {
-                    if($_GET['id'] === $fav['postID']) {
-                        $faved= true;
-                        break;
-                    }
-                } 
-                if (isset($faved)) { ?>
-                <a href="?controller=member&action=unfav&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-heart fa-3x icon"></i></a>
-                
-                <?php } else { ?>
-                <a href="?controller=member&action=fav&id=<?php echo $post->getPostID(); ?>"><i class="far fa-heart fa-3x icon"></i></a>
-                <?php } ?>
-            </div>
-            <div class="col-md-8 text-right">
-            <?php 
-        if(($_SESSION['user']->getAccessLevelID() === '1' ) || ($post->getMemberID() === $_SESSION['user']->getMemberID())) {?>
 
-            
-                <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
-                <a href="?controller=post&action=create"><i class="fas fa-plus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
-                <a href="?controller=post&action=delete&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
-                
-            
-        <?php } ?>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class='col-md-9'><hr></div>
-            </div>
-    </div>
-<?php } ?>
 
 
 
@@ -87,6 +47,66 @@ if (isset($_SESSION['user'])) {
 
 
 
+
+
+
+
+
+
+    <!--POST ACTIONS-->
+    <!--if user is logged in and accessLevelID is admin or member logged in is the post author-->
+    <?php
+    if (isset($_SESSION['user'])) {
+        ?>
+        <div class="spacer"></div>
+        <div class="container ">
+            <div class="row justify-content-center">
+                <div class=" col-md-9 postActions">
+                    <div class="row">
+                        <div class='col-md-1 text-left'>
+                            <?php
+                            $faved = null;
+                            foreach ($favs as $fav) {
+                                if ($_GET['id'] === $fav['postID']) {
+                                    $faved = true;
+                                    break;
+                                }
+                            }
+                            if (isset($faved)) {
+                                ?>
+                                <a href="?controller=member&action=unfav&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-heart fa-3x icon"></i></a>
+
+                            <?php } else { ?>
+                                <a href="?controller=member&action=fav&id=<?php echo $post->getPostID(); ?>"><i class="far fa-heart fa-3x icon"></i></a>
+    <?php } ?>
+                        </div>
+                        <div class="col-md-11 text-right">
+                            <?php if (($_SESSION['user']->getAccessLevelID() === '1' ) || ($post->getMemberID() === $_SESSION['user']->getMemberID())) { ?>
+
+
+                                <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
+                                <a href="?controller=post&action=create"><i class="fas fa-plus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
+                                <a href="?controller=post&action=delete&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
+
+
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+
+
+
+
+
+
+
+
+
+
+    <!--Blog Image-->
     <div class="row justify-content-center">
         <div class="col-md-9 text-center">
             <img src="<?php echo $img ?>?<?= Date('U') ?>" class="blogimg">
@@ -231,11 +251,11 @@ if (isset($_SESSION['user'])) {
                         <textarea name='message' class='form-control commentAreas' form="form-comment" placeholder="Comment"></textarea>
                     </div>
                     <div class='form-row justify-content-end'>
-                        <input type="submit" value='Submit Comment' class='btn btn-primary'>
+                        <input type="submit" value='Submit Comment' class='btn btn-outline-secondary'>
                     </div>
-            
-            </form>
-                </div>
+
+                </form>
+            </div>
         </div>
     </div>
     </section>
@@ -246,7 +266,7 @@ if (isset($_SESSION['user'])) {
                 <h2>New Comment:</h2>
                 Please log in to comment.
                 <div class='form-row justify-content-end'>
-                    <button class="btn btn-primary" onclick="loginForm('overall')">Login </button>
+                    <button class="btn btn-outline-secondary read-btn" onclick="loginForm('overall')">Login </button>
                 </div>
             </div>
         </div>

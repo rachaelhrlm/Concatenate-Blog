@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
 
 /*default override*/
 a, a:hover {
@@ -24,7 +25,20 @@ hr {
     background: #ccc;
 }
 h1, h2, h3, h4, h5 {
-    font-family: 'Varela Round', sans-serif;
+    font-family: 'Amatic SC', cursive;
+    color: #f27166;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+h2 {
+    color: #fff;
+    background-color:  #f27166;
+    padding: 10px;
+    font-weight: 400;
+    margin: 0;
+}
+h5 {
+    color: #86a6a6;
 }
 
 
@@ -53,13 +67,13 @@ section{
 
 .icon  {
     margin: 5px;
-    color: #333 !important;
+    color: #86a6a6 !important;
     cursor: pointer;
 }
 
 .icon:hover {
     margin: 5px;
-    color: #23a6d5 !important;
+    color: #082A40 !important;
     transition:color .5s;
 }
 .vpad {
@@ -75,7 +89,9 @@ section{
 
 }
 .nav-link {
-    font-family: 'Varela Round', sans-serif;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 700;
+    font-size: 2rem;
     color: black;
     padding: 5px;
     margin: 10px;
@@ -83,14 +99,28 @@ section{
     transition:color .2s, background .5s;
 }
 .nav-link:hover {
-    background-color: #23a6d5;
-    color: white;
+    color: #86a6a6;
+}
+
+
+
+/*Post actions*/
+.postActions {
+    /*background-color: #f27166;*/
+    color: #fff !important;
+    padding: 20px 0;
+}
+.postActions .icon:hover {
+    color: #f27166;
 }
 
 
 
 
 /*account page styling*/
+.active.nav-links{
+    background-color: #f27166;
+}
 .tab-container{
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -127,16 +157,23 @@ section{
 
 
 /*animated section styling*/
+.animated h1 {
+    color: #fff;
+}
+.animated .smalltext {
+    color: #082A40 !important;
+}
 .animated {
     overflow:hidden;
     height: 400px;
     width: 100%;
     color: #fff;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 600% 600%;
-    -webkit-animation: Gradient 60s ease infinite;
-    -moz-animation: Gradient 60s ease infinite;
-    animation: Gradient 60s ease infinite;
+    background-color: #f27166;
+    /*    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 600% 600%;
+        -webkit-animation: Gradient 60s ease infinite;
+        -moz-animation: Gradient 60s ease infinite;
+        animation: Gradient 60s ease infinite;*/
 }
 .animatedsmall {
     overflow:hidden;
@@ -174,6 +211,20 @@ section{
 
 
 /*search results: card styling*/
+.latestcard {
+    margin: 10px;
+    cursor: pointer;
+    transition: transform .5s;
+    background-color: #082A40;
+    color: #d9d5c5;
+}
+.latestcard:hover {
+    transform: scale(1.1,1.1);
+}
+
+.customcard h5, .latestcard h5{
+    color: #f27166;
+}
 .customcard {
     margin: 10px;
     cursor: pointer;
@@ -184,24 +235,25 @@ section{
 }
 .customcard button {
     font-size: 11px;
-    color: #999;
+    color: #f27166;
     padding: 3px;
-    border: 1px solid #999;
+    border: 1px solid #f27166 ;
     border-radius: 3px;
     background: none;
 }
-.smalltext{
+.smalltext, .text-muted{
     font-size: 11px;
+    color: #d9d5c5 !important;
 }
 .card {
     border-color: #ccc;
 }
 
 
+
 /*Blog Post Styling (read.php)*/
 .blogimg {
     width: 100%;
-    padding: 10px 0;
 }
 
 .authorSnippet {
@@ -221,7 +273,7 @@ section{
     display: block;
 }
 .excerpt {
-    background-color: #333;
+    background-color: #082A40;
     padding: 10px;
     margin-top: -10px;
     color: white;
@@ -268,10 +320,10 @@ section{
 
 /*featured post styling*/
 .carousel-control-next, .carousel-control-prev{
-    color: #333 !important;
+    color: #082A40 !important;
 }
 .carousel-control-next:hover, .carousel-control-prev:hover{
-    color: #23a6d5 !important;
+    color: #f27166 !important;
 }
 .featured {
     overflow: hidden;
@@ -288,23 +340,44 @@ section{
     .featured-btn{
         right: 0;
     }
+    .featured-img {
+        width: 100%;
+        margin: 0 auto;
+    }
     .carousel-control-next, .carousel-control-prev, .carousel-control-next:hover, .carousel-control-prev:hover{
-    margin-top: -25rem;
-}
+        margin-top: -25rem;
+    }
 }
 @media only screen and (min-width: 768px){
     .featured-text{
         height: 400px;
         position: relative;
     } 
+    .featured-img {
+    height: 100%;
+    margin: 0 auto;
+}
     .featured-btn{
         position: absolute;
-        right: 0;
+        right: 10px ;
         bottom: 0;
     }
 }
 
-.featured-img {
-    height: 100%;
-    margin: 0 auto;
+
+
+
+.latestPosts {
+    padding: 50px;
+}
+
+
+.small-text {
+    background-color: #082A40;
+    font-size: 11px;
+    color: #d9d5c5;
+    padding: 3px 10px;
+}
+.feature-excerpt{
+    padding: 10px;
 }

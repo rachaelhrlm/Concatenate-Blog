@@ -8,7 +8,7 @@ class PagesController {
         [$fpost1 = Post::searchID(intval(Member::searchFeaturedPosts(1)['postID'])),
         $fpost2 = Post::searchID(intval(Member::searchFeaturedPosts(2)['postID'])),
         $fpost3 = Post::searchID(intval(Member::searchFeaturedPosts(3)['postID']))];
-
+        $latest = Post::searchLatest();
         require_once('views/pages/home.php');
     }
 
