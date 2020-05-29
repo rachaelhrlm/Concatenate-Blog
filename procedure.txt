@@ -1,0 +1,22 @@
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `forgetpassword` (IN `keyword` VARCHAR(100))  BEGIN
+
+SELECT security.memberID, securityquestions.securityquestion, security.securityanswer FROM security
+INNER JOIN securityquestions ON security.securityID=securityquestions.securityID
+INNER JOIN member ON member.memberID=security.memberID
+WHERE userName LIKE CONCAT('%',keyword,'%')
+ OR email LIKE CONCAT('%',keyword,'%') ;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `login` (IN `keyword` VARCHAR(100))  NO SQL
+BEGIN
+SELECT userName,email, passwords,accessLevelID FROM member
+WHERE userName LIKE CONCAT('%',keyword,'%')
+ OR email LIKE CONCAT('%',keyword,'%') ;
+END$$
+
+DELIMITER ;
