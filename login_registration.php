@@ -21,21 +21,21 @@ require_once 'connection.php';
 
 
         if (isset($_POST['login'])) {
-            $login_username = $_POST['login_username'];
-            //The password is encrypted
+            $keyword = $_POST['keyword'];
             $login_password = $_POST['login_password'];
-            $stmt = $db->prepare("SELECT userName, passwords,accessLevelID FROM member WHERE userName =:username");
-            $stmt->bindParam(":username", $login_username);
-            $stmt->execute();
+            $stmt = $db->prepare("call login(?)");
+            $stmt->execute([$keyword]);
             $count = $stmt->rowCount();
             $data = $stmt->fetchall();
             foreach ($data as $row) {
                 $hashed_password = $row['passwords'];
                 $access = $row['accessLevelID'];
+                $username=$row['userName'];
+                $email=$row['email'];
             }
             if ($count > 0) {
                 if (password_verify($login_password, $hashed_password)) {
-                    $_SESSION["username"] = $login_username;
+                    $_SESSION["username"] = $username;
                     $_SESSION["accessid"] = $access;
                     $_SESSION['start'] = time(); // Taking now logged in time.
                     // Ending a session in 15 minutes from the starting time.
@@ -74,7 +74,7 @@ require_once 'connection.php';
                     $number = preg_match('@[0-9]@', $_POST['password']);
                     $specialChars = preg_match('@[^\w]@', $_POST['password']);
 
-                    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+                    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($_POST['password']) < 8) {
                         echo 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
                     } else {
 
@@ -124,8 +124,8 @@ require_once 'connection.php';
         <h3>Log In Here</h3>
 
         <form action = "" method = "POST">
-            Username:
-            <input type = "text" name = "login_username"required>
+            Username or email:
+            <input type = "text" name = "keyword"required>
             Password:
             <input type = "password" name = "login_password"required>
             <button type = 'submit' name = 'login'>Log In</button>

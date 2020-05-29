@@ -25,9 +25,6 @@ require_once ('connection.php');
         foreach ($data as $row) {
         $hashed_password = $row['passwords'];
         }
-
-
-
         if ($count > 0) {
         if(password_verify($password, $hashed_password)) {
         ?>
