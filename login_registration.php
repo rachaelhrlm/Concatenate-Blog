@@ -73,14 +73,13 @@ require_once 'connection.php';
                         $securityid = intval($_POST['securityID']);
                         $securityanswer = $_POST['securityanswer'];
                         $req2 = $db->prepare("INSERT INTO security (memberID, securityID, securityanswer) VALUES (?, ?, ?)");
-
-
                         $req2->execute([intval($id), $securityid, $securityanswer]);
                         $_SESSION["username"] = $username;
                         $_SESSION["accessid"] = 3;
                         $_SESSION['start'] = time(); // Taking now logged in time.
                         // Ending a session in 15 minutes from the starting time.
-                        $_SESSION['expire'] = $_SESSION['start'] + (15 * 60);
+
+
                         header("location: dashboard.php");
                         echo "Hello " . $_SESSION["username"] . ". Registration Successful";
                     } else {
