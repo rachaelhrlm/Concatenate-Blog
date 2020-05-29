@@ -14,155 +14,161 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 ?>
 <div class="container-fluid" id="post">
     <div class="container">
-    <div class="row justify-content-center">
-        <div id="postContainer" class="col-md-9">
-            <!--if user is logged in and accessLevelID is admin or member logged in is the post author-->
-            <?php
-            if (isset($_SESSION['user'])) {
-                ?>
-                <div class="row postNav">
-                            <div class='col-md-2 text-left'>
-                                <?php
-                                $faved = null;
-                                foreach ($favs as $fav) {
-                                    if ($_GET['id'] === $fav['postID']) {
-                                        $faved = true;
-                                        break;
-                                    }
+        <div class="row justify-content-center">
+            <div id="postContainer" class="col-md-9">
+                <!--if user is logged in and accessLevelID is admin or member logged in is the post author-->
+                <?php
+                if (isset($_SESSION['user'])) {
+                    ?>
+                    <div class="row postNav">
+                        <div class='col-md-2 text-left'>
+                            <?php
+                            $faved = null;
+                            foreach ($favs as $fav) {
+                                if ($_GET['id'] === $fav['postID']) {
+                                    $faved = true;
+                                    break;
                                 }
-                                if (isset($faved)) {
-                                    ?>
-                                    <a href="?controller=member&action=unfav&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-heart fa-3x icon"></i></a>
+                            }
+                            if (isset($faved)) {
+                                ?>
+                                <a href="?controller=member&action=unfav&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-heart fa-3x icon"></i></a>
 
-                                <?php } else { ?>
-                                    <a href="?controller=member&action=fav&id=<?php echo $post->getPostID(); ?>"><i class="far fa-heart fa-3x icon"></i></a>
-    <?php } ?>
-                            </div>
-                            <div class="col-md-10 text-right">
-                                <?php if (($_SESSION['user']->getAccessLevelID() === '1' ) || ($post->getMemberID() === $_SESSION['user']->getMemberID())) { ?>
-
-
-                                    <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
-                                    <a href="?controller=post&action=create"><i class="fas fa-plus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
-                                    <a href="?controller=post&action=delete&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
+                            <?php } else { ?>
+                                <a href="?controller=member&action=fav&id=<?php echo $post->getPostID(); ?>"><i class="far fa-heart fa-3x icon"></i></a>
+                            <?php } ?>
+                        </div>
+                        <div class="col-md-10 text-right">
+                            <?php if (($_SESSION['user']->getAccessLevelID() === '1' ) || ($post->getMemberID() === $_SESSION['user']->getMemberID())) { ?>
 
 
-                                <?php } ?>
-                           
+                                <a href="?controller=post&action=edit&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-pen-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
+                                <a href="?controller=post&action=create"><i class="fas fa-plus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="New Post"></i></a>
+                                <a href="?controller=post&action=delete&id=<?php echo $post->getPostID(); ?>"><i class="fas fa-minus-square fa-3x icon" data-toggle="tooltip" data-placement="top" title="Delete Post"></i></a>
+
+
+                            <?php } ?>
+
+                        </div>
+
                     </div>
-                    
-                </div>
-            <div class="row justify-content-center">
+                    <div class="row justify-content-center">
                         <div class='col'><hr></div>
                     </div>
 
-            <?php } ?>
+                <?php } ?>
 
 
 
 
 
 
-            <!--Blog Content-->  
-            <div class ="row justify-content-center">
-                <div class="col title"> 
-                    <h1><?php echo ucwords(Post::censor($post->getTitle())) ?></h1>
+                <!--Blog Content-->  
+                <div class ="row justify-content-center">
+                    <div class="col title"> 
+                        <h1><?php echo ucwords(Post::censor($post->getTitle())) ?></h1>
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <small class="text-muted"><?php echo $post->getAuthor() . '&emsp; &emsp;' . $post->getDatePosted() . '&emsp; &emsp;' . $post->getCategory() ?></small>
-            </div>
-
-
-            <!--Add to Any Share Buttons-->
-<!--            <div class="row justify-content-center">
-                <div class="a2a_kit a2a_kit_size_32 a2a_default_style sharebtn">
-                    <a class="a2a_button_email"></a>
-                    <a class="a2a_button_print"></a>
-                    <a class="a2a_button_twitter"></a>
-                    <a class="a2a_button_linkedin"></a>
-                    <a class="a2a_button_facebook"></a>
-                    <a class="a2a_button_tumblr"></a>
+                <div class="row justify-content-center">
+                    <small class="text-muted"><?php echo $post->getAuthor() . '&emsp; &emsp;' . $post->getDatePosted() . '&emsp; &emsp;' . $post->getCategory() ?></small>
                 </div>
-            </div>-->
+
+
+                <!--Add to Any Share Buttons-->
+                <!--            <div class="row justify-content-center">
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style sharebtn">
+                                    <a class="a2a_button_email"></a>
+                                    <a class="a2a_button_print"></a>
+                                    <a class="a2a_button_twitter"></a>
+                                    <a class="a2a_button_linkedin"></a>
+                                    <a class="a2a_button_facebook"></a>
+                                    <a class="a2a_button_tumblr"></a>
+                                </div>
+                            </div>-->
 
 
 
-            <div class="row justify-content-center">
-                <div class="col text-center">
-                    <img src="<?php echo $img ?>?<?= Date('U') ?>" class="blogimg">
+                <div class="row justify-content-center">
+                    <div class="col text-center">
+                        <img src="<?php echo $img ?>?<?= Date('U') ?>" class="blogimg">
+                    </div>
                 </div>
-            </div>
 
 
-            <div class="row justify-content-center">
-                <div class="post">
-                    <h2 class="excerpt"><?php echo ucfirst(Post::censor($post->getExcerpt())) ?></h2>
-                    <div class="spacer"></div>
-                    <?php
-                    
-                    $content = htmlspecialchars_decode($post->getContent());
+                <div class="row justify-content-center">
+                    <div class="post">
+                        <h2 class="excerpt"><?php echo Post::censor($post->getExcerpt()) ?></h2>
+                        <div class="postcontent">
 
-                    echo $content
-                    ?>
+                            <?php
+                            $content = htmlspecialchars_decode($post->getContent());
+
+                            echo $content
+                            ?></div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+        <!--Author Snippet-->
+        <section class="content" id="author">
+            <div class="row justify-content-center">
+                <i class="far fa-id-card fa-3x icon"></i><h1>About the author</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-9 authorSnippet">
+
+                    <div class="row justify-content-around">
+                        <div class="col-md-3">
+                            <img src="<?php echo $pic ?>" class="profilePic">
+                            <p><?php echo $post->getAuthor() ?></p>
+                        </div>
+                        <div class="col-md-6 text-left">
+
+                            <p><?php echo $post->getAbout() ?></p>
+                            <hr>
+
+
+                            <?php
+                            foreach ($socials as $social) {
+                                if ($social['socialID'] === '1') {
+                                    ?>
+                                    <a href="<?php echo $social['url'] ?>"> <i class="fab fa-twitter fa-2x icon"></i></a>
+                                    <?php
+                                }
+                                if ($social['socialID'] === '2') {
+                                    ?>
+                                    <a href="<?php echo $social['url'] ?>"> <i class="fab fa-facebook fa-2x icon"></i></a>
+                                    <?php
+                                }
+                                if ($social['socialID'] === '3') {
+                                    ?>
+                                    <a href="<?php echo $social['url'] ?>"> <i class="fab fa-github fa-2x icon"></i>  </a> 
+                                    <?php
+                                }
+                                if ($social['socialID'] === '4') {
+                                    ?>
+                                    <a href="<?php echo $social['url'] ?>"> <i class="fab fa-instagram fa-2x icon"></i> </a>
+                                    <?php
+                                }
+                                if ($social['socialID'] === '5') {
+                                    ?>
+                                    <a href="<?php echo $social['url'] ?>"> <i class="fab fa-linkedin fa-2x icon"></i></a>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+        </section>
     </div>
-
-
-
-
-
-
-<!--Author Snippet-->
-<section class="content">
-    <div class="row justify-content-center">
-        <div class="col-md-9 authorSnippet">
-            <div class="row justify-content-around">
-                <div class="col-md-3">
-                    <img src="<?php echo $pic ?>" class="profilePic">
-                    <p><?php echo $post->getAuthor() ?></p>
-                </div>
-                <div class="col-md-6 text-left">
-                    <h2>About the author:</h2>
-                    <p><?php echo $post->getAbout() ?></p>
-
-                    <?php
-                    foreach ($socials as $social) {
-                        if ($social['socialID'] === '1') {
-                            ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-twitter fa-2x icon"></i></a>
-                            <?php
-                        }
-                        if ($social['socialID'] === '2') {
-                            ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-facebook fa-2x icon"></i></a>
-                            <?php
-                        }
-                        if ($social['socialID'] === '3') {
-                            ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-github fa-2x icon"></i>  </a> 
-                            <?php
-                        }
-                        if ($social['socialID'] === '4') {
-                            ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-instagram fa-2x icon"></i> </a>
-                            <?php
-                        }
-                        if ($social['socialID'] === '5') {
-                            ?>
-                            <a href="<?php echo $social['url'] ?>"> <i class="fab fa-linkedin fa-2x icon"></i></a>
-                            <?php
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
-        </div>
-</section>
 </div>
-    </div>
 
 
 
@@ -172,8 +178,8 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
     <section class="container">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <div class="row">
-                    <h2>Comments:</h2>
+                <div class="row justify-content-center">
+                    <i class="far fa-comments fa-3x icon"></i><h1>Comments</h1>
                 </div>
 
                 <?php
@@ -194,7 +200,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                             <div class="col-md-1 commentPic">
                                 <img src='<?php echo $propic ?>' class='propic'> 
                             </div>
-                            <div class="col-md-4 commentMessage">
+                            <div class="col-md-9 commentMessage">
                                 <div class="smalltext"><?php echo $name . "&emsp;" . $comment['dateCommented'] ?></div>
                                 <p><?php echo Post::censor($comment['message']) ?></p>
                             </div></div><?php
@@ -222,8 +228,10 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
         ?>
         <section class="container">
             <div class="row justify-content-center">
+            <i class="far fa-comment-dots fa-3x icon"></i><h1>New Comment</h1>
+        </div>
+            <div class="row justify-content-center">
                 <div class="col-md-9">
-                    <h2>New Comment:</h2>
                     <form action="" method="GET"  id="form-comment">
                         <input type="hidden" name="controller" value="post">
                         <input type="hidden" name="action" value="createComment">
@@ -247,8 +255,11 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 <?php } else { ?>
     <section class="container">
         <div class="row justify-content-center">
+            <i class="far fa-comment-dots fa-3x icon"></i><h1>New Comment</h1>
+        </div>
+        <div class="row justify-content-center">
+            
             <div class="col-md-9 newComment">
-                <h2>New Comment:</h2>
                 Please log in to comment.
                 <div class='form-row justify-content-end'>
                     <button class="btn fourth" onclick="loginForm('overall')">Login </button>
@@ -266,7 +277,8 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 
 
 <!--Previous and Next Post-->
-<section class="container">
+<section class="container-fluid" id="prevnext">
+    <div class="container">
     <div class="row justify-content-around">
         <div class="col-md-4">
             <?php
@@ -281,13 +293,14 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                 $previmg = "views/images/{$prevID}.jpeg";
                 ?>
                 <div class="row justify-content-center">
-                    <h3>Previous Post</h3>
+                    <i class="far fa-hand-point-left fa-2x icon" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $prev->getPostID(); ?>';"></i><h2>Previous Post</h2>
                 </div>
                 <div class="card customcard" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $prev->getPostID(); ?>';" style="width: 20rem;">
                     <img src="<?php echo $previmg ?>"  class="card-img-top">
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted"><?php echo $prev->getDatePosted() . '&emsp; &emsp;' . $prev->getAuthor() ?></small></p>
                         <h5 class="card-title"><?php echo ucwords(Post::censor($prev->getTitle())) ?></h5>
+                        <hr>
                         <p class="card-text"><?php echo ucfirst(Post::censor($prev->getExcerpt())) ?></p>
                         <button><?php echo $prev->getCategory() ?></button>
                     </div>
@@ -309,13 +322,14 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                 $nextimg = "views/images/{$nextID}.jpeg";
                 ?>
                 <div class="row justify-content-center">
-                    <h3>Next Post</h3>
+                    <h2>Next Post</h2><i class="far fa-hand-point-right fa-2x icon" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $next->getPostID(); ?>';"></i>
                 </div>
                 <div class="card customcard" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $next->getPostID(); ?>';" style="width: 20rem;">
                     <img src="<?php echo $nextimg ?>"  class="card-img-top" >
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted"><?php echo $next->getDatePosted() . '&emsp; &emsp;' . $next->getAuthor() ?></small></p>
                         <h5 class="card-title"><?php echo ucwords(Post::censor($next->getTitle())) ?></h5>
+                        <hr>
                         <p class="card-text"><?php echo ucfirst(Post::censor($next->getExcerpt())) ?></p>
                         <button><?php echo $next->getCategory() ?></button>
                     </div>
@@ -324,6 +338,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
             }
             ?>
         </div>
+    </div>
     </div>
 </section>
 

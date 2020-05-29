@@ -243,10 +243,11 @@ class Post {
                         throw new LowResolutionException();
                     } else if ($_FILES[self::InputKey]['error'] > 0) {
                         throw new Exception();
-                    } else {
-                        Post::uploadFile($id);
-                        $req->execute([$id, $title, $categoryID, $excerpt, $content]);
                     }
+                } else {
+
+                    $req->execute([$id, $title, $categoryID, $excerpt, $content]);
+                    Post::uploadFile($id);
                 }
             } catch (WordingTooLongException $e) {
                 ?> <div class='alert alert-primary' role='alert'>

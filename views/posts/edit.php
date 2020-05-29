@@ -6,7 +6,7 @@
             <h1>Editing Post #<?php echo $post->getPostID() ?></h1>
         </div>
         <div class="col-md-2 text-right">
-            <a href="?controller=member&action=account#actions"><i class="far fa-times-circle fa-3x icon" data-toggle="tooltip" data-placement="top" title="Cancel Edit"></i></a>
+            <a href="<?php echo (isset($_GET['id'])) ?  "?controller=post&action=searchID&id={$_GET['id']}" :  "?controller=member&action=account#actions"; ?>"><i class="far fa-times-circle fa-3x icon" data-toggle="tooltip" data-placement="top" title="Cancel Edit"></i></a>
         </div>
     </div>    
     <div class=" row justify-content-center">

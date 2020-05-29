@@ -4,7 +4,7 @@
     <div class="tab-container">
 
         <div class="row justify-content-center">
-            <h2>Favourite Posts: </h2>
+            <i class="far fa-heart fa-3x icon"></i><h1>Favourite Posts </h1>
         </div>
         <div class="spacer"></div>
         <div class="row justify-content-center">

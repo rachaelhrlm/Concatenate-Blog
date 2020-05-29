@@ -24,12 +24,8 @@ session_start();
 
 
     <body>
-        <!--        Logo Bar
-                <div class="container-fluid logo">
-                    <div class="row justify-content-center">
-                        <img src="views/images/standard/logo.png" height="80px">
-                    </div>
-                </div>-->
+        <i class="fas fa-chevron-circle-up fa-3x icon" onclick="topFunction()" id="scrollup"></i>
+
 
 
 
@@ -144,7 +140,6 @@ session_start();
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
             });
-
 //            Enable Bootstrap ToolTip
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
@@ -159,6 +154,28 @@ session_start();
                 var nextSibling = e.target.nextElementSibling
                 nextSibling.innerText = fileName
             })
+
+
+
+            var scrollup = document.getElementById("scrollup");
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    scrollup.style.display = "block";
+                } else {
+                    scrollup.style.display = "none";
+                }
+            }
+
+
+
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
 
 
         </script>
