@@ -2,34 +2,49 @@
 <div class="tab-pane fade <?php echo (isset($_GET['target']) && $_GET['target'] == 'login') ? "active show" : ""; ?>" id="loginDetails" role="tabpanel" aria-labelledby="loginDetails-tab">
     <div class="tab-container">
         <div class="row justify-content-center">
-            <h2>Email:</h2>
+            <i class="far fa-envelope fa-3x icon"></i><h1>Email</h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-4 vpad text-center"><?php echo $_SESSION['user']->getEmail() ?></div>
             <div class="col-md-4 text-center"><button class="btn fourth" onclick="showHide('email')">Change</button></div>
         </div>
 
-        <div class="spacer"></div>
 
-        <div class="row justify-content-center">
-            <?php if (empty($_POST['changeemail']) && !isset($_SESSION['verification'])) { ?>
-                <form action="?controller=member&action=changeEmail&target=login" method="POST" class="col-md-7" id="email">
-                    Username: <input type='text' name='username' value="<?php echo $_SESSION['user']->getUserName() ?>" class="form-control" disabled="">                 
-                    Password: <input type='password' name='password' class="form-control" required>                 
+
+        <?php if (empty($_POST['changeemail']) && !isset($_SESSION['verification'])) { ?>
+            <div class="row justify-content-center" id="email">
+                <form action="?controller=member&action=changeEmail&target=login" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type='text' name='username' value="<?php echo $_SESSION['user']->getUserName() ?>" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type='password' name='password' class="form-control" required> 
+                        </div>
+                    </div>
                     <input type="hidden" name="confirmLogin" value="true">        
-                    <div class="smalltext">Please validate your session</div>        
-                    <button class="btn fourth" type='submit'>Submit</button>
+                    <div class="smalltext">Please validate your session</div>   
+                    <div class="form-row justify-content-end">
+                        <button class="btn fourth" type='submit'>Submit</button>
+                    </div>
                 </form>
-            <?php } else if (isset($_SESSION['verification'])) { ?>
-                <form action="?controller=member&action=changeEmail&target=login" method="POST" class="col-md-7">
+            </div>
+        <?php } else if (isset($_SESSION['verification'])) { ?>
+            <div class="row justify-content-center">
+                <form action="?controller=member&action=changeEmail&target=login" method="POST">
                     <input type="hidden" name="changeEmail" value="true">
                     <input class="form-control" type="email" name="newemail" value="<?php echo $_SESSION['user']->getEmail(); ?> ">
                     <div class="form-row justify-content-end">
                         <button type="submit" class="btn fourth">Update</button>
                     </div>
                 </form>
-            <?php } ?>
-        </div>
+            </div>
+        <?php } ?>
+
 
         <div class="spacer"></div>
         <hr>
@@ -37,7 +52,7 @@
 
 
         <div class="row justify-content-center">
-            <h2>Password:</h2>
+            <i class="fas fa-user-secret fa-3x icon"></i><h1>Password:</h1>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-4 vpad text-center"> ( -- It's a secret! -- ) </div>
@@ -47,17 +62,31 @@
         <div class="spacer"></div>
 
 
-        <div class="row justify-content-center">
+        
             <?php if (empty($_POST['changepassword']) && !isset($_SESSION['verification'])) { ?>
-                <form action="?controller=member&action=changePassword&target=login" method="POST" class="col-md-7" id="passwords">
-                    Username: <input type='text' name='username' value="<?php echo $_SESSION['user']->getUserName() ?>" class="form-control" disabled="">                 
-                    Password: <input type='password' name='password' class="form-control" required>                 
+        <div class="row justify-content-center" id="passwords">
+                <form action="?controller=member&action=changePassword&target=login" method="POST"  >
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type='text' name='username' value="<?php echo $_SESSION['user']->getUserName() ?>" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type='password' name='password' class="form-control" required> 
+                        </div>
+                    </div>
                     <input type="hidden" name="confirmLogin" value="true">        
-                    <input type="hidden" name="changePassword" value="true">
-                    <div class="smalltext">Please validate your session</div>        
-                    <button class="btn fourth" type='submit'>Submit</button>
+                    <div class="smalltext">Please validate your session</div>   
+                    <div class="form-row justify-content-end">
+                        <button class="btn fourth" type='submit'>Submit</button>
+                    </div>
                 </form>
+            </div>
             <?php } else if (isset($_SESSION['verification']) && isset($_POST['changePassword'])) { ?>
+        <div class="row justify-content-center">
                 <form action="?controller=member&action=changePassword&target=login" method="POST" class="col-md-7">
                     <input type="hidden" name="changePassword" value="true">
                     New Password:  <input class="form-control" type="password" name="newpassword">
@@ -66,8 +95,9 @@
                         <button type="submit" class="btn fourth">Update</button>
                     </div>
                 </form>
-            <?php } ?>
         </div>
+            <?php } ?>
+        
 
 
     </div>

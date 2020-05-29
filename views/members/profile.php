@@ -5,7 +5,7 @@
 
         <!--Update Name Form-->
         <div class="row justify-content-center">
-            <h2>Update Name: </h2>
+            <i class="fas fa-user-circle fa-3x icon"></i><h1>Name </h1>
         </div>
         <div class="row justify-content-center">
             <form action="" method="GET" class="col-md-7">
@@ -25,7 +25,7 @@
 
         <!--Update About Me Form-->
         <div class="row justify-content-center">
-            <h2>Update About Me: </h2>
+            <i class="far fa-id-card fa-3x icon"></i><h1>About Me </h1>
         </div>
         <div class="row justify-content-center">
             <form action="" method="GET" id="aboutMe" class="col-md-7">
@@ -47,7 +47,7 @@
 
         <!--Update Profile Picture Form-->
         <div class="row justify-content-center">
-            <h2>Update Profile Picture: </h2>
+            <i class="fas fa-camera fa-3x icon"></i><h1>Profile Picture </h1>
         </div>
         <div class="row justify-content-center">
             <?php

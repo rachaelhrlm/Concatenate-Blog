@@ -16,7 +16,7 @@ session_start();
         <!--custom style sheet-->
 
         <link href="views/css/loginform.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="views/css/styles.css">
+        <link rel="stylesheet" href="views/css/styles.css" type="text/css">
         <link href="views/css/buttons.css" rel="stylesheet" type="text/css"/>
 
         <title>Concatenate</title>
