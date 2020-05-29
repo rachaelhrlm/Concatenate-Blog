@@ -20,10 +20,13 @@ ul {
 hr {
     position: relative;
     border: none;
+    margin: 0;
     height: 1px;
     background: #ccc;
 }
 h1, h2, h3, h4, h5 {
+    
+    text-transform: uppercase;
     font-family: 'Varela Round', sans-serif;
 }
 
@@ -51,43 +54,17 @@ section{
     margin: 5px;
 }
 
-.icon  {
-    margin: 5px;
-    color: #333 !important;
-    cursor: pointer;
-}
 
-.icon:hover {
-    margin: 5px;
-    color: #28a745 !important;
-    transition:color .5s;
-}
 .vpad {
-    padding: 10px;
-    margin: 0 5px;
+    margin: 2em 5px;
 }
 
 
 
 /*navigation styling*/
-.customnav {
-    padding-bottom: 10px;
 
-}
-.nav-link {
-    font-family: 'Varela Round', sans-serif;
-    color: black;
-    padding: 5px;
-    margin: 10px;
-    border-radius: 10px;
-    transition:color .2s, background .5s;
-}
-.nav-link:hover {
-    background-color: #28a745;
-    color: white;
-}
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-     background-color: #28a745;
+     background-color: #f1c40f;
 }
 
 
@@ -131,14 +108,10 @@ section{
 /*animated section styling*/
 .animated {
     overflow:hidden;
-    height: 400px;
+    height: 300px;
     width: 100%;
-    color: #fff;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 600% 600%;
-    -webkit-animation: Gradient 60s ease infinite;
-    -moz-animation: Gradient 60s ease infinite;
-    animation: Gradient 60s ease infinite;
+    color: #333;
+    background-color: #efefef;
 }
 .animatedsmall {
     overflow:hidden;
@@ -170,7 +143,7 @@ section{
 .animated-container{
     /*border: 3px solid #fff;*/
     padding: 50px;
-    margin: 80px 0;
+    margin: 30px 0;
 }
 
 
@@ -186,9 +159,9 @@ section{
 }
 .customcard button {
     font-size: 11px;
-    color: #999;
+    color: #ff7369 ;
     padding: 3px;
-    border: 1px solid #999;
+    border: 1px solid #ff7369 ;
     border-radius: 3px;
     background: none;
 }
@@ -203,7 +176,6 @@ section{
 /*Blog Post Styling (read.php)*/
 .blogimg {
     width: 100%;
-    padding: 10px 0;
 }
 
 .authorSnippet {
@@ -225,7 +197,6 @@ section{
 .excerpt {
     background-color: #333;
     padding: 10px;
-    margin-top: -10px;
     color: white;
 }
 .curses {
@@ -238,6 +209,7 @@ section{
 }
 .comment {
     margin-bottom: 15px;
+    background-color: #fff;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 15px;
@@ -269,44 +241,18 @@ section{
 
 
 /*featured post styling*/
-.carousel-control-next, .carousel-control-prev{
-    color: #333 !important;
-}
-.carousel-control-next:hover, .carousel-control-prev:hover{
-    color: #23a6d5 !important;
-}
-.featured {
-    overflow: hidden;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-@media only screen and (max-width: 768px) {
-    .featured-text{
-        height: 400px;
-        position: static;
-    }
-    .featured-btn{
-        right: 0;
-    }
-    .carousel-control-next, .carousel-control-prev, .carousel-control-next:hover, .carousel-control-prev:hover{
-    margin-top: -25rem;
-}
-}
-@media only screen and (min-width: 768px){
-    .featured-text{
-        height: 400px;
-        position: relative;
-    } 
-    .featured-btn{
-        position: absolute;
-        right: 0;
-        bottom: 0;
-    }
-}
 
-.featured-img {
-    height: 100%;
-    margin: 0 auto;
+
+
+
+
+.footer {
+    background-color: #ddd;
+    color: #333;
+}
+hr.footer {
+    background-color: #999;
+}
+.footer.spacer {
+    padding: 10px;
 }

@@ -6,6 +6,7 @@
         <div class="row justify-content-center">
             <h2>Favourite Posts: </h2>
         </div>
+        <div class="spacer"></div>
         <div class="row justify-content-center">
             <?php
             foreach ($favs as $fav) {

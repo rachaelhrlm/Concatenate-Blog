@@ -17,20 +17,21 @@ session_start();
 
         <link href="views/css/loginform.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="views/css/styles.css">
+        <link href="views/css/buttons.css" rel="stylesheet" type="text/css"/>
 
         <title>Concatenate</title>
     </head>
 
 
     <body>
-        <!--Logo Bar-->
-        <div class="container-fluid logo">
-            <div class="row justify-content-center">
-                <img src="views/images/standard/logo.png" height="80px">
-            </div>
-        </div>
+        <!--        Logo Bar
+                <div class="container-fluid logo">
+                    <div class="row justify-content-center">
+                        <img src="views/images/standard/logo.png" height="80px">
+                    </div>
+                </div>-->
 
-        
+
 
 
         <!--Navbar Switch-->
@@ -48,38 +49,7 @@ session_start();
 
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginLabel">Login</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action = "?controller=member&action=login" method = "POST">
-                            <div class="form-group row">
-                                <label for="username"  class="col-sm-2 col-form-label" required>Username:</label>
-                                <div class="col-md-10">
-                                    <input type="text" name="login_username" class="form-control" id="username">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password"  class="col-sm-2 col-form-label" required>Password:</label>
-                                <div class="col-md-10">
-                                    <input type="password" name="login_password"  class="form-control" id="password">
-                                </div>
-                            </div>
-                            <input type="hidden" name='login' value="true">
-                            <button type = 'submit' class="btn btn-success" >Log In</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-<!--divider-->
+
         <hr>
 
 
@@ -96,56 +66,55 @@ session_start();
         <!--divider-->
         <hr>
 
-
+        <div class="spacer footer"></div>
+        <div class="spacer footer"></div>
         <!--Footer-->
-        <div class="container">
-            <div class="row justify-content-around">
-                <div class="col-md-2">
-                    <ul>
-                        <li><h5>Resources</h5></li>
-                        <!--<li><hr></li>-->
-                        <li>Example</li>
-                        <li>Example</li>
-                        <li>Example</li>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                    <ul>
-                        <li><h5>Contact</h5></li>
-                        <!--<li><hr></li>-->
-                        <li>Example</li>
-                        <li>Example</li>
-                        <li>Example</li>
-                    </ul>
-                </div>
-                <div class="col-md-2"><ul>
-                        <li><h5>Events</h5></li>
-                        <!--<li><hr></li>-->
-                        <li>Example</li>
-                        <li>Example</li>
-                        <li>Example</li>
-                    </ul></div>
-                <div class="col-md-2">
-                    <ul>
-                        <li><h5>Socials</h5></li>
-                        <!--<li><hr></li>-->
-                        <li><i class="fab fa-discord"></i></li>
-                        <li><i class="fab fa-facebook"></i></li>
-                        <li><i class="fab fa-github"></i></li>
-                    </ul>
+        <div class="container-fluid footer">
+            <div class="container">
+                <div class="row justify-content-around">
+                    <div class="col-md-2">
+                        <div class="row">
+                            <img class="logo" src="views/images/standard/logo.png">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <ul>
+                            <li><h5>Contact</h5></li>
+                            <!--<li><hr></li>-->
+                            <li>Example</li>
+                            <li>Example</li>
+                            <li>Example</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2"><ul>
+                            <li><h5>Events</h5></li>
+                            <!--<li><hr></li>-->
+                            <li>Example</li>
+                            <li>Example</li>
+                            <li>Example</li>
+                        </ul></div>
+                    <div class="col-md-2">
+                        <ul>
+                            <li><h5>Socials</h5></li>
+                            <!--<li><hr></li>-->
+                            <li><i class="fab fa-discord"></i></li>
+                            <li><i class="fab fa-facebook"></i></li>
+                            <li><i class="fab fa-github"></i></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="spacer footer"></div>
+
+        <hr class="footer">
+        <div class="spacer footer"></div>
 
 
-        <hr>
-
-
-
-        <div class="container-fluid">
+        <div class="container-fluid footer">
             <div class="row justify-content-end align-content-middle">
                 <div class="col-md-2">
-                    <img src="views/images/standard/graphiclogo.png" width="30px">
+                    <img src="views/images/standard/logo-graphic.png" width="30px">
                     <i class="far fa-copyright"></i> <?php echo date('Y') ?></div>
 
             </div>

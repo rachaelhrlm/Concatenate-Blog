@@ -47,7 +47,7 @@
         </div>
     </div>
 </div>
-
+<hr>
 
 <!--Padding-->
 <div class="spacer"></div>
@@ -57,6 +57,7 @@
 <div class="container">
     <div class="row justify-content-center results"></div>
 </div>
+
 
 <!--All Posts Section-->
 <div class="container">

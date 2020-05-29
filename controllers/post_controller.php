@@ -46,9 +46,16 @@ class PostController {
                 }
             } else {
                 Post::edit($_GET['id']);
-
+                if (isset($_SESSION['user'])) {
+                    $user = $_SESSION['user']->searchID();
+                    $favs = $_SESSION['user']->searchFavourites();
+                }
+                
                 $post = Post::searchID($_GET['id']);
-                $socials = Post::searchSocial($post->getMemberID());
+                if (isset($post)) {
+                    $comments = Post::searchComments($_GET['id']);
+                    $socials = Post::searchSocial($post->getMemberID());
+                }
                 require_once('views/posts/read.php');
             }
         } else {
@@ -103,7 +110,7 @@ class PostController {
     }
 
     public function restore() {
-        if(isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 3) {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 3) {
             if (!isset($_GET['id'])) {
                 return call('pages', 'error');
             } else {
@@ -122,15 +129,13 @@ class PostController {
             return call('pages', 'home');
         }
     }
-    
-    
-    
+
     public function feature() {
-        if(isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() == 1) {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() == 1) {
             if (!isset($_GET['id'])) {
                 return call('pages', 'error');
             } else {
-                Post::feature($_GET['id'],$_GET['post']);
+                Post::feature($_GET['id'], $_GET['post']);
                 ?>
                 <div class='alert alert-primary' role='alert'>
                     Post successfully featured.
@@ -145,23 +150,23 @@ class PostController {
             return call('pages', 'home');
         }
     }
-    
-    
+
     public function createComment() {
-        if(isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 4) {
             if (!isset($_GET['id'])) {
                 return call('pages', 'error');
             } else {
-                $success=Post::createComment($_GET['id'], $_SESSION['user']->getMemberID());
-                if(isset($success)){
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    Comment successfully added.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-                <?php }
+                $success = Post::createComment($_GET['id'], $_SESSION['user']->getMemberID());
+                if (isset($success)) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        Comment successfully added.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                <?php
+                }
                 return call('post', 'searchID');
             }
         }

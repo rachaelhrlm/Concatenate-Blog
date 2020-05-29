@@ -118,7 +118,7 @@
 
 
             <div class="form-row justify-content-end">
-                <input type="submit" value="Submit" class="btn btn-success">
+                <input type="submit" value="Submit" class="btn fourth">
             </div>
         </form>
 
