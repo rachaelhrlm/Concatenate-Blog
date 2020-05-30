@@ -22,45 +22,23 @@ and open the template in the editor.
         } catch (Exception $e) {
             $message = $e->getMessage();
         }
+        if(isset($_POST['subscribe'])){
+        $stmt = $pdo->prepare("INSERT INTO subscriber (email) VALUES (:email)");
+        $stmt->bindParam(":email", $_POST['email']);
+        $stmt->execute();
+        $count = $stmt->rowCount();
+        if ($count > 0) {
+            echo "Subscription Successful";
+        } else {
+            echo "Subscription Unsuccessful";
+        }}
+        ?>   
 
+        <form action = "" method = "POST">             
+            Email:             
+            <input required type = "email" name = "email" required>               
+            <button type = 'submit' name = 'subscribe'>Subscribe</button>         
+        </form>
 
-        if (isset($_POST['subscribe'])) {
-            
-            $_POST['email'] = $_POST['confirm_email'];
-
-
-
-
-
-            $email = $_POST ['email'];
-
-
-            $stmt = $pdo->prepare("INSERT INTO subscriber (email) VALUES (:email)");
-
-            $stmt->bindParam(":email", $email);
-
-            $stmt->execute();
-            $count = $stmt->rowCount();
-            if ($count > 0) {
-
-                echo "Subscription Successful";
-            } else {
-                echo "Unsuccesful. Sad cat :(";
-            }
-        }
-        ?>
-        <h3>Subscribe here:</h3>
-
-        <form action = "" method = "POST">
-
-            Email:
-            <input type = "email" name = "email" required>
-            
-            Confirm Email:
-            <input type = "email" name = "confirm_email" required>
-
-
-
-            <button type = 'submit' name = 'subscribe'>Subscribe</button>
     </body>
 </html>
