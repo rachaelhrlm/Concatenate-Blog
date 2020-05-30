@@ -33,10 +33,6 @@ class PostController {
     public function edit() {
         if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() < 3) {
             if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-                if (!isset($_GET['id'])) {
-                    return call('pages', 'error');
-                }
-
                 $post = Post::searchID($_GET['id']);
                 if (isset($post)) {
                     $categories = Post::categories();
@@ -45,20 +41,19 @@ class PostController {
                     return call('pages', 'error');
                 }
             } else {
-                $status = Post::edit($_GET['id']);
-
-                if (isset($status)) {
-                    if (isset($_SESSION['user'])) {
-                        $user = $_SESSION['user']->searchID();
-                        $favs = $_SESSION['user']->searchFavourites();
-                    }
-
-                    $post = Post::searchID($_GET['id']);
-                    if (isset($post)) {
-                        $comments = Post::searchComments($_GET['id']);
-                        $socials = Post::searchSocial($post->getMemberID());
-                    }
-                    require_once('views/posts/read.php');
+                $_GET['id'] = Post::edit($_POST['id']);
+                if (!empty($_GET['id'])) {
+//                    if (isset($_SESSION['user'])) {
+//                        $user = $_SESSION['user']->searchID();
+//                        $favs = $_SESSION['user']->searchFavourites();
+//                    }
+//                    $post = Post::searchID($_GET['id']);
+//                    if (isset($post)) {
+//                        $comments = Post::searchComments($_GET['id']);
+//                        $socials = Post::searchSocial($post->getMemberID());
+//                    }
+//                    require_once('views/posts/read.php');
+                    call('post','searchID');
                 } else {
                     $categories = Post::categories();
                     require_once('views/posts/edit.php');

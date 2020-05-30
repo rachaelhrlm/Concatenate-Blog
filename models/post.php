@@ -232,7 +232,22 @@ class Post {
                     throw new WordingTooLongException('of 100 for your title');
                 } else if (strlen($_POST['excerpt']) > 250) {
                     throw new WordingTooLongException('of 250 for your excerpt');
-                } else if (!empty($_FILES[self::InputKey]['name'])) {
+                } else {
+
+                    $req->execute([$id, $title, $categoryID, $excerpt, $content]);
+                    $postID = $req->fetch(PDO::FETCH_ASSOC);
+                }
+            } catch (WordingTooLongException $e) {
+                ?> <div class='alert alert-primary' role='alert'>
+                    You have exceeded the character limit <?php echo $e->getMessage() ?>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div> <?php
+            }
+        }
+            if (!empty($_FILES[self::InputKey]['name'])) {
+                try {
                     list($width, $height, $type, $attr) = getimagesize($_FILES[self::InputKey]['tmp_name']);
                     if (empty($_FILES[self::InputKey])) {
                         throw new NoFileException();
@@ -243,63 +258,56 @@ class Post {
                     } else if ($_FILES[self::InputKey]['error'] > 0) {
                         throw new Exception();
                     } else {
-
-                        $req->execute([$id, $title, $categoryID, $excerpt, $content]);
-                        Post::uploadFile($id);
+                        Post::uploadFile($postID['postID']);
                     }
+                } catch (PortraitException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        Only landscape photos are allowed. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                    <?php
+                } catch (LowResolutionException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        Resolution too low. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                    <?php
+                } catch (NoFileException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        File missing! Please try again.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                    <?php
+                } catch (WrongFileTypeException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        You cannot upload this file type <?php echo $_FILES[self::InputKey]['type'] ?>, please try again.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                <?php } catch (Exception $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        oops something went wrong
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div><?php
                 }
-            } catch (WordingTooLongException $e) {
-                ?> <div class='alert alert-primary' role='alert'>
-                    You have exceeded the character limit <?php echo $e->getMessage() ?>
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div> <?php
-            } catch (PortraitException $ex) {
-//                    
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    Only landscape photos are allowed. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-                <?php
-            } catch (LowResolutionException $ex) {
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    Resolution too low. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-                <?php
-            } catch (NoFileException $ex) {
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    File missing! Please try again.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-                <?php
-            } catch (WrongFileTypeException $ex) {
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    You cannot upload this file type <?php echo $_FILES[self::InputKey]['type'] ?>, please try again.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-            <?php } catch (Exception $ex) {
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    oops something went wrong
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div><?php
-            }
+        } if (isset($postID['postID'])){
+            return $postID['postID'];
+        }else {
+            return null;
         }
     }
 
@@ -327,7 +335,22 @@ class Post {
                     throw new WordingTooLongException('of 100 for your title');
                 } else if (strlen($_POST['excerpt']) > 250) {
                     throw new WordingTooLongException('of 250 for your excerpt');
-                } else if (!empty($_FILES[self::InputKey]['name'])) {
+                } else {
+
+                    $req->execute([$id, $title, $categoryID, $excerpt, $content]);
+                    $postID = $req->fetch(PDO::FETCH_ASSOC);
+                    
+                }
+            } catch (WordingTooLongException $e) {
+                ?> <div class='alert alert-primary' role='alert'>
+                    You have exceeded the character limit <?php echo $e->getMessage() ?>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                        <span aria-hidden='true'>&times;</span>
+                    </button>
+                </div> <?php
+            }
+            if (!empty($_FILES[self::InputKey]['name'])) {
+                try {
                     list($width, $height, $type, $attr) = getimagesize($_FILES[self::InputKey]['tmp_name']);
                     if (empty($_FILES[self::InputKey])) {
                         throw new NoFileException();
@@ -338,66 +361,54 @@ class Post {
                     } else if ($_FILES[self::InputKey]['error'] > 0) {
                         throw new Exception();
                     } else {
-
-                        $req->execute([$id, $title, $categoryID, $excerpt, $content]);
-                        $postID = $req->fetch(PDO::FETCH_ASSOC);
                         Post::uploadFile($postID['postID']);
-                        return $postID['postID'];
                     }
+                } catch (PortraitException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        Only landscape photos are allowed. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                    <?php
+                } catch (LowResolutionException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        Resolution too low. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                    <?php
+                } catch (NoFileException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        File missing! Please try again.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                    <?php
+                } catch (WrongFileTypeException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        You cannot upload this file type <?php echo $_FILES[self::InputKey]['type'] ?>, please try again.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                <?php } catch (Exception $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        oops something went wrong
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div><?php
                 }
-            } catch (WordingTooLongException $e) {
-                ?> <div class='alert alert-primary' role='alert'>
-                    You have exceeded the character limit <?php echo $e->getMessage() ?>
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div> <?php
-            } catch (PortraitException $ex) {
-//                    
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    Only landscape photos are allowed. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-                <?php
-            } catch (LowResolutionException $ex) {
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    Resolution too low. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-                <?php
-            } catch (NoFileException $ex) {
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    File missing! Please try again.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-                <?php
-            } catch (WrongFileTypeException $ex) {
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    You cannot upload this file type <?php echo $_FILES[self::InputKey]['type'] ?>, please try again.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
-            <?php } catch (Exception $ex) {
-                ?>
-                <div class='alert alert-primary' role='alert'>
-                    oops something went wrong
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div><?php
             }
-        }
+        } return $postID['postID'];
     }
 
     public static function delete($id) {

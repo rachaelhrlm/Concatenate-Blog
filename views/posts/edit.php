@@ -6,7 +6,16 @@
             <h1>Editing Post #<?php echo (isset($post))?$post->getPostID():$_POST['id']; ?></h1>
         </div>
         <div class="col-md-2 text-right">
-            <a href="<?php echo (isset($_GET['id'])) ?  "?controller=post&action=searchID&id={$_GET['id']}" :  "?controller=member&action=account#actions"; ?>"><i class="far fa-times-circle fa-3x icon" data-toggle="tooltip" data-placement="top" title="Cancel Edit"></i></a>
+            
+            
+            <?php if(isset($_GET['id'])) {
+                $link = "?controller=post&action=searchID&id={$_GET['id']}";
+            } else if (isset($_POST['id'])) {
+                $link = "?controller=post&action=searchID&id={$_POST['id']}";
+            } else {
+                $link = "?controller=member&action=account#actions";
+            } ?>
+            <a href="<?php echo $link ?>"><i class="far fa-times-circle fa-3x icon" data-toggle="tooltip" data-placement="top" title="Cancel Edit"></i></a>
         </div>
     </div>    
     <div class=" row justify-content-center">
@@ -114,7 +123,7 @@
             <div class="form-group row justify-content-between">
                 <label for="content" class="col-md-2 col-form-label" >Content</label>
                 <div class="col-md-9">
-                    <input type="content" name="content" class="textarea" id="content" value="<?php echo (isset($post))?$post->getContent():$_POST['content'] ?>" required>
+                    <input type="content" name="content" class="textarea" id="content" value="<?php echo (isset($post))?$post->getContent(): htmlentities($_POST['content']) ?>" required>
                 </div>
             </div>
 
@@ -122,7 +131,7 @@
 
 
             <div class="form-row justify-content-end">
-                <?php if(isset($_GET)) { ?>
+                <?php if(isset($_GET['id'])) { ?>
                 <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>" class="btn fourth">
                 <?php } else if (isset($_POST['id'])){ ?>
                 <input type="hidden" name="id" value="<?php echo $_POST['id'] ?>" class="btn fourth">
