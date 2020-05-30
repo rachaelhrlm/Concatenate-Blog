@@ -63,7 +63,7 @@ session_start();
                     <div class="col-md-2 logoContainer">
                         <div class="row">
                             <img class="logo" src="views/images/standard/logo.png">
-                            <div class="circle"></div>
+                            <!--<div class="circle"></div>-->
                         </div>
                     </div>
                     <div class="col-md-2">

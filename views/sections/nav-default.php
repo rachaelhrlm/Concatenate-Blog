@@ -1,4 +1,5 @@
 <div class="container-fluid customnav">
+    <div class="container">
     <div class="row justify-content-between">
         <div class="col-md-2">
             <a href='?controller=pages&action=home'><img  class="logo" src="views/images/standard/logo-inline.png"></a>
@@ -16,6 +17,7 @@
                 </li>
             </ul>
         </div>
+    </div>
     </div>
 </div>
 

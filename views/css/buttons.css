@@ -388,7 +388,7 @@
 
 /*NAVBAR*/
 .customnav {
-    padding: 0 25px 5px 25px;
+    padding: 10px 25px 15px 25px;
 }
 .customnav .nav-link {
     font-family: 'Varela Round', sans-serif;
@@ -397,21 +397,27 @@
     float: right;
     color: black;
     padding: 5px;
-    margin: 10px 0 10px 30px;
+    margin: 10px;
     border-radius: 10px;
     transition:color .2s;
 }
 .customnav .nav-link:hover {
     color: #ff7369 ;
 }
-.customnav .logo, .footer .logo {
+ .footer .logo {
     width: 100%;
     padding: 10px 0 0 0;
+}
+.customnav .logo {
+    max-height: 45px;
 }
 .customnav .links {
     float: right;
 }
-
+.navcircle {
+        padding-top: 18px;
+        color: #ff7369;
+    }
 
 
 
@@ -585,3 +591,13 @@ hr.footer {
         z-index: 2;
     }
    
+    
+    .error {
+        transform: scale(5);
+    }
+    #error {
+        padding: 50px 0;
+        min-height: 400px;
+    }
+    
+    
