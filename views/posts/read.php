@@ -233,14 +233,14 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
             <i class="far fa-comment-dots fa-3x icon"></i><h1>New Comment</h1>
         </div>
             <div class="row justify-content-center">
-                <div class="col-md-9">
+                <div class="col-md-9" id="newComment" >
                     <form action="" method="GET"  id="form-comment">
                         <input type="hidden" name="controller" value="post">
                         <input type="hidden" name="action" value="createComment">
                         <input type='hidden' name='id' value='<?php echo $post->getPostID() ?>'>
                         <input type='hidden' name='member' value='<?php echo $_SESSION['user']->getMemberID() ?>'>
                         <div class='form-row'>
-                            <input type="author" name="author" class="form-control" id="author" value="<?php echo $name ?>" disabled>
+                            <input type="author" name="author" class="form-control commentTop" id="author" value="<?php echo $name ?>" disabled>
                         </div>
                         <div class='form-row'>
                             <textarea name='message' class='form-control commentAreas' form="form-comment" placeholder="Comment"></textarea>

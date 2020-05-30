@@ -1,3 +1,16 @@
+/*---------------------------------------------------*/
+
+/*FORMS*/
+.custom-select {
+    min-width: 1em;
+    border-radius: 25px;
+}
+.form-control {
+    border-color: #ccc !important;
+    border-radius: 25px;
+}
+
+
 .btn {
     box-sizing: border-box;
     appearance: none;
@@ -196,6 +209,13 @@
     width: 50px;
     border-radius: 100px;
     object-fit: cover;
+}
+.commentTop {
+    border-radius: 15px 15px 0 0;
+}
+#newComment textarea.form-control  {
+    max-height: 300px;
+    border-radius: 0 0 15px 15px ;
 }
 
 
@@ -517,17 +537,7 @@ hr.footer {
 
 
 
-/*---------------------------------------------------*/
 
-/*FORMS*/
-.custom-select {
-    min-width: 1em;
-    border-radius: 25px;
-}
-.form-control {
-    border-color: #ccc !important;
-    border-radius: 25px;
-}
 
 
 
