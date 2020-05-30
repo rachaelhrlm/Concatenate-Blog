@@ -188,11 +188,7 @@ section{
 .curses {
     color: #e73c7e;
 }
-.propic {
-    height: auto;
-    max-width: 50px;
-    border-radius: 100px;
-}
+
 
 .newComment {
     margin-bottom: 15px;

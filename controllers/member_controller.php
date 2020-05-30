@@ -138,12 +138,7 @@ class MemberController {
             if (isset($_FILES['myUploader'])) {
                 $_SESSION['user']->updateProfilePic();
                 ?>
-                <div class='alert alert-primary' role='alert'>
-                    Profile Picture successfully updated.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
+                
                 <?php
                 return call('member', 'account');
             } else {

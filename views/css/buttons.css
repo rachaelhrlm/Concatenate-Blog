@@ -144,10 +144,11 @@
     text-align: center;
 }
 #author .profilePic {
-    height: auto;
-    max-width: 100px;
+    height: 100px;
+    width: 100px;
     border-radius: 100px;
     border: 1px solid #ccc;
+    object-fit: cover;
 }
 #author hr {
     margin-bottom: 15px;
@@ -189,6 +190,12 @@
 }
 #comments .commentPic{
     margin-right: 20px;
+}
+.propic {
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    object-fit: cover;
 }
 
 
