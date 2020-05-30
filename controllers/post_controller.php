@@ -45,18 +45,24 @@ class PostController {
                     return call('pages', 'error');
                 }
             } else {
-                Post::edit($_GET['id']);
-                if (isset($_SESSION['user'])) {
-                    $user = $_SESSION['user']->searchID();
-                    $favs = $_SESSION['user']->searchFavourites();
+                $status = Post::edit($_GET['id']);
+
+                if (isset($status)) {
+                    if (isset($_SESSION['user'])) {
+                        $user = $_SESSION['user']->searchID();
+                        $favs = $_SESSION['user']->searchFavourites();
+                    }
+
+                    $post = Post::searchID($_GET['id']);
+                    if (isset($post)) {
+                        $comments = Post::searchComments($_GET['id']);
+                        $socials = Post::searchSocial($post->getMemberID());
+                    }
+                    require_once('views/posts/read.php');
+                } else {
+                    $categories = Post::categories();
+                    require_once('views/posts/edit.php');
                 }
-                
-                $post = Post::searchID($_GET['id']);
-                if (isset($post)) {
-                    $comments = Post::searchComments($_GET['id']);
-                    $socials = Post::searchSocial($post->getMemberID());
-                }
-                require_once('views/posts/read.php');
             }
         } else {
             return call('pages', 'home');
@@ -170,7 +176,7 @@ class PostController {
                             <span aria-hidden='true'>&times;</span>
                         </button>
                     </div>
-                <?php
+                    <?php
                 }
                 return call('post', 'searchID');
             }

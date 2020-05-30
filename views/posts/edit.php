@@ -3,7 +3,7 @@
 
     <div class=" row justify-content-center">
         <div class="col-md-7">
-            <h1>Editing Post #<?php echo $post->getPostID() ?></h1>
+            <h1>Editing Post #<?php echo (isset($post))?$post->getPostID():$_POST['id']; ?></h1>
         </div>
         <div class="col-md-2 text-right">
             <a href="<?php echo (isset($_GET['id'])) ?  "?controller=post&action=searchID&id={$_GET['id']}" :  "?controller=member&action=account#actions"; ?>"><i class="far fa-times-circle fa-3x icon" data-toggle="tooltip" data-placement="top" title="Cancel Edit"></i></a>
@@ -34,7 +34,7 @@
             <div class="form-group row justify-content-between">
                 <label for="title" class="col-md-2 col-form-label">Title</label>
                 <div class="col-md-9">
-                    <input type="title" name="title" class="form-control" id="title" value="<?php echo $post->getTitle() ?>" required>
+                    <input type="title" name="title" class="form-control" id="title" value="<?php echo (isset($post))?$post->getTitle():$_POST['title']; ?>" required>
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
             <div class="form-group row justify-content-between ">
                 <label for="author" class="col-md-2 col-form-label">Author</label>
                 <div class="col-md-9">
-                    <input type="author" name="author" class="form-control" id="author" value="<?php echo $post->getAuthor() ?>" disabled>
+                    <input type="author" name="author" class="form-control" id="author" value="<?php echo (isset($post))?$post->getAuthor():$_POST['author'] ?>" readonly>
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                     <select class="custom-select" name="categoryID">
                         <?php
                         foreach ($categories as $category) {
-                            if ($category['categoryID'] === $post->getCategoryID()) {
+                            if ((isset($post) && $category['categoryID'] === $post->getCategoryID()) || $category['categoryID'] === $_POST['categoryID']) {
                                 ?>
                                 <option value="<?php echo $category['categoryID'] ?>" selected><?php echo $category['category'] ?></option>
                             <?php } else { ?>
@@ -75,7 +75,7 @@
             <div class="form-group row justify-content-between">
                 <label for="excerpt" class="col-md-2 col-form-label" >Excerpt</label>
                 <div class="col-md-9">
-                    <input type="excerpt" name="excerpt" class="form-control" id="excerpt" value="<?php echo $post->getExcerpt() ?>" required>
+                    <input type="excerpt" name="excerpt" class="form-control" id="excerpt" value="<?php echo (isset($post))?$post->getExcerpt():$_POST['excerpt'] ?>" required>
                 </div>
             </div>
 
@@ -87,7 +87,11 @@
                 <label for="image" class="col-md-2 col-form-label" >Image</label>
                 <div class="col-md-9">
                     <?php
+                    if(isset($post)){
                     $file = 'views/images/' . $post->getPostID() . '.jpeg';
+                    } else {
+                    $file = 'views/images/' . $_POST['id'] . '.jpeg';
+                    }
                     if (file_exists($file)) {
                         $img = "<img src='$file?=Date('U')' width='500' />";
                         echo $img;
@@ -110,7 +114,7 @@
             <div class="form-group row justify-content-between">
                 <label for="content" class="col-md-2 col-form-label" >Content</label>
                 <div class="col-md-9">
-                    <input type="content" name="content" class="textarea" id="content" value="<?php echo $post->getContent() ?>" required>
+                    <input type="content" name="content" class="textarea" id="content" value="<?php echo (isset($post))?$post->getContent():$_POST['content'] ?>" required>
                 </div>
             </div>
 
@@ -118,6 +122,11 @@
 
 
             <div class="form-row justify-content-end">
+                <?php if(isset($_GET)) { ?>
+                <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>" class="btn fourth">
+                <?php } else if (isset($_POST['id'])){ ?>
+                <input type="hidden" name="id" value="<?php echo $_POST['id'] ?>" class="btn fourth">
+                <?php } ?>
                 <input type="submit" value="Submit" class="btn fourth">
             </div>
         </form>

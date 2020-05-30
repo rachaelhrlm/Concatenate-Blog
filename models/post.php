@@ -213,8 +213,6 @@ class Post {
         $req = $db->prepare("call editPost(?,?,?,?,?)");
 
         if (!empty($_POST)) {
-//            $_POST['excerpt'] = Strip_tags($_POST['excerpt']);
-//            $_POST['title'] = Strip_tags($_POST['title']);
             if (isset($_POST['title']) && $_POST['title'] != "") {
                 $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
             }
@@ -242,15 +240,13 @@ class Post {
                         throw new WrongFileTypeException();
                     } else if ($height > $width) {
                         throw new PortraitException();
-                    } else if ($height < 534 || $width < 800) {
-                        throw new LowResolutionException();
                     } else if ($_FILES[self::InputKey]['error'] > 0) {
                         throw new Exception();
-                    }
-                } else {
+                    } else {
 
-                    $req->execute([$id, $title, $categoryID, $excerpt, $content]);
-                    Post::uploadFile($id);
+                        $req->execute([$id, $title, $categoryID, $excerpt, $content]);
+                        Post::uploadFile($id);
+                    }
                 }
             } catch (WordingTooLongException $e) {
                 ?> <div class='alert alert-primary' role='alert'>
@@ -290,7 +286,7 @@ class Post {
             } catch (WrongFileTypeException $ex) {
                 ?>
                 <div class='alert alert-primary' role='alert'>
-                    You cannot upload this file type {$_FILES[self::InputKey]['type']}, please try again.
+                    You cannot upload this file type <?php echo $_FILES[self::InputKey]['type'] ?>, please try again.
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
@@ -339,12 +335,10 @@ class Post {
                         throw new WrongFileTypeException();
                     } else if ($height > $width) {
                         throw new PortraitException();
-//                    } else if ($height < 530 || $width < 790) {
-//                        throw new LowResolutionException();
                     } else if ($_FILES[self::InputKey]['error'] > 0) {
                         throw new Exception();
                     } else {
-                        
+
                         $req->execute([$id, $title, $categoryID, $excerpt, $content]);
                         $postID = $req->fetch(PDO::FETCH_ASSOC);
                         Post::uploadFile($postID['postID']);
@@ -389,7 +383,7 @@ class Post {
             } catch (WrongFileTypeException $ex) {
                 ?>
                 <div class='alert alert-primary' role='alert'>
-                    You cannot upload this file type {$_FILES[self::InputKey]['type']}, please try again.
+                    You cannot upload this file type <?php echo $_FILES[self::InputKey]['type'] ?>, please try again.
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
@@ -403,7 +397,6 @@ class Post {
                     </button>
                 </div><?php
             }
-            
         }
     }
 
