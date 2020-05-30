@@ -493,6 +493,7 @@ hr.footer {
 }
 .nav-pills .nav-link {
      text-transform: uppercase;
+     border-radius: 50px;
 }
 
 

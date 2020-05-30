@@ -339,14 +339,16 @@ class Post {
                         throw new WrongFileTypeException();
                     } else if ($height > $width) {
                         throw new PortraitException();
-                    } else if ($height < 534 || $width < 800) {
-                        throw new LowResolutionException();
+//                    } else if ($height < 530 || $width < 790) {
+//                        throw new LowResolutionException();
                     } else if ($_FILES[self::InputKey]['error'] > 0) {
                         throw new Exception();
                     } else {
-                        Post::uploadFile($id);
+                        
                         $req->execute([$id, $title, $categoryID, $excerpt, $content]);
-                        $postID = $req->fetch();
+                        $postID = $req->fetch(PDO::FETCH_ASSOC);
+                        Post::uploadFile($postID['postID']);
+                        return $postID['postID'];
                     }
                 }
             } catch (WordingTooLongException $e) {
@@ -401,7 +403,7 @@ class Post {
                     </button>
                 </div><?php
             }
-            return $postID['postID'];
+            
         }
     }
 

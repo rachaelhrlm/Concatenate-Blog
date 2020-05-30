@@ -78,9 +78,14 @@ class PostController {
                 $_GET['id'] = Post::create($memberID);
 
                 if (!empty($_GET['id'])) {
-                    $post = Post::searchID($_GET['id']);
-                    $socials = Post::searchSocial($_SESSION['user']->getMemberID());
-                    require_once('views/posts/read.php');
+//                    $post = Post::searchID($_GET['id']);
+//                    $socials = Post::searchSocial($_SESSION['user']->getMemberID());
+                    call('post', 'searchID');
+                } else {
+                    $user = Member::searchID();
+
+                    $categories = Post::categories();
+                    require_once('views/posts/create.php');
                 }
             }
         } else {

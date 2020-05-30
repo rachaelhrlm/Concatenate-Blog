@@ -27,13 +27,14 @@
                         </div>
                     </div>
                     <input type="hidden" name="confirmLogin" value="true">        
+                    <input type="hidden" name="emailVerify" value="true">        
                     <div class="smalltext">Please validate your session</div>   
                     <div class="form-row justify-content-end">
                         <button class="btn fourth" type='submit'>Submit</button>
                     </div>
                 </form>
             </div>
-        <?php } else if (isset($_SESSION['verification'])) { ?>
+        <?php } else if (isset($_SESSION['verification']) && isset($_POST['emailVerify'])) { ?>
             <div class="row justify-content-center">
                 <form action="?controller=member&action=changeEmail&target=login" method="POST">
                     <input type="hidden" name="changeEmail" value="true">
@@ -79,13 +80,14 @@
                         </div>
                     </div>
                     <input type="hidden" name="confirmLogin" value="true">        
+                    <input type="hidden" name="passwordVerify" value="true">        
                     <div class="smalltext">Please validate your session</div>   
                     <div class="form-row justify-content-end">
                         <button class="btn fourth" type='submit'>Submit</button>
                     </div>
                 </form>
             </div>
-            <?php } else if (isset($_SESSION['verification']) && isset($_POST['changePassword'])) { ?>
+            <?php } else if (isset($_SESSION['verification']) && isset($_POST['passwordVerify'])) { ?>
         <div class="row justify-content-center">
                 <form action="?controller=member&action=changePassword&target=login" method="POST" class="col-md-7">
                     <input type="hidden" name="changePassword" value="true">
