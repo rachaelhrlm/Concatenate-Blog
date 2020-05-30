@@ -98,7 +98,8 @@
     background-color: white;
 }
 .tab-container .custom-select{
-    max-width: 20rem;
+    max-width: 18rem;
+    min-width: 15rem;
 }
 .tab-container h1{
     color: #333;
@@ -327,7 +328,7 @@
     margin: 0 auto;
 }
 #featured {
-    background-color: #fff;
+    background-color: #efefef;
     padding: 50px 0 100px 0;
 }
 #featured .carousel-item {
@@ -454,6 +455,16 @@ hr.footer {
 }
 #footer .logoContainer {
     padding: 20px;
+}
+#footer .footcircle {
+    color: #f1c40f;
+    padding: 0 5px 0 0;
+}
+#footer ul {
+    margin: 0;
+}
+#footer .fab {
+    padding: 10px;
 }
 
 

@@ -315,6 +315,9 @@ class Member {
         const InputKey = 'myUploader';
 
         public static function updateProfilePic() {
+            
+            
+            
             $tempFile = $_FILES[self::InputKey]['tmp_name'];
             $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/members/";
             $destinationFile = $path . $_SESSION['user']->getMemberID() . '.jpeg';

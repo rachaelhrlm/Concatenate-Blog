@@ -66,29 +66,27 @@ session_start();
                             <!--<div class="circle"></div>-->
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <ul>
-                            <li><h5>Contact</h5></li>
+                            <li> <h5> <i class="fas fa-circle footcircle"></i>Contact</h5> </li>
                             <!--<li><hr></li>-->
                             <li>Example</li>
                             <li>Example</li>
                             <li>Example</li>
                         </ul>
                     </div>
-                    <div class="col-md-2"><ul>
-                            <li><h5>Events</h5></li>
+                    <div class="col-md-3"><ul>
+                            <li><h5> <i class="fas fa-circle footcircle"></i>Events</h5></li>
                             <!--<li><hr></li>-->
                             <li>Example</li>
                             <li>Example</li>
                             <li>Example</li>
                         </ul></div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <ul>
-                            <li><h5>Socials</h5></li>
+                            <li><h5><i class="fas fa-circle footcircle"></i>Socials</h5></li>
                             <!--<li><hr></li>-->
-                            <li><i class="fab fa-discord"></i></li>
-                            <li><i class="fab fa-facebook"></i></li>
-                            <li><i class="fab fa-github"></i></li>
+                            <li><i class="fab fa-discord fa-2x"></i><i class="fab fa-facebook fa-2x"></i><i class="fab fa-github fa-2x"></i></li>
                         </ul>
                     </div>
                 </div>
