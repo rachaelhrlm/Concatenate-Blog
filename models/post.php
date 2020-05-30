@@ -334,6 +334,64 @@ class Post {
                     throw new WordingTooLongException('of 100 for your title');
                 } else if (strlen($_POST['excerpt']) > 250) {
                     throw new WordingTooLongException('of 250 for your excerpt');
+                } else if (!empty($_FILES[self::InputKey]['name'])) {
+                    try {
+                        list($width, $height, $type, $attr) = getimagesize($_FILES[self::InputKey]['tmp_name']);
+                        if (empty($_FILES[self::InputKey])) {
+                            throw new NoFileException();
+                        } else if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
+                            throw new WrongFileTypeException();
+                        } else if ($height > $width) {
+                            throw new PortraitException();
+                        } else if ($_FILES[self::InputKey]['error'] > 0) {
+                            throw new Exception();
+                        } else {
+                            Post::uploadFile($postID['postID']);
+                        }
+                    } catch (PortraitException $ex) {
+                        ?>
+                        <div class='alert alert-primary' role='alert'>
+                            Only landscape photos are allowed. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>
+                        <?php
+                    } catch (LowResolutionException $ex) {
+                        ?>
+                        <div class='alert alert-primary' role='alert'>
+                            Resolution too low. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>
+                        <?php
+                    } catch (NoFileException $ex) {
+                        ?>
+                        <div class='alert alert-primary' role='alert'>
+                            File missing! Please try again.
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>
+                        <?php
+                    } catch (WrongFileTypeException $ex) {
+                        ?>
+                        <div class='alert alert-primary' role='alert'>
+                            You cannot upload this file type <?php echo $_FILES[self::InputKey]['type'] ?>, please try again.
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>
+                    <?php } catch (Exception $ex) {
+                        ?>
+                        <div class='alert alert-primary' role='alert'>
+                            oops something went wrong
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div><?php
+                    }
                 } else {
 
                     $req->execute([$id, $title, $categoryID, $excerpt, $content]);
@@ -347,66 +405,11 @@ class Post {
                     </button>
                 </div> <?php
             }
-            if (!empty($_FILES[self::InputKey]['name'])) {
-                try {
-                    list($width, $height, $type, $attr) = getimagesize($_FILES[self::InputKey]['tmp_name']);
-                    if (empty($_FILES[self::InputKey])) {
-                        throw new NoFileException();
-                    } else if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
-                        throw new WrongFileTypeException();
-                    } else if ($height > $width) {
-                        throw new PortraitException();
-                    } else if ($_FILES[self::InputKey]['error'] > 0) {
-                        throw new Exception();
-                    } else {
-                        Post::uploadFile($postID['postID']);
-                    }
-                } catch (PortraitException $ex) {
-                    ?>
-                    <div class='alert alert-primary' role='alert'>
-                        Only landscape photos are allowed. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
-                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                            <span aria-hidden='true'>&times;</span>
-                        </button>
-                    </div>
-                    <?php
-                } catch (LowResolutionException $ex) {
-                    ?>
-                    <div class='alert alert-primary' role='alert'>
-                        Resolution too low. Please choose another image. The recommended size is 800 x 534 pixels, 72 dpi.
-                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                            <span aria-hidden='true'>&times;</span>
-                        </button>
-                    </div>
-                    <?php
-                } catch (NoFileException $ex) {
-                    ?>
-                    <div class='alert alert-primary' role='alert'>
-                        File missing! Please try again.
-                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                            <span aria-hidden='true'>&times;</span>
-                        </button>
-                    </div>
-                    <?php
-                } catch (WrongFileTypeException $ex) {
-                    ?>
-                    <div class='alert alert-primary' role='alert'>
-                        You cannot upload this file type <?php echo $_FILES[self::InputKey]['type'] ?>, please try again.
-                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                            <span aria-hidden='true'>&times;</span>
-                        </button>
-                    </div>
-                <?php } catch (Exception $ex) {
-                    ?>
-                    <div class='alert alert-primary' role='alert'>
-                        oops something went wrong
-                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                            <span aria-hidden='true'>&times;</span>
-                        </button>
-                    </div><?php
-                }
-            }
-        } return $postID['postID'];
+        } if (isset($postID['postID'])) {
+            return $postID['postID'];
+        } else {
+            return null;
+        }
     }
 
     public static function delete($id) {
