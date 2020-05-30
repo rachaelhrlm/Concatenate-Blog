@@ -157,6 +157,7 @@ class Post {
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted"><?php echo $post['datePosted'] . '&emsp; &emsp;' . $post['author'] ?></small></p>
                         <h5 class="card-title"><?php echo ucwords(Post::censor($post['title'])) ?></h5>
+                        <hr>
                         <p class="card-text"><?php echo ucfirst(Post::censor($post['excerpt'])) ?> </p>
                         <button><?php echo $post['category'] ?></button>
                     </div></div>
@@ -212,6 +213,8 @@ class Post {
         $req = $db->prepare("call editPost(?,?,?,?,?)");
 
         if (!empty($_POST)) {
+//            $_POST['excerpt'] = Strip_tags($_POST['excerpt']);
+//            $_POST['title'] = Strip_tags($_POST['title']);
             if (isset($_POST['title']) && $_POST['title'] != "") {
                 $filteredTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS);
             }

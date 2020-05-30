@@ -1,33 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 
-
+#loginForm {
+    background-color: #efefef;
+    padding-top: 3em;
+}
+#loginForm h1{
+    color: #333;
+    padding: 5px;
+    border-radius: 10px;
+    text-transform: uppercase; 
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 400; 
+    margin-bottom: 1em;
+}
 
 .overall {
-    font-family: 'Merriweather', serif;
-    top: 10%;
-    left: 20%;
-    right: 20%;
-    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position:fixed;
-    z-index: 1;
-    
-    /*box-sizing: border-box;*/
+    margin-bottom: 5em;
 }
 
-.overlayheader {
+.overlay h2{
     font-weight: bold;
+    color: #fff;
     margin: 0;
     font-size: 120px;
     font-family: 'Gochi Hand', cursive;
 }
-.overall h1 {
-    /*    font-weight: bold;*/
-    margin: 0;
-    font-size: 30px;
+.overall .sign-in-container h1,.overall .sign-up-container h1 {
+    color: #333;
+    margin-bottom: 1em;
+    padding: 5px;
+    border-radius: 10px;
+    text-transform: uppercase; 
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 400; 
 }
 .overall h2 {
     text-align: center;
@@ -58,18 +67,7 @@
     background-color:white;
     color:black;
 }
-.overall button {
-    border-radius: 20px;
-    /*    border: 1px solid #FF4B2B;*/
-    background-color: transparent;
-    color: black;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-}
+
 
 .overall button:active {
     transform: scale(0.95);
@@ -119,15 +117,13 @@
 }
 .loginFormContainer {
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-        0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 15px;
     position: relative;
     overflow: hidden;
-    width: 768px;
     max-width: 100%;
-    /*z-index: 10;*/
-    min-height: 480px;
+    min-height: 600px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
 }
 
 .overall .form-container {
@@ -189,15 +185,7 @@
 }
 
 .overlay {
-    background: #333533;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-    /*    background: -webkit-linear-gradient(to right, #242423, #333533);
-        background: linear-gradient(to right, #242423, #333533);
-        background-repeat: no-repeat;
-        background-size: cover;*/
-    background-position: 0 0;
+    background-color: #f1c40f;
     color: #FFFFFF;
     position: relative;
     left: -100%;
@@ -206,17 +194,7 @@
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;
 }
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+
 .loginFormContainer.right-panel-active .overlay {
     transform: translateX(50%);
 

@@ -292,7 +292,7 @@ class Member {
             $db = Db::getInstance();
             $user = $this->getMemberID();
             $id = intval($id);
-            $req = $db->prepare('INSERT INTO favourite (memberID, postID) VALUES (?,?);');
+            $req = $db->prepare('call addFavourite(?,?)');
             $req->execute([$user, $id]);
         }
 

@@ -23,10 +23,10 @@
                                     </div>
                                     <div class="col-md-5 featured-text">
                                         <div class="smalltext"><?php echo $featuredPost->getDatePosted() . '&emsp; &emsp;' . $featuredPost->getAuthor() ?></div>
-                                        <h2><?php echo $featuredPost->getTitle() ?></h2>
+                                        <h2><?php echo Post::censor($featuredPost->getTitle()) ?></h2>
                                         
                                         <hr>
-                                        <p><?php echo $featuredPost->getExcerpt() ?></p>
+                                        <p><?php echo Post::censor($featuredPost->getExcerpt()) ?></p>
                                         <button onclick='location.href ="?controller=post&action=searchID&id=<?php echo $featuredPost->getPostID();?>"' class="btn fourth align-self-end featured-btn">Read More</button>
                                     </div>
                                 </div>

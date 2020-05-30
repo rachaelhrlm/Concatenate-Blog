@@ -18,8 +18,6 @@
                             <div class="card-body">
                                 <p class="card-text"><small class="text-muted"><?php echo $post['datePosted'] . '&emsp; &emsp;' . $post['author'] ?></small></p>
                                 <h5 class="card-title"><?php echo ucwords(Post::censor($post['title'])) ?></h5>
-                                <hr>
-                                <p class="card-text"><?php echo ucfirst(Post::censor($post['excerpt'])) ?></p>
                                 <button><?php echo $post['category'] ?></button>
                             </div>
                         </div>

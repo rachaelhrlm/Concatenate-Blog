@@ -2,7 +2,7 @@
     <div class="tab-pane fade <?php echo!isset($_GET['target']) ? "show active" : ""; ?> " id="actions" role="tabpanel" aria-labelledby="actions-tab">
         <div class="tab-container">
             <div class="row justify-content-center">
-                <h2>Post Actions: </h2>
+                <i class="far fa-list-alt fa-3x icon"></i><h1>Post Actions </h1>
             </div>
             <div class="row justify-content-center">
                 <a onclick="editPost()"><i class="fas fa-pen-square fa-3x icon"  data-toggle="tooltip" data-placement="top" title="Edit Post"></i></a>
@@ -26,7 +26,7 @@
                             }
                         }
                         ?>
-                    </select><button type="submit" class="btn fourth">Edit</button>
+                    </select><div class="form-row justify-content-end"><button type="submit" class="btn fourth">Edit</button></div>
                 </form>
 
 
@@ -45,7 +45,7 @@
                             }
                         }
                         ?>
-                    </select><button type="submit" class="btn fourth">Delete</button>
+                    </select><div class="form-row justify-content-end"><button type="submit" class="btn fourth">Delete</button></div>
                 </form>
 
 
@@ -63,7 +63,7 @@
                             }
                         }
                         ?>
-                    </select><button type="submit" class="btn fourth">Restore</button>
+                    </select><div class="form-row justify-content-end"><button type="submit" class="btn fourth">Restore</button></div>
                 </form>
             </div>
 
@@ -83,7 +83,7 @@
 
 
                 <div class="row justify-content-center">
-                    <h2>Featured Posts: </h2>
+                    <i class="far fa-newspaper fa-3x icon"></i><h1>Featured Posts </h1>
                 </div>
 
                 <!--First Featured Post-->
@@ -170,7 +170,7 @@
 
 
                 <div class="row justify-content-center">
-                    <h2>Promote Member to Blogger: </h2>
+                   <i class="fas fa-user-plus fa-3x icon"></i> <h1>Promote Member </h1>
                 </div>
                 <div class="row justify-content-center">
                     <form action="?controller=member&action=promoteMember" method="POST" class="form-inline">
@@ -194,7 +194,7 @@
                 <div class="spacer"></div>
 
                 <div class="row justify-content-center">
-                    <h2>Demote Blogger to Member: </h2>
+                   <i class="fas fa-user-minus fa-3x icon"></i> <h1>Demote Blogger </h1>
                 </div>
                 <div class="row justify-content-center">
                     <form action="?controller=member&action=demoteMember" method="POST" class="form-inline">
@@ -220,7 +220,7 @@
 
 
                 <div class="row justify-content-center">
-                    <h2>Ban Member: </h2>
+                    <i class="fas fa-user-times fa-3x icon"></i><h1>Ban Member </h1>
                 </div>
                 <div class="row justify-content-center">
                     <form action="?controller=member&action=banMember" method="POST" class="form-inline">
@@ -247,7 +247,7 @@
 
 
                 <div class="row justify-content-center">
-                    <h2>Unban Member: </h2>
+                    <i class="fas fa-user-check fa-3x icon"></i><h1>Unban Member </h1>
                 </div>
                 <div class="row justify-content-center">
                     <form action="?controller=member&action=unbanMember" method="POST" class="form-inline">

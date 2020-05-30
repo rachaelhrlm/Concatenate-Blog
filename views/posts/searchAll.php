@@ -33,15 +33,19 @@
         <div class="row ">
             <div class="col-md-3"></div>
             <div class="col-md-6 animated-container">
-                <h1>Looking for something?</h1>
+                <div class="search"><h1 >Looking for something?</h1></div>
                 <label class="sr-only" for="inlineFormInputGroup">Search</label>
+                <div class=" searchbar">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fas fa-search"></i></div>
                     </div>
                     <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="search" onkeyup="searchPost(this.value)">
+                    
                 </div>
-                <p class="smalltext"><b>try:</b> motivational, career, lifestyle</p> 
+                <div class="circle"></div>
+                </div>
+                <div class="search"><p><b>try:</b> motivational, career, lifestyle</p> </div>
             </div>
             <div class="col-md-3"></div>
         </div>

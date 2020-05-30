@@ -3,10 +3,17 @@ require_once 'models/post.php';
 
 class MemberController {
 
+    public function loginForm() {
+        if (!isset($_SESSION['user'])) {
+            require_once('views/members/loginForm.php');
+        } else {
+            return call('pages', 'home');
+        }
+    }
     public function login() {
         if (!isset($_SESSION['user'])) {
             Member::login();
-            return call('pages', 'home');
+            require_once('views/members/loginForm.php');
         } else {
             return call('pages', 'home');
         }
@@ -15,7 +22,7 @@ class MemberController {
     public function register() {
         if (!isset($_SESSION['user'])) {
             Member::register();
-            return call('pages', 'home');
+            require_once('views/members/loginForm.php');
         } else {
             return call('pages', 'home');
         }

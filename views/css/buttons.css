@@ -38,6 +38,18 @@
     color: #fff;
     background-position: 0;
 }
+.third {
+    border-color: #fff;
+    color: #fff;
+    background-image: linear-gradient(45deg, #ffffff 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    transition: background 300ms ease-in-out, color 300ms;
+}
+.third:hover, .third:focus {
+    color: #f1c40f !important;
+    background-position: 0;
+}
 
 
 
@@ -79,7 +91,7 @@
     color: #333;
 }
 #account .nav-link.active {
-    color: white;
+    color: #fff;
 }
 
 .tab-container {
@@ -90,7 +102,7 @@
 }
 .tab-container h1{
     color: #333;
-    margin-bottom: 1em;
+    margin-bottom: 10px;
     padding: 5px;
     border-radius: 10px;
     text-transform: uppercase; 
@@ -195,6 +207,7 @@
     border: 1px solid #ddd;
     border-radius: 15px;
     background-color: #fff;
+    word-wrap: break-word;
 }
 #post {
     background-color: #efefef;
@@ -205,7 +218,7 @@
 }
 #post .title{
     text-align: center;
-    padding: 20px 0 0 0;
+    padding: 20px;
     margin: 0;
 }
 #post .text-muted {
@@ -230,9 +243,10 @@
     text-transform: capitalize;
     font-size: 1.5em;
     color: #fff;
+    word-wrap: break-word;
 }
-#post .content em {
-    text-align: center;
+#post .content  {
+   word-wrap: break-word;
 }
 .postNav {
     background-color: #fff;
@@ -284,7 +298,6 @@
     margin-bottom: 1em;
     padding: 5px;
     border-radius: 10px;
-    /*border:5px solid #333;*/
     text-transform: uppercase; 
     font-family: 'Varela Round', sans-serif;
     font-weight: 400;
@@ -327,7 +340,6 @@
     margin-bottom: 1em;
     padding: 5px;
     border-radius: 10px;
-    /*border:5px solid #f1c40f;*/
     text-transform: uppercase;
     font-family: 'Varela Round', sans-serif;
     font-weight: 400;
@@ -349,44 +361,8 @@
     font-size: .8em;
     padding: 5px 20px 5px 20px;
 }
-@media only screen and (max-width: 768px) {
-    .featured-text {
-        min-height: 200px;
-        position: static;
-    }
-    .featured-btn{
-        right: 0;
-    }
-    .featured-img {
-        border-radius: 15px 15px 0 0;
-    }
-    .carousel-control-next, .carousel-control-prev, .carousel-control-next:hover, .carousel-control-prev:hover{
-        margin-top: -25rem;
-    }
-}
-@media only screen and (min-width: 768px){
-    .featured-text{
-        min-height: 400px;
-        position: relative;
-    } 
-    .featured-text h2{
-        border-radius: 0 15px 0 0;
-    }
-    .featured-btn{
-        position: absolute;
-        right: 10px;
-        bottom: 0;
-    }
-    .featured-img {
-        border-radius: 15px 0 0 15px;
-    }
-    #featured .col-md-5{
-        padding: 0 15px 0 0;
-    }
-    #featured .col-md-7{
-        padding: 0 0 0 0;
-    }
-}
+
+
 
 
 
@@ -458,6 +434,23 @@
 
 
 
+/*---------------------------------------------------*/
+
+/*FOOTER*/
+#footer {
+    background-color: #ddd;
+    color: #333;
+    padding: 3em 0 1em 0;
+}
+hr.footer {
+    background-color: #999;
+    margin: 1em 0;
+}
+#footer .logoContainer {
+    padding: 20px;
+}
+
+
 
 
 
@@ -499,4 +492,96 @@
 
 
 
+/*---------------------------------------------------*/
 
+/*FORMS*/
+.custom-select {
+    min-width: 1em;
+    border-radius: 25px;
+}
+.form-control {
+    border-color: #ccc !important;
+    border-radius: 25px;
+}
+
+
+
+
+
+
+
+/*---------------------------------------------------*/
+
+/*FORMS*/
+@media only screen and (max-width: 768px) {
+    .featured-text {
+        min-height: 200px;
+        position: static;
+    }
+    .featured-btn{
+        right: 0;
+    }
+    .featured-img {
+        border-radius: 15px 15px 0 0;
+    }
+    .carousel-control-next, .carousel-control-prev, .carousel-control-next:hover, .carousel-control-prev:hover{
+        margin-top: -25rem;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .featured-text{
+        min-height: 400px;
+        position: relative;
+    } 
+    .featured-text h2{
+        border-radius: 0 15px 0 0;
+    }
+    .featured-btn{
+        position: absolute;
+        right: 10px;
+        bottom: 0;
+    }
+    .featured-img {
+        border-radius: 15px 0 0 15px;
+    }
+    #featured .col-md-5{
+        padding: 0 15px 0 0;
+    }
+    #featured .col-md-7{
+        padding: 0 0 0 0;
+    }
+}
+
+
+
+
+.animated-container .form-control {
+    border-radius: 25px;
+}
+.animated-container .input-group-text {
+    border-radius: 25px 0 0 25px;
+}
+
+.circle {
+      width: 100px;
+      height: 100px;
+      transform: scale(1.5);
+      background: #f1c40f;
+      border-radius: 50%;
+      position: absolute;
+      top: -30px;
+      left:-40px;
+    }
+    
+    .searchbar {
+        position: relative;
+    }
+    .searchbar .input-group{
+        z-index: 2;
+    }
+    .search {
+        position: relative;
+        z-index: 2;
+    }
+   

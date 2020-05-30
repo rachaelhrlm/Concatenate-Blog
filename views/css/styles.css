@@ -30,9 +30,7 @@ h1, h2, h3, h4, h5 {
     font-family: 'Varela Round', sans-serif;
 }
 
-.form-control {
-    border-color: #ccc !important;
-}
+
 
 
 /*margin and padding*/
@@ -67,10 +65,7 @@ section{
 
 /*navigation styling*/
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-     background-color: #f1c40f;
-     text-transform: uppercase;
-}
+
 
 
 
@@ -95,9 +90,7 @@ section{
 .accountimg {
     margin-bottom: 10px;
 }
-.custom-select {
-    min-width: 20rem;
-}
+
 .accountFav {
     padding: 0 15px 15px 15px;
     margin: 5px;
@@ -158,10 +151,11 @@ section{
 .customcard {
     margin: 10px;
     cursor: pointer;
-    transition: transform .5s;
+    transition: transform .5s, z-index .2s;
 }
 .customcard:hover {
     transform: scale(1.1,1.1);
+    z-index: 2;
 }
 .customcard button {
     font-size: 11px;
@@ -230,13 +224,3 @@ section{
 
 
 
-.footer {
-    background-color: #ddd;
-    color: #333;
-}
-hr.footer {
-    background-color: #999;
-}
-.footer.spacer {
-    padding: 10px;
-}

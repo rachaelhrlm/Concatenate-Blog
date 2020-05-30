@@ -32,12 +32,10 @@ session_start();
 
         <!--Navbar Switch-->
         <?php
-//        $_COOKIE['user'] = 'uncomment to test log in switch';
         if (isset($_SESSION['user'])) {
             require_once 'views/sections/nav-member.php';
         } else {
             require_once 'views/sections/nav-default.php';
-//            require_once 'views/sections/nav-test.php';
         }
         ?>
 
@@ -51,26 +49,21 @@ session_start();
 
 
 
-
-        <?php require_once 'views/members/loginForm.php'; ?>
-
-
         <!--Content-->
         <?php require_once('routes.php'); ?>
 
 
         <!--divider-->
         <hr>
-
-        <div class="spacer footer"></div>
-        <div class="spacer footer"></div>
         <!--Footer-->
+        <div id="footer">
         <div class="container-fluid footer">
             <div class="container">
                 <div class="row justify-content-around">
-                    <div class="col-md-2">
+                    <div class="col-md-2 logoContainer">
                         <div class="row">
                             <img class="logo" src="views/images/standard/logo.png">
+                            <div class="circle"></div>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -101,10 +94,8 @@ session_start();
                 </div>
             </div>
         </div>
-        <div class="spacer footer"></div>
 
         <hr class="footer">
-        <div class="spacer footer"></div>
 
 
         <div class="container-fluid footer">
@@ -114,6 +105,7 @@ session_start();
                     <i class="far fa-copyright"></i> <?php echo date('Y') ?></div>
 
             </div>
+        </div>
         </div>
 
         <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>

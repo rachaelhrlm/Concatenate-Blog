@@ -96,8 +96,9 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 
 
                 <div class="row justify-content-center">
+                    <div class="col">
                     <div class="post">
-                        <h2 class="excerpt"><?php echo Post::censor($post->getExcerpt()) ?></h2>
+                        <h2 class="excerpt"><?php echo htmlspecialchars_decode(Post::censor($post->getExcerpt())) ?></h2>
                         <div class="postcontent">
 
                             <?php
@@ -105,6 +106,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
 
                             echo $content
                             ?></div>
+                    </div>
                     </div>
                 </div>
             </div>
