@@ -155,7 +155,12 @@ class Member {
                         Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
-                        </button> <?php
+                        </button> 
+
+
+
+
+                        <?php
                     } else {
                         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                         $email = $_POST ['email'];

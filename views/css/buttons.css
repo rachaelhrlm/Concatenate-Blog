@@ -203,7 +203,7 @@
     font-weight: 400; 
 }
 #comments .comment {
-    margin-bottom: 15px;
+    margin: 15px;
     background-color: #fff;
     padding: 10px;
     border: 1px solid #ccc;
@@ -409,9 +409,10 @@
 /*ALERTS*/
 .alert {
     margin: 0;
-    background-color: #fff;
+    background-color: #f1c40f;
     border-color: #ddd;
-    color: #333;
+    color: #fff;
+    text-align: center;
 }
 
 
