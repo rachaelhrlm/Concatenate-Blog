@@ -65,9 +65,20 @@ section{
 
 /*navigation styling*/
 
-
-
-
+.navbar-toggler-icon {
+    color: #f1c40f !important;
+}
+.navLinks{
+/*    display: flex;
+    float:right;*/
+    /*position: absolute;*/
+    right: 0;
+}
+nav .burger {
+    text-align: right;
+    right: 0;
+    float: right;
+}
 
 
 /*account page styling*/
@@ -213,7 +224,9 @@ section{
 
 /*featured post styling*/
 
-
+nav .logo {
+    max-width: 200px;
+}
 
 
 

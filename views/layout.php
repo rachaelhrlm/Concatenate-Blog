@@ -32,7 +32,7 @@ session_start();
 
         <!--Navbar Switch-->
         <?php
-        require_once 'views/sections/nav-member.php';
+        require_once 'views/sections/nav-default.php';
         ?>
 
 
