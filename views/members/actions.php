@@ -26,7 +26,7 @@
                             }
                         }
                         ?>
-                    </select><div class="form-row justify-content-end"><button type="submit" class="btn fourth">Edit</button></div>
+                    </select><div class="form-row justify-content-end"><button type="submit" class="btn1 fourth">Edit</button></div>
                 </form>
 
 
@@ -45,7 +45,7 @@
                             }
                         }
                         ?>
-                    </select><div class="form-row justify-content-end"><button type="submit" class="btn fourth">Delete</button></div>
+                    </select><div class="form-row justify-content-end"><button type="submit" class="btn1 fourth">Delete</button></div>
                 </form>
 
 
@@ -63,7 +63,7 @@
                             }
                         }
                         ?>
-                    </select><div class="form-row justify-content-end"><button type="submit" class="btn fourth">Restore</button></div>
+                    </select><div class="form-row justify-content-end"><button type="submit" class="btn1 fourth">Restore</button></div>
                 </form>
             </div>
 
@@ -108,7 +108,7 @@
                                 }
                             }
                             ?>
-                        </select><button type="submit" class="btn fourth">Set</button>
+                        </select><button type="submit" class="btn1 fourth">Set</button>
                     </form>
                 </div>
                 <!--Second Featured Post-->
@@ -133,7 +133,7 @@
                                 }
                             }
                             ?>
-                        </select><button type="submit" class="btn fourth">Set</button>
+                        </select><button type="submit" class="btn1 fourth">Set</button>
                     </form>
                 </div>
                 <!--Third Featured Post-->
@@ -158,7 +158,7 @@
                                 }
                             }
                             ?>
-                        </select><button type="submit" class="btn fourth">Set</button>
+                        </select><button type="submit" class="btn1 fourth">Set</button>
                     </form>
                 </div>
 
@@ -184,7 +184,7 @@
                                     <?php
                                 }
                             }
-                            ?></select><button type="submit" class="btn fourth">Set</button>
+                            ?></select><button type="submit" class="btn1 fourth">Set</button>
 
                     </form>
                 </div>
@@ -208,7 +208,7 @@
                                     <?php
                                 }
                             }
-                            ?></select><button type="submit" class="btn fourth">Set</button>
+                            ?></select><button type="submit" class="btn1 fourth">Set</button>
 
                     </form>
                 </div>
@@ -234,7 +234,7 @@
                                     <?php
                                 }
                             }
-                            ?></select><button type="submit" class="btn fourth">Set</button>
+                            ?></select><button type="submit" class="btn1 fourth">Set</button>
 
                     </form>
                 </div>
@@ -261,7 +261,7 @@
                                     <?php
                                 }
                             }
-                            ?></select><button type="submit" class="btn fourth">Set</button>
+                            ?></select><button type="submit" class="btn1 fourth">Set</button>
 
                     </form>
                 </div>

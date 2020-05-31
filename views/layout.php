@@ -32,7 +32,7 @@ session_start();
 
         <!--Navbar Switch-->
         <?php
-            require_once 'views/sections/nav-member.php';
+        require_once 'views/sections/nav-member.php';
         ?>
 
 
@@ -49,57 +49,86 @@ session_start();
         <?php require_once('routes.php'); ?>
 
 
+
+
+        <hr>
+        <div class='container-fluid'id='subscribe'>
+
+            <div class='row justify-content-center'>
+
+
+                <form class='form-inline' method="POST" action='?controller=member&action=subscribe<?php if (isset($_GET['id'])){ echo "&id={$_GET['id']}";} ?>'>
+                    <h3>Subscribe: </h3>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="email" name='email'>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                        </div>
+                    </div>
+
+
+
+
+                </form>
+            </div>
+        </div>
+
+
+
         <!--divider-->
         <hr>
         <!--Footer-->
         <div id="footer">
-        <div class="container-fluid footer">
-            <div class="container">
-                <div class="row justify-content-around">
-                    <div class="col-md-2 logoContainer">
-                        <div class="row">
-                            <img class="logo" src="views/images/standard/logo.png">
-                            <!--<div class="circle"></div>-->
+            <div class="container-fluid footer">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-2 logoContainer">
+                            <div class="row">
+                                <img class="logo" src="views/images/standard/logo.png">
+                                <!--<div class="circle"></div>-->
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <ul>
-                            <li> <h5> <i class="fas fa-circle footcircle"></i>Contact</h5> </li>
-                            <!--<li><hr></li>-->
-                            <li>Example</li>
-                            <li>Example</li>
-                            <li>Example</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3"><ul>
-                            <li><h5> <i class="fas fa-circle footcircle"></i>Events</h5></li>
-                            <!--<li><hr></li>-->
-                            <li>Example</li>
-                            <li>Example</li>
-                            <li>Example</li>
-                        </ul></div>
-                    <div class="col-md-3">
-                        <ul>
-                            <li><h5><i class="fas fa-circle footcircle"></i>Socials</h5></li>
-                            <!--<li><hr></li>-->
-                            <li><i class="fab fa-discord fa-2x"></i><i class="fab fa-facebook fa-2x"></i><i class="fab fa-github fa-2x"></i></li>
-                        </ul>
+                        <div class="col-md-3">
+                            <ul>
+                                <li> <h5> <i class="fas fa-circle footcircle"></i>Contact</h5> </li>
+                                <!--<li><hr></li>-->
+                                <li>Example</li>
+                                <li>Example</li>
+                                <li>Example</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <ul>
+                                <li><h5><i class="fas fa-circle footcircle"></i>Socials</h5></li>
+                                <!--<li><hr></li>-->
+                                <li><i class="fab fa-discord fa-2x"></i><i class="fab fa-facebook fa-2x"></i><i class="fab fa-github fa-2x"></i></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul>
+                                <li> <h5> <i class="fas fa-circle footcircle"></i>Contact</h5> </li>
+                                <!--<li><hr></li>-->
+                                <li>Example</li>
+                                <li>Example</li>
+                                <li>Example</li>
+                            </ul>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <hr class="footer">
+            <hr class="footer">
 
 
-        <div class="container-fluid footer">
-            <div class="row justify-content-end align-content-middle">
-                <div class="col-md-2">
-                    <img src="views/images/standard/logo-graphic.png" width="30px">
-                    <i class="far fa-copyright"></i> <?php echo date('Y') ?></div>
+            <div class="container-fluid footer">
+                <div class="row justify-content-end align-content-middle">
+                    <div class="col-md-2">
+                        <img src="views/images/standard/logo-graphic.png" width="30px">
+                        <i class="far fa-copyright"></i> <?php echo date('Y') ?></div>
 
+                </div>
             </div>
-        </div>
         </div>
 
         <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>

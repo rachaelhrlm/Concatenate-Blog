@@ -13,7 +13,7 @@
                 <input type="hidden" name="action" value="updateName">
                 <input class="form-control" type="text" name="name" value="<?php echo (isset($user['name'])) ? $user['name'] : $_SESSION['user']->getUserName(); ?> ">
                 <div class="form-row justify-content-end">
-                    <button type="submit" class="btn fourth">Update</button>
+                    <button type="submit" class="btn1 fourth">Update</button>
                 </div>
             </form>
         </div>
@@ -33,7 +33,7 @@
                 <input type="hidden" name="action" value="updateAbout">
                 <textarea form="aboutMe" class="form-control aboutArea" type="text" name="about"><?php echo (isset($user['about'])) ? $user['about'] : "About me"; ?> </textarea>
                 <div class="form-row justify-content-end">
-                    <button type="submit" class="btn fourth">Update</button>
+                    <button type="submit" class="btn1 fourth">Update</button>
                 </div>
             </form>
         </div>
@@ -70,7 +70,7 @@
                 <input type="file" name="myUploader" class="custom-file-input" id="image">
                 <label class="custom-file-label cfl" for="image">Choose file</label>
                 <div class="form-row justify-content-end">
-                    <button type="submit" class="btn fourth">Update</button>
+                    <button type="submit" class="btn1 fourth">Update</button>
                 </div>
             </form>
         </div>

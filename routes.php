@@ -25,10 +25,10 @@ function call($controller, $action) {
 
 // for validation we list the allowed controllers and their actions
 // Add an entry for each new controller and its actions
-$controllers = array('pages' => ['home', 'error'],
+$controllers = array('pages' => ['home', 'error',],
     'product' => ['readAll', 'read', 'create', 'update', 'delete'],
     'post' => ['searchAll', 'searchID', 'edit', 'create','delete', 'restore','feature','createComment'],
-    'member' => ['loginForm','login', 'logout','register', 'account','fav','unfav', 'updateName', 'updateAbout', 'updateProfilePic', 'promoteMember', 'demoteMember', 'changeEmail', 'changePassword', 'unbanMember', 'banMember'],
+    'member' => ['loginForm','login', 'logout','register', 'account','fav','unfav', 'updateName', 'updateAbout', 'updateProfilePic', 'promoteMember', 'demoteMember', 'changeEmail', 'changePassword', 'unbanMember', 'banMember', 'subscribe'],
 );
 
 

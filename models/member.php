@@ -61,6 +61,35 @@ class Member {
         $this->accessLevelID = $accessLevelID;
     }
 
+    public static function subscribe($email) {
+        $db = Db::getInstance();
+        $req = $db->prepare("SELECT email FROM subscriber WHERE email= ?");
+        $req->execute([$email]);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+        if (isset($data['email'])) {
+            ?>
+            <div class='alert alert-primary' role='alert'>
+                Email address is already subscribed.
+                <button type='button' class='close' data-dismiss='alert'aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>
+        <?php
+        } else {
+            $db = Db::getInstance();
+            $req = $db->prepare("INSERT INTO subscriber(email) VALUES (?)");
+            $req->execute([$email]);
+            ?>
+            <div class='alert alert-primary' role='alert'>
+                Email successfully subscribed.
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div> 
+            <?php
+        }
+    }
+
     public function confirmLogin() {
         $username = $this->getUserName();
         $password = $_POST['password'];

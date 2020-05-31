@@ -25,7 +25,7 @@
                                 <?php } ?>                     
                         </select>
                         <input type="text" name='securityAnswer' placeholder="Answer" required/>
-                        <button class="btn fourth" type="submit">Sign Up</button>
+                        <button class="btn1 fourth" type="submit">Sign Up</button>
                     </form>
                 </div>
                 <div class="form-group form-container sign-in-container ">
@@ -37,7 +37,7 @@
                         <input type="text" name="userName" placeholder="Username" required/>
                         <input type="password" name="password" placeholder="Password" required />
                         <a href="#">Forgot your password?</a>
-                        <button class="btn fourth" type="submit">Sign In</button>
+                        <button class="btn1 fourth" type="submit">Sign In</button>
                     </form>
                 </div>
                 <div class="overlay-container">
@@ -45,12 +45,12 @@
                         <div class="overlay-panel overlay-left">
                             <h2 class="overlayheader">Meow?</h2>
                             <p>Already have an account?</p>
-                            <button class="btn third" id="signIn">Maybe.</button>
+                            <button class="btn1 third" id="signIn">Maybe.</button>
                         </div>
                         <div class="overlay-panel overlay-right">
                             <h2 class="overlayheader">Meow!</h2>
                             <p>Hey! Do you like cats? </p>
-                            <button class="btn third" id="signUp">Yes!</button>
+                            <button class="btn1 third" id="signUp">Yes!</button>
                         </div>
                     </div>
                 </div>

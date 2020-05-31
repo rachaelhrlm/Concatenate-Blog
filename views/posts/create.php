@@ -104,7 +104,7 @@
 
 
             <div class="form-row justify-content-end">
-                <input type="submit" value="Submit" class="btn fourth">
+                <input type="submit" value="Submit" class="btn1 fourth">
             </div>
         </form>
 

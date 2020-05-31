@@ -246,7 +246,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                             <textarea name='message' class='form-control commentAreas' form="form-comment" placeholder="Comment"></textarea>
                         </div>
                         <div class='form-row justify-content-end'>
-                            <input type="submit" value='Submit Comment' class='btn fourth'>
+                            <input type="submit" value='Submit Comment' class='btn1 fourth'>
                         </div>
 
                     </form>
@@ -264,7 +264,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
             <div class="col-md-9 newComment">
                 Please log in to comment.
                 <div class='form-row justify-content-end'>
-                    <a href="?controller=member&action=loginForm"><button class="btn fourth" >Login </button></a>
+                    <a href="?controller=member&action=loginForm"><button class="btn1 fourth" >Login </button></a>
                 </div>
             </div>
         </div>

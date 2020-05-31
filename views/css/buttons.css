@@ -19,7 +19,7 @@
 /*---------------------------------------------------*/
 
 /*BUTTONS*/
-.btn {
+.btn1 {
     box-sizing: border-box;
     appearance: none;
     background-color: transparent;
@@ -131,7 +131,7 @@
     font-family: 'Varela Round', sans-serif;
     font-weight: 400; 
 }
-.tab-container .btn {
+.tab-container .btn1 {
     margin-right: 0;
 }
 .tab-container #email {
@@ -477,6 +477,44 @@
 
 
 
+
+
+/*---------------------------------------------------*/
+
+/*SUBSCRIBE*/
+#subscribe {
+    background-color: #efefef;
+    color: #333;
+    padding: 2em 0 1em 0;
+}
+#subscribe .fourth {
+    border-radius: 100px;
+}
+#subscribe h3 {
+    margin: -15px 20px 0 0;
+}
+#subscribe .btn {
+    border-radius: 0 50px  50px 0;
+    background-color: #f1c40f;
+    color: #fff;
+    border: 1px solid #ccc;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+#subscribe .form-control {
+    width: 20em;
+    padding-left: 20px;
+}
+
+
+
+
+
+
+
+
+
+
 /*---------------------------------------------------*/
 
 /*FOOTER*/
@@ -484,6 +522,7 @@
     background-color: #ddd;
     color: #333;
     padding: 3em 0 1em 0;
+    text-align: center;
 }
 hr.footer {
     background-color: #999;

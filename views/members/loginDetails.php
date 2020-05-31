@@ -6,7 +6,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-4 vpad text-center"><?php echo $_SESSION['user']->getEmail() ?></div>
-            <div class="col-md-4 text-center"><button class="btn fourth" onclick="showHide('email')">Change</button></div>
+            <div class="col-md-4 text-center"><button class="btn1 fourth" onclick="showHide('email')">Change</button></div>
         </div>
 
 
@@ -30,7 +30,7 @@
                     <input type="hidden" name="emailVerify" value="true">        
                     <div class="smalltext">Please validate your session</div>   
                     <div class="form-row justify-content-end">
-                        <button class="btn fourth" type='submit'>Submit</button>
+                        <button class="btn1 fourth" type='submit'>Submit</button>
                     </div>
                 </form>
             </div>
@@ -40,7 +40,7 @@
                     <input type="hidden" name="changeEmail" value="true">
                     <input class="form-control" type="email" name="newemail" value="<?php echo $_SESSION['user']->getEmail(); ?> ">
                     <div class="form-row justify-content-end">
-                        <button type="submit" class="btn fourth">Update</button>
+                        <button type="submit" class="btn1 fourth">Update</button>
                     </div>
                 </form>
             </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-4 vpad text-center"> ( -- It's a secret! -- ) </div>
-            <div class="col-md-4 text-center"><button class="btn fourth" onclick="showHide('passwords')">Change</button></div>
+            <div class="col-md-4 text-center"><button class="btn1 fourth" onclick="showHide('passwords')">Change</button></div>
         </div>
 
         <div class="spacer"></div>
@@ -83,7 +83,7 @@
                     <input type="hidden" name="passwordVerify" value="true">        
                     <div class="smalltext">Please validate your session</div>   
                     <div class="form-row justify-content-end">
-                        <button class="btn fourth" type='submit'>Submit</button>
+                        <button class="btn1 fourth" type='submit'>Submit</button>
                     </div>
                 </form>
             </div>
@@ -94,7 +94,7 @@
                     New Password:  <input class="form-control" type="password" name="newpassword">
                     Confirm Password:  <input class="form-control" type="password" name="confirmpassword">
                     <div class="form-row justify-content-end">
-                        <button type="submit" class="btn fourth">Update</button>
+                        <button type="submit" class="btn1 fourth">Update</button>
                     </div>
                 </form>
         </div>

@@ -10,6 +10,7 @@ class MemberController {
             return call('pages', 'home');
         }
     }
+
     public function login() {
         if (!isset($_SESSION['user'])) {
             Member::login();
@@ -138,7 +139,7 @@ class MemberController {
             if (isset($_FILES['myUploader'])) {
                 $_SESSION['user']->updateProfilePic();
                 ?>
-                
+
                 <?php
                 return call('member', 'account');
             } else {
@@ -355,6 +356,15 @@ class MemberController {
                 <?php
                 return call('post', 'searchID');
             }
+        }
+    }
+
+    public function subscribe() {
+        Member::subscribe($_POST['email']);
+        if (isset($_GET['id'])) {
+            call('post', 'searchID');
+        } else {
+            call('pages', 'home');
         }
     }
 

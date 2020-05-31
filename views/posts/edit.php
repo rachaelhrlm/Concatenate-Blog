@@ -132,11 +132,11 @@
 
             <div class="form-row justify-content-end">
                 <?php if(isset($_GET['id'])) { ?>
-                <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>" class="btn fourth">
+                <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>" class="btn1 fourth">
                 <?php } else if (isset($_POST['id'])){ ?>
-                <input type="hidden" name="id" value="<?php echo $_POST['id'] ?>" class="btn fourth">
+                <input type="hidden" name="id" value="<?php echo $_POST['id'] ?>" class="btn1 fourth">
                 <?php } ?>
-                <input type="submit" value="Submit" class="btn fourth">
+                <input type="submit" value="Submit" class="btn1 fourth">
             </div>
         </form>
 

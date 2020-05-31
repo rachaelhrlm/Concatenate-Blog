@@ -27,7 +27,7 @@
                                         
                                         <hr>
                                         <p><?php echo Post::censor($featuredPost->getExcerpt()) ?></p>
-                                        <button onclick='location.href ="?controller=post&action=searchID&id=<?php echo $featuredPost->getPostID();?>"' class="btn fourth align-self-end featured-btn">Read More</button>
+                                        <button onclick='location.href ="?controller=post&action=searchID&id=<?php echo $featuredPost->getPostID();?>"' class="btn1 fourth align-self-end featured-btn">Read More</button>
                                     </div>
                                 </div>
                             </div>
