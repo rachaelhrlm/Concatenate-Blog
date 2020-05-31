@@ -3,13 +3,13 @@
     <div class="navbar-header ">
         <a class="navbar-brand" href='?controller=pages&action=home'><img class="logo" src="views/images/standard/logo-inline.png"></a>
 
-        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <i class="fas fa-bars"></i>
         </button>
     </div>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class=" nav navbar-nav navbar-right ml-auto">
-            <li><i class="fas fa-circle navcircle "></i><a class="nav-link" href='?controller=pages&action=home'> Home</a></li>
+            <li><a class="nav-link" href='?controller=pages&action=home'> Home</a></li>
             <li><i class="fas fa-circle navcircle "></i><a  class="nav-link" href='?controller=post&action=searchAll'>Blogs</a></li>
 
             <?php if (isset($_SESSION['user'])) { ?>

@@ -21,7 +21,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                 if (isset($_SESSION['user'])) {
                     ?>
                     <div class="row postNav">
-                        <div class='col-md-2 text-left'>
+                        <div class='col-md-2 textleft'>
                             <?php
                             $faved = null;
                             foreach ($favs as $fav) {
@@ -38,7 +38,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                                 <a href="?controller=member&action=fav&id=<?php echo $post->getPostID(); ?>"><i class="far fa-heart fa-3x icon"></i></a>
                             <?php } ?>
                         </div>
-                        <div class="col-md-10 text-right">
+                        <div class="col-md-10 textright">
                             <?php if (($_SESSION['user']->getAccessLevelID() === '1' ) || ($post->getMemberID() === $_SESSION['user']->getMemberID())) { ?>
 
 
@@ -130,7 +130,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                             <img src="<?php echo $pic ?>" class="profilePic">
                             <p><?php echo $post->getAuthor() ?></p>
                         </div>
-                        <div class="col-md-6 text-left">
+                        <div class="col-md-6 textleft">
 
                             <p><?php echo $post->getAbout() ?></p>
                             <hr>

@@ -5,7 +5,7 @@
         <div class="col-md-7">
             <h1>Editing Post #<?php echo (isset($post))?$post->getPostID():$_POST['id']; ?></h1>
         </div>
-        <div class="col-md-2 text-right">
+        <div class="col-md-2 textright">
             
             
             <?php if(isset($_GET['id'])) {

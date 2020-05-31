@@ -10,7 +10,12 @@
     border-radius: 25px;
 }
 
-
+.textleft {
+    text-align: left;
+}
+.textright {
+    text-align: right;
+}
 
 
 
@@ -107,6 +112,7 @@
 #account {
     background-color: #efefef;
     padding-bottom: 25px;
+    min-height: 550px;
 }
 #account .nav-link {
     color: #333;
@@ -327,7 +333,7 @@
 }
 .latestPosts .customcard {
     background-color: white;
-    border-color: #efefef;
+    border-color: #ccc;
 }
 .latestPosts h1{
     color: #333;
@@ -469,6 +475,7 @@
 /*CUSTOM CARD*/
 .customcard .card-text {
     margin-top: 15px;
+    border-color: #ccc;
 }
 
 
@@ -596,9 +603,23 @@ hr.footer {
 /*FORMS*/
 @media only screen and (max-width: 768px) {
     .navbar .container, .navbar .container-fluid, .navbar .container-lg, .navbar .container-md, .navbar .container-sm, .navbar .container-xl {
-     justify-content: center;   
+        justify-content: center;   
     }
-        
+    .navbar li, .navbar i, .navbar ul  {
+        text-align: left;
+        margin: 0;
+    }
+    .navbar .navcircle  {
+        display: none;
+    }
+
+    #subscribe {
+        padding: 50px;
+    }
+    #footer .logoContainer {
+        padding: 0 50px 30px 50px;
+    }
+
     .featured-text {
         min-height: 200px;
         position: static;
@@ -613,8 +634,23 @@ hr.footer {
         margin-top: 19rem;
         bottom: auto;
     }
+.post img {
+    max-width: 100%;
+}
+.navbar-toggler, .navbar-toggler:focus, .navbar-toggler:hover, .navbar-toggler:active{
+    color: #ff7369;
+    border: 0;
+    outline: none;
+    box-shadow: none;
+}
 
+nav .logo {
+    padding: 0 0 8px 0;
+}
 
+    .postNav .textleft, .postNav .textright {
+        text-align: center;
+    }
 
     .tab-container {
         margin-top: 20px;
@@ -672,16 +708,16 @@ hr.footer {
         padding: 0 0 0 0;
     }
     #footer ul {
-    margin: 0;
-    padding-bottom: 50px;
-}
-#footer li {
-    text-align: left;
-    text-indent: 25px;
-}
-#footer h5 {
-    text-indent: 0;
-}
+        margin: 0;
+        padding-bottom: 50px;
+    }
+    #footer li {
+        text-align: left;
+        text-indent: 25px;
+    }
+    #footer h5 {
+        text-indent: 0;
+    }
 }
 
 

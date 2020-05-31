@@ -5,7 +5,7 @@
         <div class="col-md-7">
             <h1>New Post</h1>
         </div>
-        <div class="col-md-2 text-right">
+        <div class="col-md-2 textright">
             <a href="?controller=member&action=account#actions"><i class="far fa-times-circle fa-3x icon" data-toggle="tooltip" data-placement="top" title="Cancel Create"></i></a>
         </div>
     </div>    
