@@ -52,7 +52,7 @@
         <div class="row justify-content-center">
             <?php
             if (file_exists("views/images/members/{$_SESSION['user']->getMemberID()}.jpeg")) {
-                $propic = "views/images/members/{$_SESSION['user']->getMemberID()}.jpeg?".Date('U');
+                $propic = "views/images/members/{$_SESSION['user']->getMemberID()}.jpeg?=".Date('U');
             } else {
                 $propic = "views/images/standard/noprofileimage.png";
             }

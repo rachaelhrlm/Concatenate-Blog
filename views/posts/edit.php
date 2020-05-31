@@ -99,7 +99,7 @@
                     if(isset($post)){
                     $file = 'views/images/' . $post->getPostID() . '.jpeg';
                     } else {
-                    $file = 'views/images/' . $_POST['id'] . '.jpeg';
+                    $file = 'views/images/' . $_POST['id'] . '.jpeg?=' . Date('U');
                     }
                     if (file_exists($file)) {
                         $img = "<img src='$file?=Date('U')' width='500' />";

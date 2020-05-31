@@ -68,7 +68,7 @@
     <div class="row justify-content-center postAll">
         <?php foreach ($posts as $post) { ?>
             <?php
-            $img = "views/images/{$post->getPostID()}.jpeg";
+            $img = "views/images/{$post->getPostID()}.jpeg?=".Date('U');
             ?>
             <div class="card customcard" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $post->getPostID(); ?>';" style="width: 20rem;">
                 <img src="<?php echo $img ?>"  class="card-img-top" alt="Image for <?php ucwords(Post::censor($post->getTitle())) ?>">

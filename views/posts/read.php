@@ -292,7 +292,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                 }
             }
             if (!empty($prev)) {
-                $previmg = "views/images/{$prevID}.jpeg";
+                $previmg = "views/images/{$prevID}.jpeg?=".Date('U');
                 ?>
                 <div class="row justify-content-center">
                     <i class="far fa-hand-point-left fa-2x icon" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $prev->getPostID(); ?>';"></i><h2>Previous Post</h2>
@@ -321,7 +321,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
                 }
             }
             if (!empty($next)) {
-                $nextimg = "views/images/{$nextID}.jpeg";
+                $nextimg = "views/images/{$nextID}.jpeg?=".Date('U');
                 ?>
                 <div class="row justify-content-center">
                     <h2>Next Post</h2><i class="far fa-hand-point-right fa-2x icon" onclick="location.href = '?controller=post&action=searchID&id=<?php echo $next->getPostID(); ?>';"></i>
