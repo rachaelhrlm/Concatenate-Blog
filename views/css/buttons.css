@@ -609,20 +609,28 @@ hr.footer {
         border-radius: 15px 15px 0 0;
     }
     .carousel-control-next, .carousel-control-prev, .carousel-control-next:hover, .carousel-control-prev:hover{
-        margin-top: -25rem;
+        margin-top: 19rem;
+        bottom: auto;
     }
     
     
     
     .tab-container {
+        margin-top: 20px;
         padding-left: 30px;
         padding-right: 30px;
         text-align: center;
     }
     
-    
+    .tab-container .custom-select {
+        min-width: 10rem;
+        max-width: 10rem;
+    }
     #subscribe .form-control {
     width: 5em;
+}
+h1 {
+    text-align: center;
 }
 }
 

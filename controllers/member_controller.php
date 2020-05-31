@@ -151,7 +151,7 @@ class MemberController {
     }
 
     public function promoteMember() {
-        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() === 1) {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() == 1) {
             if (isset($_POST['id'])) {
                 $_SESSION['user']->promoteMember($_POST['id']);
                 ?>
@@ -172,7 +172,7 @@ class MemberController {
     }
 
     public function demoteMember() {
-        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() === 1) {
+        if (isset($_SESSION['user']) && $_SESSION['user']->getAccessLevelID() == 1) {
             if (isset($_POST['id'])) {
                 $_SESSION['user']->demoteMember($_POST['id']);
                 ?>
