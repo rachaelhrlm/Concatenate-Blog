@@ -11,6 +11,14 @@
 }
 
 
+
+
+
+
+
+/*---------------------------------------------------*/
+
+/*BUTTONS*/
 .btn {
     box-sizing: border-box;
     appearance: none;
@@ -562,6 +570,14 @@ hr.footer {
     }
     .carousel-control-next, .carousel-control-prev, .carousel-control-next:hover, .carousel-control-prev:hover{
         margin-top: -25rem;
+    }
+    
+    
+    
+    .tab-container {
+        padding-left: 30px;
+        padding-right: 30px;
+        text-align: center;
     }
 }
 

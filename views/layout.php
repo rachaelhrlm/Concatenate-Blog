@@ -32,11 +32,7 @@ session_start();
 
         <!--Navbar Switch-->
         <?php
-        if (isset($_SESSION['user'])) {
             require_once 'views/sections/nav-member.php';
-        } else {
-            require_once 'views/sections/nav-default.php';
-        }
         ?>
 
 
