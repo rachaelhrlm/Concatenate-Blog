@@ -28,6 +28,7 @@
     margin: 0;
     font-size: 120px;
     font-family: 'Gochi Hand', cursive;
+    text-transform: lowercase;
 }
 .overall .sign-in-container h1,.overall .sign-up-container h1 {
     color: #333;
@@ -236,4 +237,14 @@
     top: -40px;
     right: -20px;
     z-index: 200;
+}
+
+@media only screen and (max-width: 576px) {
+    .loginFormContainer {
+        min-height: 800px;
+    }
+    .overlay h2{
+        font-size: 60px;
+    }
+    
 }

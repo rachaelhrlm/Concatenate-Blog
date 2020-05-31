@@ -264,7 +264,7 @@ if (file_exists("views/images/members/{$post->getMemberID()}.jpeg")) {
             <div class="col-md-9 newComment">
                 Please log in to comment.
                 <div class='form-row justify-content-end'>
-                    <button class="btn fourth" onclick="loginForm('overall')">Login </button>
+                    <a href="?controller=member&action=loginForm"><button class="btn fourth" >Login </button></a>
                 </div>
             </div>
         </div>

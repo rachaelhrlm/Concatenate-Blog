@@ -15,7 +15,7 @@
                 </li>
                 <li><i class="fas fa-circle navcircle "></i></li>
                 <li class="nav-item">
-                    <a class="nav-link" id="loginButton" href='?controller=member&action=loginForm'">Login </a>
+                    <a class="nav-link" id="loginButton" href='?controller=member&action=loginForm'>Login </a>
                 </li>
             </ul>
         </div>

@@ -478,7 +478,7 @@
 }
 hr.footer {
     background-color: #999;
-    margin: 1em 0;
+    margin: 0 0 1em 0;
 }
 #footer .logoContainer {
     padding: 20px;
@@ -489,6 +489,7 @@ hr.footer {
 }
 #footer ul {
     margin: 0;
+    padding-bottom: 50px;
 }
 #footer .fab {
     padding: 10px;
