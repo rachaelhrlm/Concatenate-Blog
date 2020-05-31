@@ -5,7 +5,7 @@
 
         <!--Update Name Form-->
         <div class="row justify-content-center">
-            <h2>Update Name: </h2>
+            <i class="fas fa-user-circle fa-3x icon"></i><h1>Name </h1>
         </div>
         <div class="row justify-content-center">
             <form action="" method="GET" class="col-md-7">
@@ -13,7 +13,7 @@
                 <input type="hidden" name="action" value="updateName">
                 <input class="form-control" type="text" name="name" value="<?php echo (isset($user['name'])) ? $user['name'] : $_SESSION['user']->getUserName(); ?> ">
                 <div class="form-row justify-content-end">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn fourth">Update</button>
                 </div>
             </form>
         </div>
@@ -25,7 +25,7 @@
 
         <!--Update About Me Form-->
         <div class="row justify-content-center">
-            <h2>Update About Me: </h2>
+            <i class="far fa-id-card fa-3x icon"></i><h1>About Me </h1>
         </div>
         <div class="row justify-content-center">
             <form action="" method="GET" id="aboutMe" class="col-md-7">
@@ -33,7 +33,7 @@
                 <input type="hidden" name="action" value="updateAbout">
                 <textarea form="aboutMe" class="form-control aboutArea" type="text" name="about"><?php echo (isset($user['about'])) ? $user['about'] : "About me"; ?> </textarea>
                 <div class="form-row justify-content-end">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn fourth">Update</button>
                 </div>
             </form>
         </div>
@@ -47,7 +47,7 @@
 
         <!--Update Profile Picture Form-->
         <div class="row justify-content-center">
-            <h2>Update Profile Picture: </h2>
+            <i class="fas fa-camera fa-3x icon"></i><h1>Profile Picture </h1>
         </div>
         <div class="row justify-content-center">
             <?php
@@ -70,7 +70,7 @@
                 <input type="file" name="myUploader" class="custom-file-input" id="image">
                 <label class="custom-file-label cfl" for="image">Choose file</label>
                 <div class="form-row justify-content-end">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn fourth">Update</button>
                 </div>
             </form>
         </div>

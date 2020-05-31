@@ -16,77 +16,33 @@ session_start();
         <!--custom style sheet-->
 
         <link href="views/css/loginform.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="views/css/styles.css">
+        <link rel="stylesheet" href="views/css/styles.css" type="text/css">
+        <link href="views/css/buttons.css" rel="stylesheet" type="text/css"/>
 
         <title>Concatenate</title>
     </head>
 
 
     <body>
-        <!--Logo Bar-->
-        <div class="container-fluid logo">
-            <div class="row justify-content-center">
-                <img src="views/images/standard/logo.png" height="80px">
-            </div>
-        </div>
+        <i class="fas fa-chevron-circle-up fa-3x icon" onclick="topFunction()" id="scrollup"></i>
 
-        <!--divider-->
-        <hr>
+
+
 
 
         <!--Navbar Switch-->
         <?php
-//        $_COOKIE['user'] = 'uncomment to test log in switch';
-        if (isset($_SESSION['user'])) {
             require_once 'views/sections/nav-member.php';
-        } else {
-            require_once 'views/sections/nav-default.php';
-//            require_once 'views/sections/nav-test.php';
-        }
         ?>
 
 
 
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="loginLabel">Login</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action = "?controller=member&action=login" method = "POST">
-                            <div class="form-group row">
-                                <label for="username"  class="col-sm-2 col-form-label" required>Username:</label>
-                                <div class="col-md-10">
-                                    <input type="text" name="login_username" class="form-control" id="username">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password"  class="col-sm-2 col-form-label" required>Password:</label>
-                                <div class="col-md-10">
-                                    <input type="password" name="login_password"  class="form-control" id="password">
-                                </div>
-                            </div>
-                            <input type="hidden" name='login' value="true">
-                            <button type = 'submit' class="btn btn-primary" >Log In</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <hr>
 
 
-
-
-
-
-        <?php require_once 'views/members/loginForm.php'; ?>
 
 
         <!--Content-->
@@ -95,60 +51,55 @@ session_start();
 
         <!--divider-->
         <hr>
-
-
         <!--Footer-->
-        <div class="container">
-            <div class="row justify-content-around">
-                <div class="col-md-2">
-                    <ul>
-                        <li><h5>Resources</h5></li>
-                        <!--<li><hr></li>-->
-                        <li>Example</li>
-                        <li>Example</li>
-                        <li>Example</li>
-                    </ul>
-                </div>
-                <div class="col-md-2">
-                    <ul>
-                        <li><h5>Contact</h5></li>
-                        <!--<li><hr></li>-->
-                        <li>Example</li>
-                        <li>Example</li>
-                        <li>Example</li>
-                    </ul>
-                </div>
-                <div class="col-md-2"><ul>
-                        <li><h5>Events</h5></li>
-                        <!--<li><hr></li>-->
-                        <li>Example</li>
-                        <li>Example</li>
-                        <li>Example</li>
-                    </ul></div>
-                <div class="col-md-2">
-                    <ul>
-                        <li><h5>Socials</h5></li>
-                        <!--<li><hr></li>-->
-                        <li><i class="fab fa-discord"></i></li>
-                        <li><i class="fab fa-facebook"></i></li>
-                        <li><i class="fab fa-github"></i></li>
-                    </ul>
+        <div id="footer">
+        <div class="container-fluid footer">
+            <div class="container">
+                <div class="row justify-content-around">
+                    <div class="col-md-2 logoContainer">
+                        <div class="row">
+                            <img class="logo" src="views/images/standard/logo.png">
+                            <!--<div class="circle"></div>-->
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li> <h5> <i class="fas fa-circle footcircle"></i>Contact</h5> </li>
+                            <!--<li><hr></li>-->
+                            <li>Example</li>
+                            <li>Example</li>
+                            <li>Example</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3"><ul>
+                            <li><h5> <i class="fas fa-circle footcircle"></i>Events</h5></li>
+                            <!--<li><hr></li>-->
+                            <li>Example</li>
+                            <li>Example</li>
+                            <li>Example</li>
+                        </ul></div>
+                    <div class="col-md-3">
+                        <ul>
+                            <li><h5><i class="fas fa-circle footcircle"></i>Socials</h5></li>
+                            <!--<li><hr></li>-->
+                            <li><i class="fab fa-discord fa-2x"></i><i class="fab fa-facebook fa-2x"></i><i class="fab fa-github fa-2x"></i></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-
-        <hr>
-
+        <hr class="footer">
 
 
-        <div class="container-fluid">
+        <div class="container-fluid footer">
             <div class="row justify-content-end align-content-middle">
                 <div class="col-md-2">
-                    <img src="views/images/standard/graphiclogo.png" width="30px">
+                    <img src="views/images/standard/logo-graphic.png" width="30px">
                     <i class="far fa-copyright"></i> <?php echo date('Y') ?></div>
 
             </div>
+        </div>
         </div>
 
         <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
@@ -175,7 +126,6 @@ session_start();
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
             });
-
 //            Enable Bootstrap ToolTip
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
@@ -190,6 +140,28 @@ session_start();
                 var nextSibling = e.target.nextElementSibling
                 nextSibling.innerText = fileName
             })
+
+
+
+            var scrollup = document.getElementById("scrollup");
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    scrollup.style.display = "block";
+                } else {
+                    scrollup.style.display = "none";
+                }
+            }
+
+
+
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
 
 
         </script>

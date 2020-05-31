@@ -1,4 +1,5 @@
 <?php
+require_once 'models/exceptions.php';
 
 class Member {
 
@@ -154,7 +155,12 @@ class Member {
                         Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.
                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                             <span aria-hidden='true'>&times;</span>
-                        </button> <?php
+                        </button> 
+
+
+
+
+                        <?php
                     } else {
                         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                         $email = $_POST ['email'];
@@ -292,7 +298,7 @@ class Member {
             $db = Db::getInstance();
             $user = $this->getMemberID();
             $id = intval($id);
-            $req = $db->prepare('INSERT INTO favourite (memberID, postID) VALUES (?,?);');
+            $req = $db->prepare('call addFavourite(?,?)');
             $req->execute([$user, $id]);
         }
 
@@ -315,12 +321,58 @@ class Member {
         const InputKey = 'myUploader';
 
         public static function updateProfilePic() {
-            $tempFile = $_FILES[self::InputKey]['tmp_name'];
-            $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/members/";
-            $destinationFile = $path . $_SESSION['user']->getMemberID() . '.jpeg';
-            move_uploaded_file($tempFile, $destinationFile);
-            if (file_exists($tempFile)) {
-                unlink($tempFile);
+
+            if (!empty($_FILES[self::InputKey]['name'])) {
+                try {
+                    list($width, $height, $type, $attr) = getimagesize($_FILES[self::InputKey]['tmp_name']);
+                    if (empty($_FILES[self::InputKey])) {
+                        throw new NoFileException();
+                    } else if (!in_array($_FILES[self::InputKey]['type'], self::AllowedTypes)) {
+                        throw new WrongFileTypeException();
+                    } else if ($_FILES[self::InputKey]['error'] > 0) {
+                        throw new Exception();
+                    } else {
+                        $tempFile = $_FILES[self::InputKey]['tmp_name'];
+                        $path = "C:/xampp/htdocs/MVC/MVC-Skeleton/views/images/members/";
+                        $destinationFile = $path . $_SESSION['user']->getMemberID() . '.jpeg';
+                        move_uploaded_file($tempFile, $destinationFile);
+                        if (file_exists($tempFile)) {
+                            unlink($tempFile);
+                        }
+                        ?>
+                        <div class='alert alert-primary' role='alert'>
+                            Profile Picture successfully updated.
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div> <?php
+                    }
+                } catch (NoFileException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        File missing! Please try again.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                    <?php
+                } catch (WrongFileTypeException $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        You cannot upload this file type <?php echo $_FILES[self::InputKey]['type'] ?>, please try again.
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div>
+                <?php } catch (Exception $ex) {
+                    ?>
+                    <div class='alert alert-primary' role='alert'>
+                        oops something went wrong
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                            <span aria-hidden='true'>&times;</span>
+                        </button>
+                    </div><?php
+                }
             }
         }
 

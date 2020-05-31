@@ -3,10 +3,17 @@ require_once 'models/post.php';
 
 class MemberController {
 
+    public function loginForm() {
+        if (!isset($_SESSION['user'])) {
+            require_once('views/members/loginForm.php');
+        } else {
+            return call('pages', 'home');
+        }
+    }
     public function login() {
         if (!isset($_SESSION['user'])) {
             Member::login();
-            return call('pages', 'home');
+            require_once('views/members/loginForm.php');
         } else {
             return call('pages', 'home');
         }
@@ -15,7 +22,7 @@ class MemberController {
     public function register() {
         if (!isset($_SESSION['user'])) {
             Member::register();
-            return call('pages', 'home');
+            require_once('views/members/loginForm.php');
         } else {
             return call('pages', 'home');
         }
@@ -131,12 +138,7 @@ class MemberController {
             if (isset($_FILES['myUploader'])) {
                 $_SESSION['user']->updateProfilePic();
                 ?>
-                <div class='alert alert-primary' role='alert'>
-                    Profile Picture successfully updated.
-                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                        <span aria-hidden='true'>&times;</span>
-                    </button>
-                </div>
+                
                 <?php
                 return call('member', 'account');
             } else {
