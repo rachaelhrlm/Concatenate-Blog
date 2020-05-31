@@ -53,6 +53,7 @@ session_start();
 
         <hr>
         <div class='container-fluid'id='subscribe'>
+            <div class="container">
 
             <div class='row justify-content-center'>
 
@@ -60,7 +61,7 @@ session_start();
                 <form class='form-inline' method="POST" action='?controller=member&action=subscribe<?php if (isset($_GET['id'])){ echo "&id={$_GET['id']}";} ?>'>
                     <h3>Subscribe: </h3>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="email" name='email'>
+                        <input type="email" class="form-control" placeholder="email" name='email' required>
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="submit">Submit</button>
                         </div>
@@ -70,6 +71,7 @@ session_start();
 
 
                 </form>
+            </div>
             </div>
         </div>
 
