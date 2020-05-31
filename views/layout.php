@@ -90,30 +90,33 @@ session_start();
                         </div>
                         <div class="col-md-3">
                             <ul>
-                                <li> <h5> <i class="fas fa-circle footcircle"></i>Contact</h5> </li>
+                                <li> <h5> <i class="fas fa-circle footcircle"></i>Founders</h5> </li>
                                 <!--<li><hr></li>-->
-                                <li>Example</li>
-                                <li>Example</li>
-                                <li>Example</li>
+                                <li>Ruth</li>
+                                <li>Sarah</li>
+                                <li>Rachael</li>
+                                <li>Yaqi</li>
                             </ul>
                         </div>
                         <div class="col-md-3">
                             <ul>
-                                <li><h5><i class="fas fa-circle footcircle"></i>Socials</h5></li>
-                                <!--<li><hr></li>-->
-                                <li><i class="fab fa-discord fa-2x"></i><i class="fab fa-facebook fa-2x"></i><i class="fab fa-github fa-2x"></i></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul>
                                 <li> <h5> <i class="fas fa-circle footcircle"></i>Contact</h5> </li>
                                 <!--<li><hr></li>-->
+                                <li>Example</li>
                                 <li>Example</li>
                                 <li>Example</li>
                                 <li>Example</li>
                             </ul>
 
                         </div>
+                        <div class="col-md-3">
+                            <ul>
+                                <li><h5><i class="fas fa-circle footcircle"></i>Socials</h5></li>
+                                <!--<li><hr></li>-->
+                                <i class="fab fa-discord fa-2x"></i><i class="fab fa-facebook fa-2x"></i><i class="fab fa-github fa-2x"></i>
+                            </ul>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
