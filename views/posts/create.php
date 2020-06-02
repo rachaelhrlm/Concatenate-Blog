@@ -34,7 +34,7 @@
             <div class="form-group row justify-content-between">
                 <label for="title" class="col-md-2 col-form-label"  >Title</label>
                 <div class="col-md-9">
-                    <input type="title" name="title" class="form-control" id="title" <?php echo (isset($_POST['title']))? "value='{$_POST['title']}'" : ""; ?> required>
+                    <input autocomplete="off" type="title" name="title" class="form-control" id="title" <?php echo (isset($_POST['title']))? "value='{$_POST['title']}'" : ""; ?> required>
                 </div>
             </div>
 

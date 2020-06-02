@@ -472,7 +472,7 @@ class Post {
 //    method and constants for uploadFile
     const AllowedTypes = ['image/jpeg', 'image/jpg'];
     const InputKey = 'myUploader';
-    const Curses = ['shit', 'Shit', 'fuck', 'Fuck'];
+    const Curses = ['shit', 'Shit', 'fuck', 'Fuck', 'Bollocks', 'bollocks', 'Bloody', 'bloody'];
 
     public static function uploadFile(string $postID) {
         $tempFile = $_FILES[self::InputKey]['tmp_name'];

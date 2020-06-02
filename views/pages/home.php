@@ -26,7 +26,7 @@
                                         <h2><?php echo Post::censor($featuredPost->getTitle()) ?></h2>
                                         
                                         <hr>
-                                        <p><?php echo Post::censor($featuredPost->getExcerpt()) ?></p>
+                                        <p><?php echo ucfirst(Post::censor($featuredPost->getExcerpt())) ?></p>
                                         <button onclick='location.href ="?controller=post&action=searchID&id=<?php echo $featuredPost->getPostID();?>"' class="btn1 fourth align-self-end featured-btn">Read More</button>
                                     </div>
                                 </div>
